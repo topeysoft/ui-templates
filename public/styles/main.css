@@ -6122,6 +6122,7 @@ body {
     html .timeline .timeline-item,
     body .timeline .timeline-item {
       top: -2rem;
+      min-height: 15rem;
       position: relative;
       padding: 2rem;
       border: .1rem solid #e4f2ff;
