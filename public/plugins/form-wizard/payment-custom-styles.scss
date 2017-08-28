@@ -1,0 +1,8 @@
+#bt-payment-form{
+    .accept-logo{
+        &.paypal{
+            padding: 2rem;
+            background-image:url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/346994/card_sprite.png);
+        }
+    }
+}

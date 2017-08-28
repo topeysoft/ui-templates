@@ -1,0 +1,1451 @@
+{ 
+    "_id" : ObjectId("590647ea7535c02738205b75"), 
+    "name" : "my_first_mage", 
+    "created" : "2017-04-30T20:24:10.759Z", 
+    "modified" : ISODate("2017-05-03T23:35:41.575+0000"), 
+    "raw_name" : "Welcome", 
+    "uri" : "home", 
+    "title" : "Welcome", 
+    "selected" : false, 
+    "project_id" : "59062e028631a043f468fc73", 
+    "isPublished" : true, 
+    "datePublished" : "2017-05-03T23:35:41.456Z", 
+    "templateId" : "59074db735d5734e005e4903", 
+    "tag_name" : "body", 
+    "sections" : [
+        {
+            "unique_name" : "SJIgP7LOW", 
+            "tag_name" : "section", 
+            "widget_definitions" : [
+                {
+                    "widget_id" : "5907ed9ea6107d0cec48d83b", 
+                    "widget" : {
+                        "_id" : "5907ed9ea6107d0cec48d83b", 
+                        "display_name" : null, 
+                        "unique_name" : null, 
+                        "project_id" : "59062e028631a043f468fc73", 
+                        "page_ids" : [
+                            "59075fa784b66849a42d69c9", 
+                            "590647ea7535c02738205b75"
+                        ], 
+                        "content" : "<div style=\"text-align: center;\"><span style=\"font-size: 36px;\">TopeySoft</span></div><p style=\"text-align: center;\"><span style=\"font-size: 24px;\">Compters</span></p><p><a class=\"mobile_menu\" data-open=\"nav5\" id=\"mobile_menu\"></a></p><nav class=\"nav5 tsc-nav\" id=\"main-nav\"><a class=\"mobile_menu_close\"></a><div class=\"container\"><div class=\"socials\"><a href=\"#\" target=\"_blank\" class=\"tw\"></a>\n<a href=\"#\" target=\"_blank\" class=\"fb\"></a>\n<a href=\"#\" target=\"_blank\" class=\"gp\"></a></div></div></nav>", 
+                        "draft" : {
+                            "_id" : "5907ed9ea6107d0cec48d83b", 
+                            "display_name" : null, 
+                            "unique_name" : null, 
+                            "project_id" : "59062e028631a043f468fc73", 
+                            "page_ids" : [
+                                "59075fa784b66849a42d69c9", 
+                                "590647ea7535c02738205b75"
+                            ], 
+                            "content" : "<div style=\"text-align: center;\"><span style=\"font-size: 36px;\">TopeySoft</span></div><p style=\"text-align: center;\"><span style=\"font-size: 24px;\">Compters</span></p><p><a class=\"mobile_menu\" data-open=\"nav5\" id=\"mobile_menu\"></a></p><nav class=\"nav5 tsc-nav\" id=\"main-nav\"><a class=\"mobile_menu_close\"></a><div class=\"container\"><div class=\"socials\"><a href=\"#\" target=\"_blank\" class=\"tw\"></a>\n<a href=\"#\" target=\"_blank\" class=\"fb\"></a>\n<a href=\"#\" target=\"_blank\" class=\"gp\"></a></div></div></nav>"
+                        }
+                    }, 
+                    "unique_name" : "HJCPWjYdW", 
+                    "attributes" : [
+                        {
+                            "enabled" : true, 
+                            "key" : "style", 
+                            "value" : "padding:5rem 5rem 15rem 5rem;height:0px;;"
+                        }
+                    ], 
+                    "grid_definition" : {
+                        "xs" : {
+                            "hidden" : false, 
+                            "size" : NumberInt(12)
+                        }, 
+                        "sm" : {
+                            "hidden" : false, 
+                            "size" : NumberInt(12)
+                        }, 
+                        "md" : {
+                            "hidden" : false, 
+                            "size" : NumberInt(12)
+                        }, 
+                        "lg" : {
+                            "hidden" : false, 
+                            "size" : NumberInt(12)
+                        }, 
+                        "xl" : {
+                            "hidden" : false, 
+                            "size" : NumberInt(4)
+                        }, 
+                        "pt" : {
+                            "hidden" : false, 
+                            "size" : NumberInt(9)
+                        }
+                    }
+                }, 
+                {
+                    "widget_id" : "59958ffd8f43de5fe85c5c19", 
+                    "widget" : {
+                        "_id" : "59958ffd8f43de5fe85c5c19", 
+                        "display_name" : null, 
+                        "unique_name" : null, 
+                        "project_id" : "59062e028631a043f468fc73", 
+                        "page_ids" : [
+
+                        ], 
+                        "content" : "<p style=\"text-align: center;\"><span style=\"font-size: 24px;\">Features &nbsp; &nbsp; Templates &nbsp; &nbsp; Pricing &nbsp; &nbsp; Get Started &nbsp; &nbsp; Login</span></p>", 
+                        "draft" : {
+                            "_id" : "59958ffd8f43de5fe85c5c19", 
+                            "display_name" : null, 
+                            "unique_name" : null, 
+                            "project_id" : "59062e028631a043f468fc73", 
+                            "page_ids" : [
+
+                            ], 
+                            "content" : "<p style=\"text-align: center;\"><span style=\"font-size: 24px;\">Features &nbsp; &nbsp; Templates &nbsp; &nbsp; Pricing &nbsp; &nbsp; Get Started &nbsp; &nbsp; Login</span></p>"
+                        }
+                    }, 
+                    "unique_name" : "BklAv-jYOZ", 
+                    "attributes" : [
+                        {
+                            "enabled" : true, 
+                            "key" : "style", 
+                            "value" : "height:0px;;padding:5rem 5rem;"
+                        }
+                    ], 
+                    "grid_definition" : {
+                        "xs" : {
+                            "hidden" : true, 
+                            "size" : NumberInt(12)
+                        }, 
+                        "sm" : {
+                            "hidden" : false, 
+                            "size" : NumberInt(12)
+                        }, 
+                        "md" : {
+                            "hidden" : false, 
+                            "size" : NumberInt(12)
+                        }, 
+                        "lg" : {
+                            "hidden" : false, 
+                            "size" : NumberInt(12)
+                        }, 
+                        "xl" : {
+                            "hidden" : false, 
+                            "size" : NumberInt(8)
+                        }, 
+                        "pt" : {
+                            "hidden" : false, 
+                            "size" : NumberInt(12)
+                        }
+                    }
+                }
+            ]
+        }, 
+        {
+            "unique_name" : "H1h0UXUOW", 
+            "tag_name" : "section", 
+            "widget_definitions" : [
+                {
+                    "widget_id" : "5995ae458f43de5fe85c5c36", 
+                    "widget" : {
+                        "_id" : "5995ae458f43de5fe85c5c36", 
+                        "display_name" : null, 
+                        "unique_name" : null, 
+                        "project_id" : "59062e028631a043f468fc73", 
+                        "page_ids" : [
+
+                        ], 
+                        "content" : "<script src=\"https://js.braintreegateway.com/web/dropin/1.6.1/js/dropin.min.js\"></script>\r\nr\n<div id=\"dropin-container\"></div>\r\n  <button id=\"submit-button\">Request payment method</button>\r\n  <script>\r\n    var button = document.querySelector('#submit-button');\r\nr\n    braintree.dropin.create({\r\n      authorization: 'CLIENT_TOKEN_FROM_SERVER',\r\n      container: '#dropin-container'\r\n    }, function (createErr, instance) {\r\n      button.addEventListener('click', function () {\r\n        instance.requestPaymentMethod(function (err, payload) {\r\n          // Submit payload.nonce to your server\r\n        });\r\n      });\r\n    });\r\n  </script>", 
+                        "draft" : {
+                            "_id" : "5995ae458f43de5fe85c5c36", 
+                            "display_name" : null, 
+                            "unique_name" : null, 
+                            "project_id" : "59062e028631a043f468fc73", 
+                            "page_ids" : [
+
+                            ], 
+                            "content" : "<script src=\"https://js.braintreegateway.com/web/dropin/1.6.1/js/dropin.min.js\"></script>\r\nr\n<div id=\"dropin-container\"></div>\r\n  <button id=\"submit-button\">Request payment method</button>\r\n  <script>\r\n    var button = document.querySelector('#submit-button');\r\nr\n    braintree.dropin.create({\r\n      authorization: 'CLIENT_TOKEN_FROM_SERVER',\r\n      container: '#dropin-container'\r\n    }, function (createErr, instance) {\r\n      button.addEventListener('click', function () {\r\n        instance.requestPaymentMethod(function (err, payload) {\r\n          // Submit payload.nonce to your server\r\n        });\r\n      });\r\n    });\r\n  </script>"
+                        }
+                    }, 
+                    "unique_name" : "S1WCw-iYdZ", 
+                    "attributes" : [
+                        {
+                            "enabled" : true, 
+                            "key" : "style", 
+                            "value" : "height:360px;background-size:contain;margin:2rem 0;"
+                        }
+                    ], 
+                    "grid_definition" : {
+                        "xs" : {
+                            "hidden" : true, 
+                            "size" : NumberInt(12)
+                        }, 
+                        "sm" : {
+                            "hidden" : false, 
+                            "size" : NumberInt(12)
+                        }, 
+                        "md" : {
+                            "hidden" : true, 
+                            "size" : NumberInt(12)
+                        }, 
+                        "lg" : {
+                            "hidden" : false, 
+                            "size" : NumberInt(12)
+                        }, 
+                        "xl" : {
+                            "hidden" : false, 
+                            "size" : NumberInt(5)
+                        }, 
+                        "pt" : {
+                            "hidden" : false, 
+                            "size" : NumberInt(12)
+                        }
+                    }
+                }, 
+                {
+                    "widget_id" : "598e4b7f4404db78f0e236cf", 
+                    "widget" : {
+                        "_id" : "598e4b7f4404db78f0e236cf", 
+                        "display_name" : null, 
+                        "unique_name" : null, 
+                        "project_id" : "59062e028631a043f468fc73", 
+                        "page_ids" : [
+
+                        ], 
+                        "content" : "<h1 style=\"text-align: center;\"><span style=\"font-size: 48px;\">Beautifully Crafted Designs</span></h1><p style=\"text-align: center;\"><span style=\"font-size: 18px;\">Every pixel of the design is carefully thought out &nbsp;so that it renders beautifully on any device, &nbsp;</span><br><span style=\"font-size: 18px;\">screen size or profile.</span></p><p style=\"text-align: center;\"><a class=\"btn btn-primary btn-lg\" href=\"#get-started\">Get Started</a></p><p style=\"text-align: center;\"><span style=\"color: rgb(44, 130, 201);\"><br></span></p><p style=\"text-align: center;\"><br></p>", 
+                        "draft" : {
+                            "_id" : "598e4b7f4404db78f0e236cf", 
+                            "display_name" : null, 
+                            "unique_name" : null, 
+                            "project_id" : "59062e028631a043f468fc73", 
+                            "page_ids" : [
+
+                            ], 
+                            "content" : "<h1 style=\"text-align: center;\"><span style=\"font-size: 48px;\">Beautifully Crafted Designs</span></h1><p style=\"text-align: center;\"><span style=\"font-size: 18px;\">Every pixel of the design is carefully thought out &nbsp;so that it renders beautifully on any device, &nbsp;</span><br><span style=\"font-size: 18px;\">screen size or profile.</span></p><p style=\"text-align: center;\"><a class=\"btn btn-primary btn-lg\" href=\"#get-started\">Get Started</a></p><p style=\"text-align: center;\"><span style=\"color: rgb(44, 130, 201);\"><br></span></p><p style=\"text-align: center;\"><br></p>"
+                        }
+                    }, 
+                    "unique_name" : "HkfRDZiFu-", 
+                    "attributes" : [
+                        {
+                            "enabled" : true, 
+                            "key" : "style", 
+                            "value" : "height:360px;"
+                        }
+                    ], 
+                    "grid_definition" : {
+                        "xs" : {
+                            "hidden" : false, 
+                            "size" : NumberInt(12)
+                        }, 
+                        "sm" : {
+                            "hidden" : false, 
+                            "size" : NumberInt(12)
+                        }, 
+                        "md" : {
+                            "hidden" : false, 
+                            "size" : NumberInt(7)
+                        }, 
+                        "lg" : {
+                            "hidden" : false, 
+                            "size" : NumberInt(12)
+                        }, 
+                        "xl" : {
+                            "hidden" : false, 
+                            "size" : NumberInt(4)
+                        }, 
+                        "pt" : {
+                            "hidden" : false, 
+                            "size" : NumberInt(8)
+                        }
+                    }
+                }, 
+                {
+                    "widget_id" : "5995ad1c8f43de5fe85c5c33", 
+                    "widget" : {
+                        "_id" : "5995ad1c8f43de5fe85c5c33", 
+                        "display_name" : null, 
+                        "unique_name" : null, 
+                        "project_id" : "59062e028631a043f468fc73", 
+                        "page_ids" : [
+
+                        ], 
+                        "content" : "", 
+                        "draft" : {
+                            "_id" : "5995ad1c8f43de5fe85c5c33", 
+                            "display_name" : null, 
+                            "unique_name" : null, 
+                            "project_id" : "59062e028631a043f468fc73", 
+                            "page_ids" : [
+
+                            ], 
+                            "content" : ""
+                        }
+                    }, 
+                    "unique_name" : "r1mAvWsKOW", 
+                    "attributes" : [
+                        {
+                            "enabled" : true, 
+                            "key" : "style", 
+                            "value" : "height:360px;background-size:contain;"
+                        }
+                    ], 
+                    "grid_definition" : {
+                        "xs" : {
+                            "hidden" : false, 
+                            "size" : NumberInt(12)
+                        }, 
+                        "sm" : {
+                            "hidden" : false, 
+                            "size" : NumberInt(12)
+                        }, 
+                        "md" : {
+                            "hidden" : false, 
+                            "size" : NumberInt(12)
+                        }, 
+                        "lg" : {
+                            "hidden" : false, 
+                            "size" : NumberInt(12)
+                        }, 
+                        "xl" : {
+                            "hidden" : false, 
+                            "size" : NumberInt(3)
+                        }, 
+                        "pt" : {
+                            "hidden" : false, 
+                            "size" : NumberInt(12)
+                        }
+                    }
+                }, 
+                {
+                    "widget_id" : "598fb2c64404db78f0e236d3", 
+                    "widget" : {
+                        "_id" : "598fb2c64404db78f0e236d3", 
+                        "display_name" : null, 
+                        "unique_name" : null, 
+                        "project_id" : "59062e028631a043f468fc73", 
+                        "page_ids" : [
+
+                        ], 
+                        "content" : "\r\n<h1 style='text-align: right;'><span style='font-size: 48px;'>High Quality, Yet Affordable</span></h1>\r\n<p style='text-align: right;'><span style='font-size: 18px;'>Even as we ensure that me make all our design high quality and responsive, </span></p>\r\n<p style='text-align: right;'><span style='font-size: 18px;'>we set our pricing system to meet you budget so that you can focus on </span></p>\r\n<p style='text-align: right;'><span style='font-size: 18px;'>what matters, and that is your business.</span></p>\r\nr\n<p style='text-align: right;'><a href='#pricing' class='btn btn-primary btn-lg'>See our pricing breakdown</a></p>\r\nr\n<p style='text-align: right;'><br></p>", 
+                        "draft" : {
+                            "_id" : "598fb2c64404db78f0e236d3", 
+                            "display_name" : null, 
+                            "unique_name" : null, 
+                            "project_id" : "59062e028631a043f468fc73", 
+                            "page_ids" : [
+
+                            ], 
+                            "content" : "\r\n<h1 style='text-align: right;'><span style='font-size: 48px;'>High Quality, Yet Affordable</span></h1>\r\n<p style='text-align: right;'><span style='font-size: 18px;'>Even as we ensure that me make all our design high quality and responsive, </span></p>\r\n<p style='text-align: right;'><span style='font-size: 18px;'>we set our pricing system to meet you budget so that you can focus on </span></p>\r\n<p style='text-align: right;'><span style='font-size: 18px;'>what matters, and that is your business.</span></p>\r\nr\n<p style='text-align: right;'><a href='#pricing' class='btn btn-primary btn-lg'>See our pricing breakdown</a></p>\r\nr\n<p style='text-align: right;'><br></p>"
+                        }
+                    }, 
+                    "unique_name" : "H140DWoKO-", 
+                    "attributes" : [
+                        {
+                            "enabled" : true, 
+                            "key" : "style", 
+                            "value" : "height:540px;background-color:#f1f1f1;padding:5rem 15rem;"
+                        }
+                    ], 
+                    "grid_definition" : {
+                        "xs" : {
+                            "hidden" : false, 
+                            "size" : NumberInt(12)
+                        }, 
+                        "sm" : {
+                            "hidden" : false, 
+                            "size" : NumberInt(12)
+                        }, 
+                        "md" : {
+                            "hidden" : false, 
+                            "size" : NumberInt(5)
+                        }, 
+                        "lg" : {
+                            "hidden" : false, 
+                            "size" : NumberInt(12)
+                        }, 
+                        "xl" : {
+                            "hidden" : false, 
+                            "size" : NumberInt(8)
+                        }, 
+                        "pt" : {
+                            "hidden" : false, 
+                            "size" : NumberInt(8)
+                        }
+                    }
+                }, 
+                {
+                    "widget_id" : "5995cf5b8f43de5fe85c5c62", 
+                    "widget" : {
+                        "_id" : "5995cf5b8f43de5fe85c5c62", 
+                        "display_name" : null, 
+                        "unique_name" : null, 
+                        "project_id" : "59062e028631a043f468fc73", 
+                        "page_ids" : [
+
+                        ], 
+                        "content" : "", 
+                        "draft" : {
+                            "_id" : "5995cf5b8f43de5fe85c5c62", 
+                            "display_name" : null, 
+                            "unique_name" : null, 
+                            "project_id" : "59062e028631a043f468fc73", 
+                            "page_ids" : [
+
+                            ], 
+                            "content" : ""
+                        }
+                    }, 
+                    "unique_name" : "BJH0D-oY_-", 
+                    "attributes" : [
+                        {
+                            "enabled" : true, 
+                            "key" : "style", 
+                            "value" : "height:540px;background-color:#f1f1f1;background-size:70%;"
+                        }
+                    ], 
+                    "grid_definition" : {
+                        "xs" : {
+                            "hidden" : false, 
+                            "size" : NumberInt(12)
+                        }, 
+                        "sm" : {
+                            "hidden" : false, 
+                            "size" : NumberInt(12)
+                        }, 
+                        "md" : {
+                            "hidden" : false, 
+                            "size" : NumberInt(12)
+                        }, 
+                        "lg" : {
+                            "hidden" : false, 
+                            "size" : NumberInt(12)
+                        }, 
+                        "xl" : {
+                            "hidden" : false, 
+                            "size" : NumberInt(4)
+                        }, 
+                        "pt" : {
+                            "hidden" : false, 
+                            "size" : NumberInt(12)
+                        }
+                    }
+                }
+            ]
+        }, 
+        {
+            "unique_name" : "SkfeDQId-", 
+            "tag_name" : "section", 
+            "widget_definitions" : [
+                {
+                    "widget_id" : "598fb2c64404db78f0e236d4", 
+                    "widget" : {
+                        "_id" : "598fb2c64404db78f0e236d4", 
+                        "display_name" : null, 
+                        "unique_name" : null, 
+                        "project_id" : "59062e028631a043f468fc73", 
+                        "page_ids" : [
+
+                        ], 
+                        "content" : "<p style=\"text-align: center;\">&copy; 2017 TopeySoft Computers</p>", 
+                        "draft" : {
+                            "_id" : "598fb2c64404db78f0e236d4", 
+                            "display_name" : null, 
+                            "unique_name" : null, 
+                            "project_id" : "59062e028631a043f468fc73", 
+                            "page_ids" : [
+
+                            ], 
+                            "content" : "<p style=\"text-align: center;\">&copy; 2017 TopeySoft Computers</p>"
+                        }
+                    }, 
+                    "unique_name" : "SkLAvZsY_W", 
+                    "attributes" : [
+                        {
+                            "enabled" : true, 
+                            "key" : "style", 
+                            "value" : "height:70px;padding:4rem;"
+                        }
+                    ], 
+                    "grid_definition" : {
+                        "xs" : {
+                            "hidden" : false, 
+                            "size" : NumberInt(12)
+                        }, 
+                        "sm" : {
+                            "hidden" : false, 
+                            "size" : NumberInt(12)
+                        }, 
+                        "md" : {
+                            "hidden" : false, 
+                            "size" : NumberInt(12)
+                        }, 
+                        "lg" : {
+                            "hidden" : false, 
+                            "size" : NumberInt(12)
+                        }, 
+                        "xl" : {
+                            "hidden" : false, 
+                            "size" : NumberInt(12)
+                        }, 
+                        "pt" : {
+                            "hidden" : false, 
+                            "size" : NumberInt(12)
+                        }
+                    }
+                }
+            ]
+        }, 
+        {
+            "unique_name" : "SJlew5L_W", 
+            "tag_name" : "section", 
+            "widget_definitions" : [
+
+            ]
+        }
+    ], 
+    "widget_ids" : [
+        "5907ed9ea6107d0cec48d83b"
+    ], 
+    "extras" : [
+        {
+            "enable" : true, 
+            "properties" : [
+                {
+                    "key" : "onload", 
+                    "value" : "setTimeout(function(){document.body.classList.add('home-menu')},1000);"
+                }, 
+                {
+                    "key" : "class", 
+                    "value" : "home"
+                }
+            ]
+        }
+    ], 
+    "id" : "590647ea7535c02738205b75", 
+    "widget_definitions" : [
+        {
+            "widget_id" : "5907ed9ea6107d0cec48d83b", 
+            "attributes" : [
+                {
+                    "enabled" : true, 
+                    "key" : "style", 
+                    "value" : "padding:5rem 5rem 15rem 5rem;height:10px;;"
+                }
+            ], 
+            "grid_definition" : {
+                "xs" : {
+                    "hidden" : false, 
+                    "size" : NumberInt(12)
+                }, 
+                "sm" : {
+                    "hidden" : false, 
+                    "size" : NumberInt(12)
+                }, 
+                "md" : {
+                    "hidden" : false, 
+                    "size" : NumberInt(12)
+                }, 
+                "lg" : {
+                    "hidden" : false, 
+                    "size" : NumberInt(12)
+                }, 
+                "xl" : {
+                    "hidden" : false, 
+                    "size" : NumberInt(3)
+                }, 
+                "pt" : {
+                    "hidden" : false, 
+                    "size" : NumberInt(9)
+                }
+            }
+        }, 
+        {
+            "widget_id" : "59958ffd8f43de5fe85c5c19", 
+            "attributes" : [
+                {
+                    "enabled" : true, 
+                    "key" : "style", 
+                    "value" : "height:230px;;padding:5rem 5rem;"
+                }
+            ], 
+            "grid_definition" : {
+                "xs" : {
+                    "hidden" : true, 
+                    "size" : NumberInt(12)
+                }, 
+                "sm" : {
+                    "hidden" : false, 
+                    "size" : NumberInt(12)
+                }, 
+                "md" : {
+                    "hidden" : false, 
+                    "size" : NumberInt(12)
+                }, 
+                "lg" : {
+                    "hidden" : false, 
+                    "size" : NumberInt(12)
+                }, 
+                "xl" : {
+                    "hidden" : false, 
+                    "size" : NumberInt(9)
+                }, 
+                "pt" : {
+                    "hidden" : false, 
+                    "size" : NumberInt(12)
+                }
+            }
+        }, 
+        {
+            "widget_id" : "5995ae458f43de5fe85c5c36", 
+            "attributes" : [
+                {
+                    "enabled" : true, 
+                    "key" : "style", 
+                    "value" : "height:360px;background-image:url(https://i.froala.com/download/edc2f0b37c0fab5fe50a13e5320dd757b02c5be5.png?1503101613);background-size:contain;margin:2rem 0;background-repeat:no-repeat;"
+                }
+            ], 
+            "grid_definition" : {
+                "xs" : {
+                    "hidden" : true, 
+                    "size" : NumberInt(12)
+                }, 
+                "sm" : {
+                    "hidden" : false, 
+                    "size" : NumberInt(12)
+                }, 
+                "md" : {
+                    "hidden" : true, 
+                    "size" : NumberInt(12)
+                }, 
+                "lg" : {
+                    "hidden" : false, 
+                    "size" : NumberInt(12)
+                }, 
+                "xl" : {
+                    "hidden" : false, 
+                    "size" : NumberInt(5)
+                }, 
+                "pt" : {
+                    "hidden" : false, 
+                    "size" : NumberInt(12)
+                }
+            }
+        }, 
+        {
+            "widget_id" : "598e4b7f4404db78f0e236cf", 
+            "attributes" : [
+                {
+                    "enabled" : true, 
+                    "key" : "style", 
+                    "value" : "height:360px;"
+                }
+            ], 
+            "grid_definition" : {
+                "xs" : {
+                    "hidden" : false, 
+                    "size" : NumberInt(12)
+                }, 
+                "sm" : {
+                    "hidden" : false, 
+                    "size" : NumberInt(12)
+                }, 
+                "md" : {
+                    "hidden" : false, 
+                    "size" : NumberInt(7)
+                }, 
+                "lg" : {
+                    "hidden" : false, 
+                    "size" : NumberInt(12)
+                }, 
+                "xl" : {
+                    "hidden" : false, 
+                    "size" : NumberInt(4)
+                }, 
+                "pt" : {
+                    "hidden" : false, 
+                    "size" : NumberInt(8)
+                }
+            }
+        }, 
+        {
+            "widget_id" : "5995ad1c8f43de5fe85c5c33", 
+            "attributes" : [
+                {
+                    "enabled" : true, 
+                    "key" : "style", 
+                    "value" : "height:360px;background-image:url(blob:http://localhost:4200/10cdaccd-4a3d-4b23-b401-b4685ecfd2b6);background-size:contain;background-repeat:no-repeat;"
+                }
+            ], 
+            "grid_definition" : {
+                "xs" : {
+                    "hidden" : false, 
+                    "size" : NumberInt(12)
+                }, 
+                "sm" : {
+                    "hidden" : false, 
+                    "size" : NumberInt(12)
+                }, 
+                "md" : {
+                    "hidden" : false, 
+                    "size" : NumberInt(12)
+                }, 
+                "lg" : {
+                    "hidden" : false, 
+                    "size" : NumberInt(12)
+                }, 
+                "xl" : {
+                    "hidden" : false, 
+                    "size" : NumberInt(3)
+                }, 
+                "pt" : {
+                    "hidden" : false, 
+                    "size" : NumberInt(12)
+                }
+            }
+        }, 
+        {
+            "widget_id" : "598fb2c64404db78f0e236d3", 
+            "attributes" : [
+                {
+                    "enabled" : true, 
+                    "key" : "style", 
+                    "value" : "height:540px;background-color:#f1f1f1;padding:5rem 15rem;"
+                }
+            ], 
+            "grid_definition" : {
+                "xs" : {
+                    "hidden" : false, 
+                    "size" : NumberInt(12)
+                }, 
+                "sm" : {
+                    "hidden" : false, 
+                    "size" : NumberInt(12)
+                }, 
+                "md" : {
+                    "hidden" : false, 
+                    "size" : NumberInt(5)
+                }, 
+                "lg" : {
+                    "hidden" : false, 
+                    "size" : NumberInt(12)
+                }, 
+                "xl" : {
+                    "hidden" : false, 
+                    "size" : NumberInt(8)
+                }, 
+                "pt" : {
+                    "hidden" : false, 
+                    "size" : NumberInt(8)
+                }
+            }
+        }, 
+        {
+            "widget_id" : "5995cf5b8f43de5fe85c5c62", 
+            "attributes" : [
+                {
+                    "enabled" : true, 
+                    "key" : "style", 
+                    "value" : "height:540px;background-color:#f1f1f1;background-image:url(https://i.froala.com/download/f490e380323f36ae62d8b1165f38d86bfc73e9cf.png?1502990471);background-size:70%;background-position:center center;background-repeat:no-repeat;"
+                }
+            ], 
+            "grid_definition" : {
+                "xs" : {
+                    "hidden" : false, 
+                    "size" : NumberInt(12)
+                }, 
+                "sm" : {
+                    "hidden" : false, 
+                    "size" : NumberInt(12)
+                }, 
+                "md" : {
+                    "hidden" : false, 
+                    "size" : NumberInt(12)
+                }, 
+                "lg" : {
+                    "hidden" : false, 
+                    "size" : NumberInt(12)
+                }, 
+                "xl" : {
+                    "hidden" : false, 
+                    "size" : NumberInt(4)
+                }, 
+                "pt" : {
+                    "hidden" : false, 
+                    "size" : NumberInt(12)
+                }
+            }
+        }, 
+        {
+            "widget_id" : "598fb2c64404db78f0e236d4", 
+            "attributes" : [
+                {
+                    "enabled" : true, 
+                    "key" : "style", 
+                    "value" : "height:70px;padding:4rem;"
+                }
+            ], 
+            "grid_definition" : {
+                "xs" : {
+                    "hidden" : false, 
+                    "size" : NumberInt(12)
+                }, 
+                "sm" : {
+                    "hidden" : false, 
+                    "size" : NumberInt(12)
+                }, 
+                "md" : {
+                    "hidden" : false, 
+                    "size" : NumberInt(12)
+                }, 
+                "lg" : {
+                    "hidden" : false, 
+                    "size" : NumberInt(12)
+                }, 
+                "xl" : {
+                    "hidden" : false, 
+                    "size" : NumberInt(12)
+                }, 
+                "pt" : {
+                    "hidden" : false, 
+                    "size" : NumberInt(12)
+                }
+            }
+        }
+    ], 
+    "last_modified" : "2017-08-22T12:20:10.524Z", 
+    "display_name" : null, 
+    "unique_name" : null, 
+    "metadata" : null, 
+    "scripts" : [
+        {
+            "tag_name" : "script", 
+            "enabled" : true, 
+            "self_closing" : false, 
+            "content" : "", 
+            "attributes" : [
+                {
+                    "enabled" : true, 
+                    "key" : "src", 
+                    "value" : "https://js.braintreegateway.com/web/dropin/1.6.1/js/dropin.min.js"
+                }
+            ]
+        },
+        {
+            "tag_name" : "script", 
+            "enabled" : true, 
+            "self_closing" : false, 
+            "content" : "var button = document.querySelector('#submit-button');\nbraintree.dropin.create({\n
+                authorization: 'CLIENT_TOKEN_FROM_SERVER',\n
+              container: '#dropin-container'\n
+            }, function (createErr, instance) {\n
+              button.addEventListener('click', function () {\n
+                instance.requestPaymentMethod(function (err, payload) {\n
+                  // Submit payload.nonce to your server\n
+                });\n
+              });\n
+            });\n
+          ", 
+            "attributes" : [
+            ]
+        }
+    ], 
+    "styles" : [
+        {
+            "tag_name" : "link", 
+            "enabled" : true, 
+            "self_closing" : false, 
+            "content" : "", 
+            "attributes" : [
+                {
+                    "enabled" : true, 
+                    "key" : "href", 
+                    "value" : "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+                }, 
+                {
+                    "enabled" : true, 
+                    "key" : "rel", 
+                    "value" : "stylesheet"
+                }, 
+                {
+                    "enabled" : true, 
+                    "key" : "crossorigin", 
+                    "value" : "anonymous"
+                }, 
+                {
+                    "enabled" : true, 
+                    "key" : "integrity", 
+                    "value" : "sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
+                }
+            ]
+        }
+    ], 
+    "draft" : {
+        "_id" : "590647ea7535c02738205b75", 
+        "display_name" : null, 
+        "unique_name" : null, 
+        "project_id" : "59062e028631a043f468fc73", 
+        "title" : "Welcome", 
+        "uri" : "home", 
+        "metadata" : null, 
+        "scripts" : [
+            {
+                "tag_name" : "script", 
+                "enabled" : true, 
+                "self_closing" : false, 
+                "content" : "", 
+                "attributes" : [
+                    {
+                        "enabled" : true, 
+                        "key" : "src", 
+                        "value" : "https://js.braintreegateway.com/web/dropin/1.6.1/js/dropin.min.js"
+                    }
+                ]
+            },
+            {
+                "tag_name" : "script", 
+                "enabled" : true, 
+                "self_closing" : false, 
+                "content" : "
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState == XMLHttpRequest.DONE) {
+                        var token =xhr.responseText;
+                       console.log('CLIENT_TOKEN_READY', token);
+                       var button = document.querySelector('#submit-button');\nbraintree.dropin.create({\n
+                        authorization: token,\n
+                      container: '#dropin-container'\n
+                    }, function (createErr, instance) {\n
+                      button.addEventListener('click', function () {\n
+                        instance.requestPaymentMethod(function (err, payload) {\n
+                          // Submit payload.nonce to your server\n
+                        });\n
+                      });\n
+                    });\n
+                    }
+                }
+                xhr.open('GET', 'http://www.elyir.local:5000/59062e028631a043f468fc73/client_token', true);
+                xhr.send(null);
+                // function getToken() {
+                //     var httpRequest = new XMLHttpRequest();
+                //     httpRequest.open('GET', 'http://www.elyir.local:5000/59062e028631a043f468fc73/client_token');
+                //     httpRequest.send();
+                //     return httpRequest.responseText;
+                // }
+                
+                
+              ", 
+                "attributes" : [
+                ]
+            }
+        ], 
+        "styles" : [
+            {
+                "tag_name" : "link", 
+                "enabled" : true, 
+                "self_closing" : false, 
+                "content" : "", 
+                "attributes" : [
+                    {
+                        "enabled" : true, 
+                        "key" : "href", 
+                        "value" : "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+                    }, 
+                    {
+                        "enabled" : true, 
+                        "key" : "rel", 
+                        "value" : "stylesheet"
+                    }, 
+                    {
+                        "enabled" : true, 
+                        "key" : "crossorigin", 
+                        "value" : "anonymous"
+                    }, 
+                    {
+                        "enabled" : true, 
+                        "key" : "integrity", 
+                        "value" : "sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
+                    }
+                ]
+            }
+        ], 
+        "sections" : [
+            {
+                "unique_name" : "SJIgP7LOW", 
+                "tag_name" : "section", 
+                "widget_definitions" : [
+                    {
+                        "widget_id" : "5907ed9ea6107d0cec48d83b", 
+                        "widget" : {
+                            "_id" : "5907ed9ea6107d0cec48d83b", 
+                            "display_name" : null, 
+                            "unique_name" : null, 
+                            "project_id" : "59062e028631a043f468fc73", 
+                            "page_ids" : [
+                                "59075fa784b66849a42d69c9", 
+                                "590647ea7535c02738205b75"
+                            ], 
+                            "content" : "<div style=\"text-align: center;\"><span style=\"font-size: 36px;\">TopeySoft</span></div><p style=\"text-align: center;\"><span style=\"font-size: 24px;\">Compters</span></p><p><a class=\"mobile_menu\" data-open=\"nav5\" id=\"mobile_menu\"></a></p><nav class=\"nav5 tsc-nav\" id=\"main-nav\"><a class=\"mobile_menu_close\"></a><div class=\"container\"><div class=\"socials\"><a href=\"#\" target=\"_blank\" class=\"tw\"></a>\n<a href=\"#\" target=\"_blank\" class=\"fb\"></a>\n<a href=\"#\" target=\"_blank\" class=\"gp\"></a></div></div></nav>", 
+                            "draft" : {
+                                "_id" : "5907ed9ea6107d0cec48d83b", 
+                                "display_name" : null, 
+                                "unique_name" : null, 
+                                "project_id" : "59062e028631a043f468fc73", 
+                                "page_ids" : [
+                                    "59075fa784b66849a42d69c9", 
+                                    "590647ea7535c02738205b75"
+                                ], 
+                                "content" : "<div style=\"text-align: center;\"><span style=\"font-size: 36px;\">TopeySoft</span></div><p style=\"text-align: center;\"><span style=\"font-size: 24px;\">Compters</span></p><p><a class=\"mobile_menu\" data-open=\"nav5\" id=\"mobile_menu\"></a></p><nav class=\"nav5 tsc-nav\" id=\"main-nav\"><a class=\"mobile_menu_close\"></a><div class=\"container\"><div class=\"socials\"><a href=\"#\" target=\"_blank\" class=\"tw\"></a>\n<a href=\"#\" target=\"_blank\" class=\"fb\"></a>\n<a href=\"#\" target=\"_blank\" class=\"gp\"></a></div></div></nav>"
+                            }
+                        }, 
+                        "unique_name" : "HJCPWjYdW", 
+                        "attributes" : [
+                            {
+                                "enabled" : true, 
+                                "key" : "style", 
+                                "value" : "padding:5rem 5rem 15rem 5rem;height:0px;;"
+                            }
+                        ], 
+                        "grid_definition" : {
+                            "xs" : {
+                                "hidden" : false, 
+                                "size" : NumberInt(12)
+                            }, 
+                            "sm" : {
+                                "hidden" : false, 
+                                "size" : NumberInt(12)
+                            }, 
+                            "md" : {
+                                "hidden" : false, 
+                                "size" : NumberInt(12)
+                            }, 
+                            "lg" : {
+                                "hidden" : false, 
+                                "size" : NumberInt(12)
+                            }, 
+                            "xl" : {
+                                "hidden" : false, 
+                                "size" : NumberInt(4)
+                            }, 
+                            "pt" : {
+                                "hidden" : false, 
+                                "size" : NumberInt(9)
+                            }
+                        }
+                    }, 
+                    {
+                        "widget_id" : "59958ffd8f43de5fe85c5c19", 
+                        "widget" : {
+                            "_id" : "59958ffd8f43de5fe85c5c19", 
+                            "display_name" : null, 
+                            "unique_name" : null, 
+                            "project_id" : "59062e028631a043f468fc73", 
+                            "page_ids" : [
+
+                            ], 
+                            "content" : "<p style=\"text-align: center;\"><span style=\"font-size: 24px;\">Features &nbsp; &nbsp; Templates &nbsp; &nbsp; Pricing &nbsp; &nbsp; Get Started &nbsp; &nbsp; Login</span></p>", 
+                            "draft" : {
+                                "_id" : "59958ffd8f43de5fe85c5c19", 
+                                "display_name" : null, 
+                                "unique_name" : null, 
+                                "project_id" : "59062e028631a043f468fc73", 
+                                "page_ids" : [
+
+                                ], 
+                                "content" : "<p style=\"text-align: center;\"><span style=\"font-size: 24px;\">Features &nbsp; &nbsp; Templates &nbsp; &nbsp; Pricing &nbsp; &nbsp; Get Started &nbsp; &nbsp; Login</span></p>"
+                            }
+                        }, 
+                        "unique_name" : "BklAv-jYOZ", 
+                        "attributes" : [
+                            {
+                                "enabled" : true, 
+                                "key" : "style", 
+                                "value" : "height:0px;;padding:5rem 5rem;"
+                            }
+                        ], 
+                        "grid_definition" : {
+                            "xs" : {
+                                "hidden" : true, 
+                                "size" : NumberInt(12)
+                            }, 
+                            "sm" : {
+                                "hidden" : false, 
+                                "size" : NumberInt(12)
+                            }, 
+                            "md" : {
+                                "hidden" : false, 
+                                "size" : NumberInt(12)
+                            }, 
+                            "lg" : {
+                                "hidden" : false, 
+                                "size" : NumberInt(12)
+                            }, 
+                            "xl" : {
+                                "hidden" : false, 
+                                "size" : NumberInt(8)
+                            }, 
+                            "pt" : {
+                                "hidden" : false, 
+                                "size" : NumberInt(12)
+                            }
+                        }
+                    }
+                ]
+            }, 
+            {
+                "unique_name" : "H1h0UXUOW", 
+                "tag_name" : "section", 
+                "widget_definitions" : [
+                    {
+                        "widget_id" : "5995ae458f43de5fe85c5c36", 
+                        "widget" : {
+                            "_id" : "5995ae458f43de5fe85c5c36", 
+                            "display_name" : null, 
+                            "unique_name" : null, 
+                            "project_id" : "59062e028631a043f468fc73", 
+                            "page_ids" : [
+
+                            ], 
+                            "content" : "<script src=\"https://js.braintreegateway.com/web/dropin/1.6.1/js/dropin.min.js\"></script>\r\nr\n<div id=\"dropin-container\"></div>\r\n  <button id=\"submit-button\">Request payment method</button>\r\n  <script>\r\n    var button = document.querySelector('#submit-button');\r\nr\n    braintree.dropin.create({\r\n      authorization: 'CLIENT_TOKEN_FROM_SERVER',\r\n      container: '#dropin-container'\r\n    }, function (createErr, instance) {\r\n      button.addEventListener('click', function () {\r\n        instance.requestPaymentMethod(function (err, payload) {\r\n          // Submit payload.nonce to your server\r\n        });\r\n      });\r\n    });\r\n  </script>", 
+                            "draft" : {
+                                "_id" : "5995ae458f43de5fe85c5c36", 
+                                "display_name" : null, 
+                                "unique_name" : null, 
+                                "project_id" : "59062e028631a043f468fc73", 
+                                "page_ids" : [
+
+                                ], 
+                                "content" : "<script src=\"https://js.braintreegateway.com/web/dropin/1.6.1/js/dropin.min.js\"></script>\r\nr\n<div id=\"dropin-container\"></div>\r\n  <button id=\"submit-button\">Request payment method</button>\r\n  <script>\r\n    var button = document.querySelector('#submit-button');\r\nr\n    braintree.dropin.create({\r\n      authorization: 'CLIENT_TOKEN_FROM_SERVER',\r\n      container: '#dropin-container'\r\n    }, function (createErr, instance) {\r\n      button.addEventListener('click', function () {\r\n        instance.requestPaymentMethod(function (err, payload) {\r\n          // Submit payload.nonce to your server\r\n        });\r\n      });\r\n    });\r\n  </script>"
+                            }
+                        }, 
+                        "unique_name" : "S1WCw-iYdZ", 
+                        "attributes" : [
+                            {
+                                "enabled" : true, 
+                                "key" : "style", 
+                                "value" : "height:360px;background-size:contain;margin:2rem 0;"
+                            }
+                        ], 
+                        "grid_definition" : {
+                            "xs" : {
+                                "hidden" : true, 
+                                "size" : NumberInt(12)
+                            }, 
+                            "sm" : {
+                                "hidden" : false, 
+                                "size" : NumberInt(12)
+                            }, 
+                            "md" : {
+                                "hidden" : true, 
+                                "size" : NumberInt(12)
+                            }, 
+                            "lg" : {
+                                "hidden" : false, 
+                                "size" : NumberInt(12)
+                            }, 
+                            "xl" : {
+                                "hidden" : false, 
+                                "size" : NumberInt(5)
+                            }, 
+                            "pt" : {
+                                "hidden" : false, 
+                                "size" : NumberInt(12)
+                            }
+                        }
+                    }, 
+                    {
+                        "widget_id" : "598e4b7f4404db78f0e236cf", 
+                        "widget" : {
+                            "_id" : "598e4b7f4404db78f0e236cf", 
+                            "display_name" : null, 
+                            "unique_name" : null, 
+                            "project_id" : "59062e028631a043f468fc73", 
+                            "page_ids" : [
+
+                            ], 
+                            "content" : "<h1 style=\"text-align: center;\"><span style=\"font-size: 48px;\">Beautifully Crafted Designs</span></h1><p style=\"text-align: center;\"><span style=\"font-size: 18px;\">Every pixel of the design is carefully thought out &nbsp;so that it renders beautifully on any device, &nbsp;</span><br><span style=\"font-size: 18px;\">screen size or profile.</span></p><p style=\"text-align: center;\"><a class=\"btn btn-primary btn-lg\" href=\"#get-started\">Get Started</a></p><p style=\"text-align: center;\"><span style=\"color: rgb(44, 130, 201);\"><br></span></p><p style=\"text-align: center;\"><br></p>", 
+                            "draft" : {
+                                "_id" : "598e4b7f4404db78f0e236cf", 
+                                "display_name" : null, 
+                                "unique_name" : null, 
+                                "project_id" : "59062e028631a043f468fc73", 
+                                "page_ids" : [
+
+                                ], 
+                                "content" : "<h1 style=\"text-align: center;\"><span style=\"font-size: 48px;\">Beautifully Crafted Designs</span></h1><p style=\"text-align: center;\"><span style=\"font-size: 18px;\">Every pixel of the design is carefully thought out &nbsp;so that it renders beautifully on any device, &nbsp;</span><br><span style=\"font-size: 18px;\">screen size or profile.</span></p><p style=\"text-align: center;\"><a class=\"btn btn-primary btn-lg\" href=\"#get-started\">Get Started</a></p><p style=\"text-align: center;\"><span style=\"color: rgb(44, 130, 201);\"><br></span></p><p style=\"text-align: center;\"><br></p>"
+                            }
+                        }, 
+                        "unique_name" : "HkfRDZiFu-", 
+                        "attributes" : [
+                            {
+                                "enabled" : true, 
+                                "key" : "style", 
+                                "value" : "height:360px;"
+                            }
+                        ], 
+                        "grid_definition" : {
+                            "xs" : {
+                                "hidden" : false, 
+                                "size" : NumberInt(12)
+                            }, 
+                            "sm" : {
+                                "hidden" : false, 
+                                "size" : NumberInt(12)
+                            }, 
+                            "md" : {
+                                "hidden" : false, 
+                                "size" : NumberInt(7)
+                            }, 
+                            "lg" : {
+                                "hidden" : false, 
+                                "size" : NumberInt(12)
+                            }, 
+                            "xl" : {
+                                "hidden" : false, 
+                                "size" : NumberInt(4)
+                            }, 
+                            "pt" : {
+                                "hidden" : false, 
+                                "size" : NumberInt(8)
+                            }
+                        }
+                    }, 
+                    {
+                        "widget_id" : "5995ad1c8f43de5fe85c5c33", 
+                        "widget" : {
+                            "_id" : "5995ad1c8f43de5fe85c5c33", 
+                            "display_name" : null, 
+                            "unique_name" : null, 
+                            "project_id" : "59062e028631a043f468fc73", 
+                            "page_ids" : [
+
+                            ], 
+                            "content" : "", 
+                            "draft" : {
+                                "_id" : "5995ad1c8f43de5fe85c5c33", 
+                                "display_name" : null, 
+                                "unique_name" : null, 
+                                "project_id" : "59062e028631a043f468fc73", 
+                                "page_ids" : [
+
+                                ], 
+                                "content" : ""
+                            }
+                        }, 
+                        "unique_name" : "r1mAvWsKOW", 
+                        "attributes" : [
+                            {
+                                "enabled" : true, 
+                                "key" : "style", 
+                                "value" : "height:360px;background-size:contain;"
+                            }
+                        ], 
+                        "grid_definition" : {
+                            "xs" : {
+                                "hidden" : false, 
+                                "size" : NumberInt(12)
+                            }, 
+                            "sm" : {
+                                "hidden" : false, 
+                                "size" : NumberInt(12)
+                            }, 
+                            "md" : {
+                                "hidden" : false, 
+                                "size" : NumberInt(12)
+                            }, 
+                            "lg" : {
+                                "hidden" : false, 
+                                "size" : NumberInt(12)
+                            }, 
+                            "xl" : {
+                                "hidden" : false, 
+                                "size" : NumberInt(3)
+                            }, 
+                            "pt" : {
+                                "hidden" : false, 
+                                "size" : NumberInt(12)
+                            }
+                        }
+                    }, 
+                    {
+                        "widget_id" : "598fb2c64404db78f0e236d3", 
+                        "widget" : {
+                            "_id" : "598fb2c64404db78f0e236d3", 
+                            "display_name" : null, 
+                            "unique_name" : null, 
+                            "project_id" : "59062e028631a043f468fc73", 
+                            "page_ids" : [
+
+                            ], 
+                            "content" : "\r\n<h1 style='text-align: right;'><span style='font-size: 48px;'>High Quality, Yet Affordable</span></h1>\r\n<p style='text-align: right;'><span style='font-size: 18px;'>Even as we ensure that me make all our design high quality and responsive, </span></p>\r\n<p style='text-align: right;'><span style='font-size: 18px;'>we set our pricing system to meet you budget so that you can focus on </span></p>\r\n<p style='text-align: right;'><span style='font-size: 18px;'>what matters, and that is your business.</span></p>\r\nr\n<p style='text-align: right;'><a href='#pricing' class='btn btn-primary btn-lg'>See our pricing breakdown</a></p>\r\nr\n<p style='text-align: right;'><br></p>", 
+                            "draft" : {
+                                "_id" : "598fb2c64404db78f0e236d3", 
+                                "display_name" : null, 
+                                "unique_name" : null, 
+                                "project_id" : "59062e028631a043f468fc73", 
+                                "page_ids" : [
+
+                                ], 
+                                "content" : "\r\n<h1 style='text-align: right;'><span style='font-size: 48px;'>High Quality, Yet Affordable</span></h1>\r\n<p style='text-align: right;'><span style='font-size: 18px;'>Even as we ensure that me make all our design high quality and responsive, </span></p>\r\n<p style='text-align: right;'><span style='font-size: 18px;'>we set our pricing system to meet you budget so that you can focus on </span></p>\r\n<p style='text-align: right;'><span style='font-size: 18px;'>what matters, and that is your business.</span></p>\r\nr\n<p style='text-align: right;'><a href='#pricing' class='btn btn-primary btn-lg'>See our pricing breakdown</a></p>\r\nr\n<p style='text-align: right;'><br></p>"
+                            }
+                        }, 
+                        "unique_name" : "H140DWoKO-", 
+                        "attributes" : [
+                            {
+                                "enabled" : true, 
+                                "key" : "style", 
+                                "value" : "height:540px;background-color:#f1f1f1;padding:5rem 15rem;"
+                            }
+                        ], 
+                        "grid_definition" : {
+                            "xs" : {
+                                "hidden" : false, 
+                                "size" : NumberInt(12)
+                            }, 
+                            "sm" : {
+                                "hidden" : false, 
+                                "size" : NumberInt(12)
+                            }, 
+                            "md" : {
+                                "hidden" : false, 
+                                "size" : NumberInt(5)
+                            }, 
+                            "lg" : {
+                                "hidden" : false, 
+                                "size" : NumberInt(12)
+                            }, 
+                            "xl" : {
+                                "hidden" : false, 
+                                "size" : NumberInt(8)
+                            }, 
+                            "pt" : {
+                                "hidden" : false, 
+                                "size" : NumberInt(8)
+                            }
+                        }
+                    }, 
+                    {
+                        "widget_id" : "5995cf5b8f43de5fe85c5c62", 
+                        "widget" : {
+                            "_id" : "5995cf5b8f43de5fe85c5c62", 
+                            "display_name" : null, 
+                            "unique_name" : null, 
+                            "project_id" : "59062e028631a043f468fc73", 
+                            "page_ids" : [
+
+                            ], 
+                            "content" : "", 
+                            "draft" : {
+                                "_id" : "5995cf5b8f43de5fe85c5c62", 
+                                "display_name" : null, 
+                                "unique_name" : null, 
+                                "project_id" : "59062e028631a043f468fc73", 
+                                "page_ids" : [
+
+                                ], 
+                                "content" : ""
+                            }
+                        }, 
+                        "unique_name" : "BJH0D-oY_-", 
+                        "attributes" : [
+                            {
+                                "enabled" : true, 
+                                "key" : "style", 
+                                "value" : "height:540px;background-color:#f1f1f1;background-size:70%;"
+                            }
+                        ], 
+                        "grid_definition" : {
+                            "xs" : {
+                                "hidden" : false, 
+                                "size" : NumberInt(12)
+                            }, 
+                            "sm" : {
+                                "hidden" : false, 
+                                "size" : NumberInt(12)
+                            }, 
+                            "md" : {
+                                "hidden" : false, 
+                                "size" : NumberInt(12)
+                            }, 
+                            "lg" : {
+                                "hidden" : false, 
+                                "size" : NumberInt(12)
+                            }, 
+                            "xl" : {
+                                "hidden" : false, 
+                                "size" : NumberInt(4)
+                            }, 
+                            "pt" : {
+                                "hidden" : false, 
+                                "size" : NumberInt(12)
+                            }
+                        }
+                    }
+                ]
+            }, 
+            {
+                "unique_name" : "SkfeDQId-", 
+                "tag_name" : "section", 
+                "widget_definitions" : [
+                    {
+                        "widget_id" : "598fb2c64404db78f0e236d4", 
+                        "widget" : {
+                            "_id" : "598fb2c64404db78f0e236d4", 
+                            "display_name" : null, 
+                            "unique_name" : null, 
+                            "project_id" : "59062e028631a043f468fc73", 
+                            "page_ids" : [
+
+                            ], 
+                            "content" : "<p style=\"text-align: center;\">&copy; 2017 TopeySoft Computers</p>", 
+                            "draft" : {
+                                "_id" : "598fb2c64404db78f0e236d4", 
+                                "display_name" : null, 
+                                "unique_name" : null, 
+                                "project_id" : "59062e028631a043f468fc73", 
+                                "page_ids" : [
+
+                                ], 
+                                "content" : "<p style=\"text-align: center;\">&copy; 2017 TopeySoft Computers</p>"
+                            }
+                        }, 
+                        "unique_name" : "SkLAvZsY_W", 
+                        "attributes" : [
+                            {
+                                "enabled" : true, 
+                                "key" : "style", 
+                                "value" : "height:70px;padding:4rem;"
+                            }
+                        ], 
+                        "grid_definition" : {
+                            "xs" : {
+                                "hidden" : false, 
+                                "size" : NumberInt(12)
+                            }, 
+                            "sm" : {
+                                "hidden" : false, 
+                                "size" : NumberInt(12)
+                            }, 
+                            "md" : {
+                                "hidden" : false, 
+                                "size" : NumberInt(12)
+                            }, 
+                            "lg" : {
+                                "hidden" : false, 
+                                "size" : NumberInt(12)
+                            }, 
+                            "xl" : {
+                                "hidden" : false, 
+                                "size" : NumberInt(12)
+                            }, 
+                            "pt" : {
+                                "hidden" : false, 
+                                "size" : NumberInt(12)
+                            }
+                        }
+                    }
+                ]
+            }, 
+            {
+                "unique_name" : "SJlew5L_W", 
+                "tag_name" : "section", 
+                "widget_definitions" : [
+
+                ]
+            }
+        ]
+    }
+}

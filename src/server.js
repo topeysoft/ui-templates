@@ -9,6 +9,9 @@ class MyServer{
     setup(){
         this.app.use(express.static(path.join(__dirname, "../public")));
     }
+    getApp(){
+       return this.app;
+    }
 }
 
 

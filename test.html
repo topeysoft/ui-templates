@@ -1,0 +1,222 @@
+<div class=\"container text-center\">
+        <div class=\"row justify-content-md-center\">
+            <div class=\"col-12\">
+                
+                <div id=\"form-wizard\" class=\"form-wizard \">
+    <div class=\"wizard-step-indicator-wrapper  justify-content d-none d-md-flex\">
+    <ul class=\"pagination pg-blue row m-0 p-0\">
+        <li data-target=\"basic-info\" class=\"page-item wizard-step col\"><a class=\"page-link\"><span class=\"checked\">&#10004;</span> Basic information</a></li>
+        <li class=\"page-item col-auto\">&rarr;</li>
+        <li class=\"page-item wizard-step col\"><a class=\"page-link\"><span class=\"checked\">&#10004;</span> Choose a plan</a></li>
+        <li class=\"page-item  col-auto\">&rarr;</li>
+        <li class=\"page-item  wizard-step col active\"><a class=\"page-link\"><span class=\"checked\">&#10004;</span> Select payment method</a></li>
+        <li class=\"page-item  col-auto\">&rarr;</li>
+        <li class=\"page-item  wizard-step col\"><a class=\"page-link\"><span class=\"checked\">&#10004;</span> Finish</a></li>
+
+
+    </ul>
+</div>
+
+<div class=\"wizard-step-content-wrapper mt-5\">
+    <div id=\"basic-info\" class=\"wizard-step-content active\">
+        <div class=\"step-header text-left\">
+            <h1>Basic information</h1>
+            <p>We just need some information so we can get you started</p>
+            <br />
+        </div>
+        <div class=\"row\">
+            <div class=\"col\">
+                <div class=\"p-sm-4\">
+
+                    <!-- Form register -->
+                    <div class=\"md-form\">
+                        <!-- <i class=\"fa fa-envelope prefix grey-text\"></i> -->
+                        <input type=\"text\" id=\"company-name\" class=\"form-control\">
+                        <label for=\"company-name\">Your company/business name</label>
+                    </div>
+
+                    <div class=\"md-form\">
+                        <!-- <i class=\"fa fa-user prefix grey-text\"></i> -->
+                        <input data-error=\"invalid domain name\" type=\"url\" id=\"your-name\" class=\"form-control\">
+                        <label for=\"your-name\">Your registered domain name (optional)</label>
+                    </div>
+                    <div class=\"md-form\">
+                        <!-- <i class=\"fa fa-lock prefix grey-text\"></i> -->
+                        <input type=\"text\" id=\"company-category\" class=\"form-control\">
+                        <label for=\"company-category\">Business category (Ex. Non-profit)</label>
+                    </div>
+
+                    <div class=\"form-group text-left\">
+                        <input type=\"checkbox\" id=\"checkbox1\">
+                        <label for=\"checkbox1\">We have a business logo</label>
+                    </div>
+
+                    <!-- Form register -->
+                </div>
+            </div>
+            <div class=\"col-6 d-none d-lg-flex\">
+                <p style=\"color:rgba(0,0,0, 0.1); font-size:20rem; height:20rem;line-height:20rem;\">
+                    <i class=\"fa fa-info-circle\"></i>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div id=\"choose-plan\" class=\"wizard-step-content\">
+        <!-- <div class=\"step-header text-left\">
+            <h3>Basic information</h3>
+            <p>We just need some information so we can get you started</p>
+            <br />
+        </div> -->
+        <div class=\"row\">
+            <div class=\"col-12\">
+                <!--Section heading-->
+                <h1 class=\"section-heading pt-4\">Choose a plan to Continue</h1>
+                <br />
+                <!--Section description-->
+                <!-- <p class=\"section-description lead grey-text\">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit, error amet numquam iure provident voluptate esse quasi, veritatis totam voluptas nostrum quisquam eum.</p> -->
+
+                <!--Grid row-->
+                <div class=\"row features-small\">
+
+                    <!--Grid column-->
+                    <div class=\"col-md-4 mb-r plan-item\">
+                        <h4 class=\"feature-title text-green\"><i class=\"fa fa-check select-indicator\"></i> Basic</h4>
+                        <p class=\"\">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores
+                            nam, aperiam minima assumenda.</p>
+                        <div class=\"p-2\">
+                            <div class=\"price-display text-center\">
+                                <span class=\"text-green\">$50</span>/month
+                            </div>
+                            <span class=\"text-default\">* Includes <span class=\"font-weight-bold\">$180</span>                                                    on-time setup fee</span>
+                            <hr/>
+                        </div>
+                        <div class=\"p-2\">
+                            <div class=\"row\">
+                                <div class=\"col-auto\"> <i class=\"fa fa-check-circle p-0 m-0\"></i></div>
+                                <div class=\"col text-left\">
+                                    Includes support and help and all that fun stuff
+                                </div>
+                            </div>
+                            <hr/>
+                        </div>
+
+
+                        <a class=\"mb-4\" href=\"#\" target=\"_blank\">Learn more</a> <br/>
+
+                        <button class=\"btn btn-default btn-sm mt-5\">Select this plan</button>
+                    </div>
+                    <!--Grid column-->
+
+                    <!--Grid column-->
+                    <div class=\"col-md-4 mb-r  plan-item\">
+                        <h4 class=\"feature-title text-primary\"><i class=\"fa fa-check select-indicator\"></i> Advanced</h4>
+                        <p class=\"\">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores
+                            nam, aperiam minima assumenda.</p>
+
+                        <div class=\"p-2\">
+                            <div class=\"price-display text-center\">
+                                <span class=\"text-primary\">$90</span>/month
+                            </div>
+                            <span class=\"text-default\">* Includes <span class=\" font-weight-bold\">$300</span>                                                    on-time setup fee</span>
+                            <hr/>
+                        </div>
+                        <div class=\"p-2\">
+                            <div class=\"row\">
+                                <div class=\"col-auto\"> <i class=\"fa fa-check-circle p-0 m-0\"></i></div>
+                                <div class=\"col text-left\">
+                                    Includes support and help and all that fun stuff
+                                </div>
+                            </div>
+                            <hr/>
+                        </div>
+
+                        <a class=\"mb-4\" href=\"#\" target=\"_blank\">Learn more</a> <br/>
+
+                        <button class=\"btn btn-primary btn-sm mt-5\">Select this plan</button>
+                    </div>
+                    <!--Grid column-->
+
+                    <!--Grid column-->
+                    <div class=\"col-md-4 mb-r  plan-item active\">
+                        <h4 class=\"feature-title text-rose\"><i class=\"fa fa-check select-indicator\"></i> Premium</h4>
+                        <p class=\"\">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores
+                            nam, aperiam minima assumenda.</p>
+                        <div class=\"p-2\">
+                            <div class=\"price-display text-center\">
+                                <span class=\"text-rose\">$150</span>/month
+                            </div>
+                            <span class=\"text-default\">* Includes <span class=\" font-weight-bold\">$500</span>                                                    on-time setup fee</span>
+                            <hr/>
+                        </div>
+                        <div class=\"p-2\">
+                            <div class=\"row\">
+                                <div class=\"col-auto\"> <i class=\"fa fa-check-circle p-0 m-0\"></i></div>
+                                <div class=\"col text-left\">
+                                    Includes support and help and all that fun stuff
+                                </div>
+                            </div>
+                            <hr/>
+                        </div>
+
+                        <a class=\"mb-4\" href=\"#\" target=\"_blank\">Learn more</a> <br/>
+
+                        <button class=\"btn btn-pink btn-sm mt-5\">Select this plan</button>
+                    </div>
+                    <!--Grid column-->
+
+                </div>
+                <p class=\"text-muted text-center\">
+                    All plans Includes free 3 months subscription starting from the date the website goes live. <br/>                                            * Setup fees can be discounted or completely waived in some cases. <a href=\"#\">Learn how you can save some money on the setup fee.</a>
+                </p>
+                <!--Grid row-->
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+    <div id=\"payment-method\" class=\"wizard-step-content\">
+        <div class=\"row justify-content-md-center\">
+            <div class=\"col-md-6\">
+                <h1 class=\"section-heading pt-4\">Set up a payment method</h1>
+                <br />
+                <div id=\"dropin-container\">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id=\"finish\" class=\"wizard-step-content\">
+        <div class=\"row\">
+            <div class=\"col-12\">
+                <h1 class=\"section-heading pt-4\">Finished</h1>
+                <br />
+
+                <h3 class=\"font-weight-normal\">Thank you for choosing our service ...</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br />
+<div class=\"wizard-footer\">
+    <hr />
+    <div class=\"row\">
+        <div class=\"col-auto text-left\">
+            <button id=\"wiz-back\" class=\"btn btn-secondary btn-lg\">&larr; <span class=\"text d-none  d-sm-inline\"> Back</span></button>
+        </div>
+        <div class=\"col text-right\">
+            <button id=\"wiz-continue\" class=\"btn btn-primary btn-lg\"><span class=\"text d-none d-sm-inline\">Continue</span> &rarr;</button>
+        </div>
+    </div>
+</div>
+</div>
+
+            </div>
+        </div>
+    </div>
