@@ -1,0 +1,95 @@
+.wizard-step-content-wrapper {
+  overflow: hidden;
+  display: flex;
+  align-content: flex-start;
+  align-items: flex-start;
+  -webkit-transition: all .2s ease-in-out;
+  -moz-transition: all .2s ease-in-out;
+  -o-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
+}
+
+.wizard-step-content {
+  -webkit-transition: all .2s ease-in-out;
+  -moz-transition: all .2s ease-in-out;
+  -o-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
+  flex: 0 0 100%;
+}
+
+.wizard-step-indicator-wrapper {
+  background: rgba(0, 0, 0, 0.03);
+  padding: .5rem;
+  .wizard-steps {
+    list-style: none;
+    .wizard-step {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      &.active {
+        font-weight: bold;
+        background: #0099cc;
+        color: white;
+      }
+      .checked {
+        display: none;
+      }
+
+      &.passed {
+        font-weight: bold;
+        &:not(.active) {
+          background: rgba(#4b515d, 1);
+          color: white;
+          .checked {
+            display: inline;
+          }
+        }
+      }
+    }
+  }
+}
+
+.page-item,
+.page-item a {
+  font-size: 1rem !important;
+}
+
+.page-item.passed:not(.active),
+.page-item.passed:not(.active) a {
+  color: teal !important;
+}
+
+.page-item .checked,
+.page-item a .checked {
+  display: none;
+}
+
+.page-item.passed:not(.active) .checked,
+.page-item.passed:not(.active) a .checked {
+  display: inline;
+}
+
+.plan-item {
+  padding: 2rem;
+}
+
+.plan-item .price-display {
+  font-size: 2rem;
+}
+
+.plan-item.active {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.plan-item:hover {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.plan-item .select-indicator {
+  display: none;
+  padding: .5rem;
+}
+
+.plan-item.active .select-indicator {
+  display: inline;
+}

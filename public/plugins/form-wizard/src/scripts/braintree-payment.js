@@ -16,6 +16,7 @@ function getStarted() {
 }
 
 
+
 function setupPaymentInfoValidation(token) {
     var form = document.querySelector('#bt-payment-form');
     var submit = document.querySelector('#button-pay');

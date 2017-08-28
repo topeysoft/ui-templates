@@ -6,10 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
 
     <title>Affordable Web Design and Mobile App Development - TopeySoft Computers</title>
-    <!-- <link rel="stylesheet"
-          href="node_modules/material-components-web/dist/material-components-web.css">
-    <link rel="stylesheet"
-          href="node_modules/bootstrap/dist/css/bootstrap.min.css">-->
     <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <!-- Font Awesome -->
@@ -17,390 +13,16 @@
 
     <!-- Bootstrap core CSS -->
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="./braintree-payment.min.css" rel="stylesheet">
+
+
 
     <!-- Material Design Bootstrap -->
     <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
     <link href="/assets/css/mdb.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="stylesheet" href="/dist/css/main.min.css">
+    <link rel="stylesheet" href="./dist/css/styles.min.css">
 
 
-    <!-- SCRIPTS -->
-
-    <!-- JQuery -->
-    <script type="text/javascript" src="/assets/js/jquery-3.1.1.min.js"></script>
-
-    <!-- Bootstrap dropdown -->
-    <script type="text/javascript" src="/assets/js/popper.min.js"></script>
-
-    <!-- Bootstrap core JavaScript -->
-    <script type="text/javascript" src="/assets/js/bootstrap.min.js"></script>
-
-
-    <script>
-        $(function () {
-            getStarted();
-            selectedPlan = {};
-            const basicInfo = [
-                {
-                    label: 'Your company/business name',
-                    value: '',
-                    type: 'text',
-                    invalid_message: 'Please provide us with your business name',
-                    valid_message: 'Thanks, got it',
-                    required: true
-                },
-                {
-                    label: 'Your registered domain name (optional)',
-                    value: '',
-                    type: 'text',
-                    invalid_message: 'Please provide us with domain name',
-                    valid_message: 'Thanks, got it'
-                },
-                {
-                    label: 'Business category (Ex. Non-profit)',
-                    value: '',
-                    type: 'text',
-                    invalid_message: '',
-                    valid_message: 'Thanks, got it'
-                },
-                {
-                    label: 'Yes we have a business logo',
-                    question: 'Do you have a business logo?',
-                    true_value: 'Yes we have a business logo',
-                    false_value: 'No we do not have a business logo',
-                    value: true,
-                    checked: false,
-                    type: 'checkbox'
-                }
-            ];
-            const steps_validity = [
-                {
-                    name: 'Basic information',
-                    invalid_message: 'Please provide a valid business name',
-                    valid: false,
-                    isValid: function (index) {
-                        var inputs = wizardContents.eq(index).find('input[required]');
-                        var valid = true;
-                        inputs.each(function (i, el) {
-                            if ($.trim($(el).val()).length < 1) {
-                                $(el).addClass('invalid').next().addClass('active');
-                                valid = false;
-                            }
-                        });
-                        if(!valid && inputs && inputs[0]){
-                            inputs.eq(0).focus();
-                        }
-                        return valid;
-                    }
-                },
-                {
-                    name: 'Choose a plan',
-                    invalid_message: 'Please select a plan to continue',
-                    isValid: function (index) {
-                        return (selectedPlan && selectedPlan.name);
-                    }
-                },
-                {
-                    name: 'Select payment method',
-                    invalid_message: 'Please setup a payment method',
-                    valid: false,
-                    isValid: function (index) {
-                        var inputs = wizardContents.eq(index).find('input[required]');
-                        var valid = true;
-                        inputs.each(function (i, el) {
-                            if ($.trim($(el).val()).length < 1) {
-                                $(el).addClass('invalid').next().addClass('active');
-                                valid = false;
-                            }
-                        });
-                        return valid;
-                    }
-                },
-                {
-                    name: 'Review',
-                    invalid_message: 'Please review your entry before you proceed',
-                    valid: true,
-                    isValid: function (index) {
-                        return true;
-                    }
-                },
-                {
-                    name: 'Finish',
-                    invalid_message: '',
-                    valid: true,
-                    isValid: function (index) {
-                        return true;
-                    }
-                }
-            ];
-            const plans = [
-                {
-                    name: "Basic",
-                    price_per_month: 50,
-                    setup_fee: 30,
-                    text_color_class: 'green',
-                    btn_color_class: 'default',
-                    description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores nam, aperiam minima assumenda.",
-                    features: [{
-                        description: "Includes support and help and all that fun stuff",
-                        included: false
-                    }]
-                },
-                {
-                    name: "Advanced",
-                    price_per_month: 90,
-                    setup_fee: 50,
-                    text_color_class: 'purple',
-                    btn_color_class: 'purple',
-                    description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores nam, aperiam minima assumenda.",
-                    features: [{
-                        description: "Includes support and help and all that fun stuff",
-                        included: true
-                    }]
-                },
-                {
-                    name: "Premium",
-                    price_per_month: 150,
-                    setup_fee: 100,
-                    text_color_class: 'rose',
-                    btn_color_class: 'pink',
-                    description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores nam, aperiam minima assumenda.",
-                    features: [{
-                        description: "Includes support and help and all that fun stuff",
-                        included: true
-                    }]
-                }
-            ];
-
-            populatePlans();
-
-            var wizardContentWrapper = $('#form-wizard .wizard-step-content-wrapper');
-            var wizardContents = $('#form-wizard .wizard-step-content');
-            var wizardSteps = $('#form-wizard .page-item.wizard-step');
-            var plainItems = $('#form-wizard .plan-item');
-            var plainItemButton = $('#form-wizard .plan-item-button');
-            var callBeforWizardNext = [];
-            var callOnWizardNext = [];
-
-
-            // wizardContents.hide();
-            // showStepByIndex(0);
-            // function showStepByIndex(index) {
-            //     wizardContents.hide();
-            //     wizardContents.eq(index).show();
-            // }
-            setup();
-            gotoToStepByIndex(0, false);
-
-            function setup() {
-                // setupPaymentInfoValidation();
-                callOnWizardNext.push(function () {
-                    var summary = $('#form-wizard .basic-info-summary');
-                    var summaryHtml = '';
-                    $.each(basicInfo, function (i, info) {
-                        summaryHtml += '<hr/><p class="font-weight-bold">' + (info.type === 'checkbox' ? info.question : info.label) + ' <br/>\
-                     <span class="font-italic font-weight-normal">' + (info.type === 'checkbox' ? (info.checked ? info.true_value : info.false_value) : info.value) + '</span></p>';
-                    });
-                    summary.html(summaryHtml);
-                });
-                callOnWizardNext.push(function () {
-                    var summary = $('#form-wizard .selected-plan-summary');
-                    summary.html('\
-                    <p class="font-weight-normal">You selected <span class="font-weight-bold text-'+ selectedPlan.text_color_class + '">' + selectedPlan.name + ' plan</span>. <br/> You will be charged a one-time *refundable fee of \
-                     <span class="font-weight-bold text-'+ selectedPlan.text_color_class + '">$' + selectedPlan.setup_fee + '</span></p>\
-                     <br />\n\
-                     <p class=" font-weight-normal" >Your monthly payment will be <span class="font-weight-bold text-'+ selectedPlan.text_color_class + '">$' + selectedPlan.price_per_month + '</span>/month starting from the date your website goes live.</h4>\
-                     <p>* Setup fee refund is subject to terms and condition. <a href="#">Please see details here</a>  </p>\
-                ');
-                    var totalSummary = $('#form-wizard .total-payment-summary');
-                    var dueToday = (+selectedPlan.setup_fee) + (+selectedPlan.price_per_month);
-                    totalSummary.html('\
-                    <hr class="border" />\
-                    <div class="row">\
-                        <p class="h4  font-weight-bold col-6">Due today: </p> \
-                        <p class="h4  font-weight-bold col-6 ">$'+(dueToday)+'</p> \
-                    </div>\
-                    <hr class="border" />\
-                    <div class="row ">\
-                        <p class="h4  font-weight-normal col-6">Due every month: <br />\
-                        <p class="h4  font-weight-normal col-6 ">$'+selectedPlan.price_per_month+'</p> \
-                    </div>\
-                    <hr class="border" />\
-                    ');
-                });
-                callOnWizardNext.push(function populateInfoInputs() {
-                    const infoInputDiv = $('#form-wizard #info-inputs');
-                    var inputs = '';
-                    $.each(basicInfo, function (i, info) {
-                        inputs += '<div class="mt-4">\
-                                        <p class="'+ (info.type === 'checkbox' ? 'form-group text-left' : 'md-form') + '">\
-                                                <input data-index="'+ i + '" ' + (info.checked ? 'checked=checked' : '') + ' \
-                                                '+ (info.required ? 'required=required' : '') + ' type="' + info.type + '" id="info-input_' + i + '" value="' + info.value + '" \
-                                                    class="'+ (info.type === 'checkbox' ? '' : 'form-control  validate') + ' basic-info-input">\
-                                                <label for="info-input_'+ i + '"data-error="' + info.invalid_message + '" data-success="' + info.valid_message + '" class="' + (info.value && $.trim(info.value).length > 0 ? 'active' : '') + '">' + info.label + '</label>\
-                                            </p>\
-                                            </div>';
-
-                    });
-                    infoInputDiv.html(inputs);
-                    function handleChange(event) {
-                        var info = basicInfo[$(this).data('index')];
-                        if (!info) {
-                            return;
-                        }
-                        info.value = $(this).val();
-                        if (info.type === 'checkbox') {
-                            info.checked = $(this).prop('checked');
-                        }
-                    }
-                    $('body').on('change', '#form-wizard #info-inputs .basic-info-input', handleChange);
-                    $('body').on('input', '#form-wizard #info-inputs .basic-info-input', handleChange);
-                });
-            }
-            function activateStepIndicatorByIndex(index) {
-                wizardSteps.removeClass('active').removeClass('passed');
-                wizardSteps.eq(index).addClass('active').prevAll().addClass('passed');
-            }
-            function reFocusActiveStep() {
-                gotoToStepByIndex($('#form-wizard .wizard-step-content.active').index(), true);
-            }
-            function resetContinueText(index) {
-                var btn = $('#form-wizard  #wiz-continue');
-                var text = $('#form-wizard  #wiz-continue .text');
-                if (index === wizardContents.length - 1) {
-                    return $('#form-wizard  .wizard-footer').hide();
-                }
-                if (index === wizardContents.length - 2) {
-                    text.text('Finish');
-                    btn.removeClass('btn-primary').addClass('btn-default');
-                } else {
-                    text.text('Continue')
-                    btn.removeClass('btn-default').addClass('btn-primary');
-                }
-            }
-            function gotoToStepByIndex(index) {
-                var rect = wizardContentWrapper[0].getBoundingClientRect();
-                var width = index * -(rect.width);
-                wizardContents.removeClass('invisible').css('transform', 'translateX(' + width + 'px)');
-                $(wizardContents).not(wizardContents.eq(index)).removeClass('active').addClass('invisible');
-                wizardContents.eq(index).addClass('active');
-                var childRect = wizardContents.get(index).getBoundingClientRect();
-                wizardContentWrapper.css('height', childRect.height);
-                scrollToSelector('#form-wizard');
-                activateStepIndicatorByIndex(index);
-                resetContinueText(index);
-                $.each(callOnWizardNext, function (i, fn) {
-                    fn();
-                });
-            }
-
-            function notifyInvalidStep(index) {
-                toastr["error"](steps_validity[index].invalid_message);
-            }
-
-            function advanceStepByIndex(index) {
-                var currIndex = index - 1;
-                if (!steps_validity[currIndex].isValid(currIndex)) {
-                    return notifyInvalidStep(currIndex);
-                }
-                gotoToStepByIndex(index);
-            }
-            function revertStepByIndex(index) {
-                gotoToStepByIndex(index);
-            }
-            function wizardContinue() {
-                var current = $('#form-wizard .wizard-step-content.active');
-                var index = current.index();
-                if (index < (wizardContents.length - 1)) {
-                    index += 1;
-                }
-                advanceStepByIndex(index);
-            }
-            function wizardBack() {
-                var current = $('#form-wizard .wizard-step-content.active');
-                var index = current.index();
-                if (index > 0) {
-                    index -= 1;
-                }
-                revertStepByIndex(index);
-            }
-            $('body').on('click', '#form-wizard  #wiz-continue', function (event) {
-                wizardContinue();
-            })
-            $('body').on('click', '#form-wizard  #wiz-back', function (event) {
-                wizardBack();
-            });
-            $(window).on('resize', function (event) {
-                reFocusActiveStep();
-            });
-            function scrollToSelector(selector, duration = 200) {
-                $('html, body').animate({
-                    scrollTop: $(selector).offset().top
-                }, duration);
-            }
-
-            function selectPlan(index) {
-                selectedPlan = plans[index];
-                plainItems.removeClass('active');
-                plainItems.eq(index).addClass('active');
-                plainItemButton.each(function (i, b) {
-                    var btn = $(b);
-                    btn.addClass('btn-' + plans[btn.data('index')].btn_color_class)
-                        .prop('disabled', false)
-                        .text('Select this plan');
-                });
-                plainItemButton.eq(index).prop('disabled', true)
-                    .text('Selected');
-                // .removeClass('btn-' + selectedPlan.btn_color_class).addClass('btn-secondary');
-
-
-            }
-            function populatePlans() {
-                var planGroup = $('#form-wizard #plan-group');
-                var plansContent = '';
-                $.each(plans, function (i, plan) {
-                    var features = '';
-                    $.each(plan.features, function (i, feat) {
-                        features += '<div class="row">\
-                                                        <div class="col-auto"> <i class="fa  '+ (feat.included ? 'fa-check-circle' : 'fa-times') + ' p-0 m-0"></i></div>\
-                                                        <div class="col text-left">\
-                                                            '+ feat.description + '\
-                                                        </div>\
-                                                    </div>\
-                                                    <hr />';
-                        if (feat.included) {
-
-                        }
-                    });
-                    plansContent += '<div class="col-md-4 mb-r plan-item">\n\
-                                                <h1 class="feature-title font-weight-normal text-'+ plan.text_color_class + '"><i class="fa fa-check select-indicator"></i> ' + plan.name + '</h1>\n\
-                                                <p class="">'+ plan.description + '</p>\n\
-                                                <div class="p-2">\n\
-                                                    <div class="lead text-center">\n\
-                                                        <span class="display-4 text-'+ plan.text_color_class + '">$' + plan.price_per_month + '</span>/mo\n\
-                                                    </div>\n\
-                                                    <span class="text-default">* Includes <span class="font-weight-bold">$'+ plan.setup_fee + '</span> on-time setup fee</span>\n\
-                                                    <hr class=" d-none d-md-block"/>\n\
-                                                </div>\n\
-                                                <div class="p-2 d-none d-md-block">\
-                                                   '+ features + '\
-                                                </div>\
-                                                <a class="mb-4 d-none d-md-block" href="#" target="_blank">Learn more</a> <br/>\
-                                                <button data-index="'+ i + '"  class="btn btn-' + plan.btn_color_class + ' btn-sm mt-md-5 plan-item-button">Select this plan</button>\
-                                                <hr class=" d-block d-md-none"/>\n\
-                                            </div>';
-                });
-                planGroup.html(plansContent);
-                $('body').on('click', '#form-wizard .plan-item-button', function (event) {
-                    selectPlan($(this).data('index'));
-                });
-
-            }
-
-
-        })
-    </script>
 </head>
 
 <body>
@@ -444,92 +66,18 @@
 
 
     <section>
-        <style>
-            .wizard-step-content-wrapper {
-                overflow: hidden;
-                display: flex;
-                align-content: flex-start;
-                align-items: flex-start;
-                -webkit-transition: all .2s ease-in-out;
-                -moz-transition: all .2s ease-in-out;
-                -o-transition: all .2s ease-in-out;
-                transition: all .2s ease-in-out;
-            }
-
-            .wizard-step-content {
-                -webkit-transition: all .2s ease-in-out;
-                -moz-transition: all .2s ease-in-out;
-                -o-transition: all .2s ease-in-out;
-                transition: all .2s ease-in-out;
-                flex: 0 0 100%;
-            }
-
-            .wizard-step-indicator-wrapper {
-                background: rgba(0, 0, 0, 0.03);
-                padding: .5rem;
-            }
-
-            .page-item,
-            .page-item a {
-                font-size: 1rem !important;
-            }
-
-            .page-item.passed:not(.active),
-            .page-item.passed:not(.active) a {
-                color: teal !important;
-            }
-
-            .page-item .checked,
-            .page-itema .checked {
-                display: none;
-            }
-
-            .page-item.passed:not(.active) .checked,
-            .page-item.passed:not(.active) a .checked {
-                display: inline;
-            }
-
-            .plan-item {
-                padding: 2rem;
-            }
-
-            .plan-item .price-display {
-                font-size: 2rem;
-            }
-
-            .plan-item.active {
-                background: rgba(0, 0, 0, 0.05);
-            }
-
-            .plan-item:hover {
-                background: rgba(0, 0, 0, 0.03);
-            }
-
-            .plan-item .select-indicator {
-                display: none;
-                padding: .5rem;
-            }
-
-            .plan-item.active .select-indicator {
-                display: inline;
-            }
-        </style>
         <div class="container text-center">
             <div class="row justify-content-md-center">
                 <div class="col-12">
 
-                    <div id="form-wizard" class="form-wizard ">
-                        <div class="wizard-step-indicator-wrapper  justify-content d-none d-md-flex">
-                            <ul class="pagination pg-blue row m-0 p-0">
-                                <li data-target="basic-info" class="page-item wizard-step col"><a class="page-link"><span class="checked">&#10004;</span> Basic information</a></li>
-                                <li class="page-item col-auto">&rarr;</li>
-                                <li class="page-item wizard-step col"><a class="page-link"><span class="checked">&#10004;</span> Choose a plan</a></li>
-                                <li class="page-item  col-auto">&rarr;</li>
-                                <li class="page-item  wizard-step col"><a class="page-link"><span class="checked">&#10004;</span> Review</a></li>
-                                <li class="page-item  col-auto">&rarr;</li>
-                                <li class="page-item  wizard-step col active"><a class="page-link"><span class="checked">&#10004;</span> Select payment method</a></li>
-                                <li class="page-item  col-auto">&rarr;</li>
-                                <li class="page-item  wizard-step col"><a class="page-link"><span class="checked">&#10004;</span> Finish</a></li>
+                    <div id="form-wizard" class="form-wizard">
+                        <div class="wizard-step-indicator-wrapper d-none d-md-block  justify-content">
+                            <ul class="wizard-steps  row m-0 p-0">
+                                <li class="wizard-step-item wizard-step col d-flex "><span class="checked">&#10004;</span> <span class="align-middle"> Basic information</span></li>
+                                <li class="wizard-step-item wizard-step col "><span class="checked">&#10004;</span><span class="align-middle">  Choose a plan</span></li>
+                                <li class="wizard-step-item wizard-step col "><span class="checked">&#10004;</span> <span class="align-middle"> Review</span></li>
+                                <li class="wizard-step-item wizard-step col "><span class="checked">&#10004;</span> <span class="align-middle"> Select payment method</span></li>
+                                <li class="wizard-step-item wizard-step col "><span class="checked">&#10004;</span> <span class="align-middle"> Finish</span></li>
 
 
                             </ul>
@@ -537,27 +85,27 @@
 
                         <div class="wizard-step-content-wrapper mt-5">
                             <div id="basic-info" class="wizard-step-content active">
-                                <div class="step-header text-left">
+                                <div class="step-header text-center">
                                     <h1>Basic information</h1>
                                     <p>We just need some information so we can get you started</p>
                                     <br />
                                 </div>
-                                <div class="row">
-                                    <div class="col">
+                                <div class="row justify-content ">
+                                    <div class="col-12 col-md-6 col-xl-4">
                                         <div class="p-sm-4" id="info-inputs">
 
                                             <div class="md-form">
                                                 <input type="text" id="company-name" class="form-control">
-                                                <label for="company-name">Your company/business name</label>
+                                                <label for="company-name">Your company<span class="d-none d-md-inline">/business</span> name</label>
                                             </div>
 
                                             <div class="md-form">
                                                 <input data-error="invalid domain name" type="url" id="your-name" class="form-control">
-                                                <label for="your-name">Your registered domain name (optional)</label>
+                                                <label for="your-name">Your <span class="d-none d-md-inline">registered</span> domain name <span class="d-none d-md-inline">(optional)</span></label>
                                             </div>
                                             <div class="md-form">
                                                 <input type="text" id="company-category" class="form-control">
-                                                <label for="company-category">Business category (Ex. Non-profit)</label>
+                                                <label for="company-category">Business category<span class="d-none d-md-inline"> (Ex. Non-profit)</span></label>
                                             </div>
 
                                             <div class="form-group text-left">
@@ -566,10 +114,13 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-6 d-none d-lg-flex">
-                                        <p style="color:rgba(0,0,0, 0.1); font-size:20rem; height:20rem;line-height:20rem;">
-                                            <i class="fa fa-info-circle"></i>
-                                        </p>
+                                    <div class="col-12 col-md-6 d-none d-md-flex">
+                                        <div class="p-2 d-block">
+                                            <button id="wiz-continue" class="btn btn-primary btn-lg"><span class="">Continue</span> &rarr;</button>
+                                            <p class="d-none" style="color:rgba(0,0,0, 0.1); font-size:20rem; height:20rem;line-height:20rem;">
+                                                <i class="fa fa-info-circle"></i>
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -610,17 +161,17 @@
 
                             <div id="review" class="wizard-step-content">
                                 <div class="row">
-                                    <div class="col-12 text-center text-md-left">
-                                        <h1 class="font-weight-normal pb-5">Let's make sure we got everything right before we proceed. </h1>
+                                    <div class="col-12 text-left">
+                                        <h3 class="pb-5 text-center">Let's make sure we got everything right before we proceed. </h3>
                                         <div class="row">
                                             <div class="col-12 col-md-6">
                                                 <h4 class="font-weight-bold">Your basic information</h4>
                                                 <div class="basic-info-summary"></div>
                                             </div>
-                                            <div class="col-12 col-md-6">
+                                            <div class="col-12 col-md-6 mt-3 mt-md-auto">
                                                 <h4 class="font-weight-bold">Plan details</h4>
                                                 <div class="selected-plan-summary"></div>
-
+                                                <button id="wiz-continue" class="btn btn-primary btn-lg d-none d-md-block"><span class="text d-none d-sm-inline">Continue</span> &rarr;</button>
                                             </div>
                                         </div>
                                     </div>
@@ -631,12 +182,15 @@
                             <div id="payment-method" class="wizard-step-content">
                                 <div class="row justify-content-md-center">
                                     <div class="w-100">
-                                        <h1 class="section-heading pt-4">Set up a payment method</h1>
+                                        <h1 class="section-heading pt-4 font-weight-normal">Set up a payment method</h1>
                                         <br />
                                     </div>
                                     <div class="col-md-6 text-left">
                                         <div class=" p-3 selected-plan-summary"></div>
                                         <div class="total-payment-summary"></div>
+                                        <div class="col-auto text-left d-none d-md-block">
+                                                <button id="wiz-back" class="btn btn-secondary btn-lg">&larr; <span class="text d-none  d-sm-inline"> Back</span></button>
+                                            </div>
                                     </div>
 
                                     <div class="col-md-6">
@@ -691,19 +245,18 @@
                             <div id="finish" class="wizard-step-content">
                                 <div class="row">
                                     <div class="col-12">
-                                        <h1 class="section-heading pt-4">Finished</h1>
+                                        <p class="section-heading display-4 pt-4">Finished</p>
                                         <br />
 
-                                        <h3 class="font-weight-normal">Thank you for choosing our service ...</h3>
+                                        <h3 class="">Thank you for choosing our service ...</h3>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <div id="fix-break-point" ></div>
 
-                        <br />
-                        <div class="wizard-footer">
-                            <hr />
-                            <div class="row">
+                        <div class="wizard-footer d-md-none">
+                            <div class="row bg-white ">
                                 <div class="col-auto text-left">
                                     <button id="wiz-back" class="btn btn-secondary btn-lg">&larr; <span class="text d-none  d-sm-inline"> Back</span></button>
                                 </div>
@@ -725,7 +278,7 @@
 
 
     <!--Projects section v.1-->
-    <section class="section container">
+    <section class="section container d-none">
 
         <!--Section heading-->
         <h2 class="section-heading h1 pt-4"><strong>Our best projects</strong></h2>
@@ -855,14 +408,10 @@
         </div>
     </footer>
 
-    <!-- MDB core JavaScript -->
-    <script type="text/javascript" src="/assets/js/mdb.min.js"></script>
 
     <script>
         //   new WOW().init();
     </script>
-    <script src="//s3-us-west-2.amazonaws.com/tscdms/shared/scripts/cleave.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="https://www.paypalobjects.com/api/checkout.js" data-version-4></script>
     <script src="https://js.braintreegateway.com/web/3.22.2/js/client.min.js"></script>
     <script src="https://js.braintreegateway.com/web/3.22.2/js/hosted-fields.min.js"></script>
@@ -870,6 +419,25 @@
     <script src="./braintree-payment.js"></script>
     <!-- <script src="https://js.braintreegateway.com/web/dropin/1.6.1/js/dropin.min.js"></script> -->
 
+
+
+    <!-- SCRIPTS -->
+
+    <!-- JQuery -->
+    <script type="text/javascript" src="/assets/js/jquery-3.1.1.min.js"></script>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <!-- Bootstrap dropdown -->
+    <script type="text/javascript" src="/assets/js/popper.min.js"></script>
+
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="/assets/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="/assets/js/mdb.min.js"></script>
+
+    <script type="text/javascript" src="/dist/js/scripts.min.js"></script>
+    <script type="text/javascript" src="./dist/js/scripts.min.js"></script>
 
 
 </body>

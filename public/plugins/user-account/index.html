@@ -20,7 +20,7 @@
 
   <!-- Material Design Bootstrap -->
   <link href="/assets/css/mdb.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/styles/main.css">
+  <link rel="stylesheet" href="/dist/css/main.min.css">
 
 
   <!-- SCRIPTS -->
@@ -34,31 +34,6 @@
     <!-- Bootstrap core JavaScript -->
     <script type="text/javascript" src="/assets/js/bootstrap.min.js"></script>
   
-      
-  <script>
-    function getStarted() {
-      var xhr = new XMLHttpRequest();
-      xhr.onreadystatechange = function () {
-        if (xhr.readyState == XMLHttpRequest.DONE) {
-          var token = xhr.responseText;
-          console.log('CLIENT_TOKEN_READY', token);
-          var button = document.querySelector('#submit-button');
-          braintree.dropin.create({
-            authorization: token,
-            container: '#dropin-container'
-          }, function (createErr, instance) {
-            button.addEventListener('click', function () {
-              instance.requestPaymentMethod(function (err, payload) {
-                // Submit payload.nonce to your server\n
-              });
-            });
-          });
-        }
-      }
-      xhr.open('GET', 'https://my.elyir.local:8443/59062e028631a043f468fc73/client_token', true);
-      xhr.send(null);
-    }
-  </script>
 </head>
 
 <body>
@@ -101,7 +76,7 @@
   <section>
     <div class="container text-center">
       <div class="row justify-content-md-center">
-        <div class=" col-5 ">
+        <div class=" col-12 col-md-5 ">
 
 
           <div class="user-account-div">
@@ -383,7 +358,7 @@
         //   new WOW().init();
       </script>
       <script src="https://js.braintreegateway.com/web/dropin/1.6.1/js/dropin.min.js"></script>
-  
+  <script src="/dist/js/scripts.min.js"></script>
 
   
 </body>

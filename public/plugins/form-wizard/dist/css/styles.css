@@ -168,6 +168,7 @@ Animations
     transform: translate3d(0, 0, 0);
     backface-visibility: hidden;
     perspective: 1000px; }
+
 @keyframes cardIntro {
   0% {
     transform: scale(0.8) translate(0, 0);
@@ -175,22 +176,97 @@ Animations
   100% {
     transform: scale(1) translate(0, 0);
     opacity: 1; } }
+
 @keyframes shake {
   10%,
-    90% {
+  90% {
     transform: translate3d(-1px, 0, 0); }
   20%,
-    80% {
+  80% {
     transform: translate3d(1px, 0, 0); }
   30%,
-    50%,
-    70% {
+  50%,
+  70% {
     transform: translate3d(-3px, 0, 0); }
   40%,
-    60% {
+  60% {
     transform: translate3d(3px, 0, 0); } }
+
 #bt-payment-form .accept-logo.paypal {
   padding: 2rem;
   background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/346994/card_sprite.png); }
 
-/*# sourceMappingURL=braintree-payment.css.map */
+.wizard-step-content-wrapper {
+  overflow: hidden;
+  display: flex;
+  align-content: flex-start;
+  align-items: flex-start;
+  -webkit-transition: all .2s ease-in-out;
+  -moz-transition: all .2s ease-in-out;
+  -o-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out; }
+
+.wizard-step-content {
+  -webkit-transition: all .2s ease-in-out;
+  -moz-transition: all .2s ease-in-out;
+  -o-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
+  flex: 0 0 100%; }
+
+.wizard-step-indicator-wrapper {
+  background: rgba(0, 0, 0, 0.03);
+  padding: .5rem; }
+  .wizard-step-indicator-wrapper .wizard-steps {
+    list-style: none; }
+    .wizard-step-indicator-wrapper .wizard-steps .wizard-step {
+      display: flex;
+      align-items: center;
+      justify-content: center; }
+      .wizard-step-indicator-wrapper .wizard-steps .wizard-step.active {
+        font-weight: bold;
+        background: #0099cc;
+        color: white; }
+      .wizard-step-indicator-wrapper .wizard-steps .wizard-step .checked {
+        display: none; }
+      .wizard-step-indicator-wrapper .wizard-steps .wizard-step.passed {
+        font-weight: bold; }
+        .wizard-step-indicator-wrapper .wizard-steps .wizard-step.passed:not(.active) {
+          background: #4b515d;
+          color: white; }
+          .wizard-step-indicator-wrapper .wizard-steps .wizard-step.passed:not(.active) .checked {
+            display: inline; }
+
+.page-item,
+.page-item a {
+  font-size: 1rem !important; }
+
+.page-item.passed:not(.active),
+.page-item.passed:not(.active) a {
+  color: teal !important; }
+
+.page-item .checked,
+.page-item a .checked {
+  display: none; }
+
+.page-item.passed:not(.active) .checked,
+.page-item.passed:not(.active) a .checked {
+  display: inline; }
+
+.plan-item {
+  padding: 2rem; }
+
+.plan-item .price-display {
+  font-size: 2rem; }
+
+.plan-item.active {
+  background: rgba(0, 0, 0, 0.05); }
+
+.plan-item:hover {
+  background: rgba(0, 0, 0, 0.03); }
+
+.plan-item .select-indicator {
+  display: none;
+  padding: .5rem; }
+
+.plan-item.active .select-indicator {
+  display: inline; }

@@ -1,4 +1,4 @@
-@import '../../node_modules/bootstrap/scss/bootstrap.scss';
+@import '../../../node_modules/bootstrap/scss/bootstrap.scss';
 
 html,
 body{
@@ -7,8 +7,8 @@ body{
     // width: 100vw;
     // overflow-x: hidden;
     // overflow-y: auto;
-    // font-family: 'Roboto', sans-serif;
-    font-family: 'Quicksand', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    // font-family: 'Quicksand', sans-serif;
         header{
             padding: 2rem 0;
             background: #dae8ed;
@@ -138,4 +138,11 @@ body{
             // }
         }
     }
+}
+h1,h2,h3,h4,
+.h1,.h2,.h3,.h4{
+    font-weight: 300;
+}
+.form-control{
+    padding:.6rem 0rem;
 }
