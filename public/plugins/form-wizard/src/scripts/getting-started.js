@@ -358,7 +358,7 @@ function GettingStartedWizard (){
                 }
             });
             plansContent += '<div class="col-md-4 mb-r plan-item">\n\
-                                        <h1 class="feature-title font-weight-normal text-'+ plan.text_color_class + '"><i class="fa fa-check select-indicator"></i> ' + plan.name + '</h1>\n\
+                                        <h1 class="feature-title font-weight-normal"><i class="fa fa-check select-indicator"></i> ' + plan.name + '</h1>\n\
                                         <p class="">'+ plan.description + '</p>\n\
                                         <div class="p-2">\n\
                                             <div class="lead text-center">\n\
