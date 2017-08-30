@@ -243,8 +243,8 @@ function GettingStartedWizard (){
         gotoToStepByIndex($('#form-wizard .wizard-step-content.active').index(), true);
     }
     function resetContinueText(index) {
-        var btn = $('#form-wizard  #wiz-continue');
-        var text = $('#form-wizard  #wiz-continue .text');
+        var btn = $('#form-wizard  .wiz-continue, #form-wizard  #wiz-continue');
+        var text = $('#form-wizard  .wiz-continue .text, #form-wizard  #wiz-continue .text');
         if (index === wizardContents.length - 1) {
             return $('#form-wizard  .wizard-footer').hide();
         }
@@ -308,10 +308,10 @@ function GettingStartedWizard (){
         }
         revertStepByIndex(index);
     }
-    $('body').on('click', '#form-wizard  #wiz-continue', function (event) {
+    $('body').on('click', '#form-wizard  #wiz-continue, #form-wizard  .wiz-continue', function (event) {
         wizardContinue();
     })
-    $('body').on('click', '#form-wizard  #wiz-back', function (event) {
+    $('body').on('click', '#form-wizard  #wiz-back, #form-wizard  .wiz-back', function (event) {
         wizardBack();
     });
     $(window).on('resize', function (event) {
@@ -352,27 +352,42 @@ function GettingStartedWizard (){
                                                     '+ feat.description + '\
                                                 </div>\
                                             </div>\
-                                            <hr />';
+                                            <hr class="d-block d-md-none d-xl-block"/>'; 
                 if (feat.included) {
 
                 }
             });
+<<<<<<< HEAD
+            plansContent += '<div class="col-12 col-xl-4 plan-item text-left">\n\
+                                     <div class="row">\
+                                        <div class="col-12 col-md-8 col-xl-12">\
+                                            <h1 class="feature-title font-weight-normal text-'+ plan.text_color_class + '"><i class="fa fa-check select-indicator"></i> ' + plan.name + '</h1>\n\
+                                            <p class="">'+ plan.description + '</p>\n\
+                                            <div class="">\n\
+                                                <div class="lead ">\n\
+                                                    <span class="display-4 text-'+ plan.text_color_class + '">$' + plan.price_per_month + '</span>/mo\n\
+                                                </div>\n\
+                                                <span class="text-default">* Plus <span class="font-weight-bold">$'+ plan.setup_fee + '</span> on-time setup fee</span>\n\
+                                                <hr class=" d-none d-md-block"/>\n\
+=======
             plansContent += '<div class="col-md-4 mb-r plan-item">\n\
                                         <h1 class="feature-title font-weight-normal"><i class="fa fa-check select-indicator"></i> ' + plan.name + '</h1>\n\
                                         <p class="">'+ plan.description + '</p>\n\
                                         <div class="p-2">\n\
                                             <div class="lead text-center">\n\
                                                 <span class="display-4 text-'+ plan.text_color_class + '">$' + plan.price_per_month + '</span>/mo\n\
+>>>>>>> 905ade2360fd51602b23838062bc1439979233d9
                                             </div>\n\
-                                            <span class="text-default">* Plus <span class="font-weight-bold">$'+ plan.setup_fee + '</span> on-time setup fee</span>\n\
-                                            <hr class=" d-none d-md-block"/>\n\
-                                        </div>\n\
-                                        <div class="p-2 d-none d-md-block">\
-                                           '+ features + '\
+                                            <div class="p-2 d-none d-md-block">\
+                                                '+ features + '\
+                                            </div>\
                                         </div>\
-                                        <a class="mb-4 d-none d-md-block" href="#" target="_blank">Learn more</a> <br/>\
-                                        <button data-index="'+ i + '"  class="btn btn-lg btn-' + plan.btn_color_class + ' mt-md-5 plan-item-button">Select this plan</button>\
-                                        <hr class=" d-block d-md-none"/>\n\
+                                        <div class="col-12 col-md-4 col-xl-12">\
+                                            <a class="mt-1 mb-1 mt-md-5 mb-md-1 d-none d-md-block" href="#" target="_blank">Learn more</a> <br/>\
+                                            <button data-index="'+ i + '"  class="btn btn-lg btn-' + plan.btn_color_class + 'mt-1 mt-md-0 mt-xl-5 plan-item-button">Select this plan</button>\
+                                        </div>\
+                                     </div>\
+                                     <hr class=" d-block border"/>\n\
                                     </div>';
         });
 

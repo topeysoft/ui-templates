@@ -9,7 +9,7 @@ function getStarted() {
   };
   xhr.open(
     "GET",
-    "https://my.elyir.local:8443/59062e028631a043f468fc73/client_token",
+    "https://cms.api.elyir.local:8443/braintree/59062e028631a043f468fc73/client_token?use_sandbox=true",
     true
   );
   xhr.send(null);

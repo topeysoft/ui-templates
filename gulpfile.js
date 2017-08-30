@@ -18,28 +18,28 @@ const configs = [
     base_path: "./public"
   }
 ];
-var jsFiles = "assets/scripts/**/*.js",
-  jsDest = "dist/scripts";
 
-  const allDone= (index, doneCallback)=>{
-    if(index===(configs.length-1)){
-      doneCallback(null);
-    }
-  }
-gulp.task("scripts", ["clean:scripts"], function() {
+
+gulp.task("scripts", ["clean:scripts"], function (done) {
   return (() => {
     configs.forEach(config => {
-      gulp
-        .src(config.base_path + "/src/scripts/**/*.js")
-        .pipe(concat("scripts.js"))
-        .pipe(gulp.dest(config.base_path + "/dist/js"))
-        .pipe(rename({ suffix: ".min" }))
-        //.pipe(uglify())
-        .pipe(gulp.dest(config.base_path + "/dist/js"));
+      try {
+
+        gulp
+          .src(config.base_path + "/src/scripts/**/*.js")
+          .pipe(concat("scripts.js"))
+          .pipe(gulp.dest(config.base_path + "/dist/js"))
+          .pipe(rename({ suffix: ".min" }))
+          //.pipe(uglify())
+          .pipe(gulp.dest(config.base_path + "/dist/js"));
+      } catch (error) {
+        console.log(error);
+      }
     });
+    done();
   })();
 });
-gulp.task("styles", ["clean:styles"], function() {
+gulp.task("styles", ["clean:styles"], function (done) {
   return (() => {
     configs.forEach(config => {
       gulp
@@ -49,14 +49,15 @@ gulp.task("styles", ["clean:styles"], function() {
         .pipe(rename({ suffix: ".min" }))
         //.pipe(sourcemaps.init())
         .pipe(
-          cleanCSS({ debug: true }, function(details) {
-            console.log(details.name + ": " + details.stats.originalSize);
-            console.log(details.name + ": " + details.stats.minifiedSize);
-          })
+        cleanCSS({ debug: true }, function (details) {
+          console.log(details.name + ": " + details.stats.originalSize);
+          console.log(details.name + ": " + details.stats.minifiedSize);
+        })
         )
         //.pipe(sourcemaps.write())
         .pipe(gulp.dest(config.base_path + "/dist/css/"));
     });
+    done();
   })();
 });
 
@@ -89,20 +90,19 @@ gulp.task("styles", ["clean:styles"], function() {
 //   })();
 // });
 
-gulp.task("clean:scripts", function(done) {
+gulp.task("clean:scripts", function (done) {
   return (() => {
-    configs.forEach((config, i) => {
-      del([config.base_path + "/dist/js", config.base_path + "/dist/scripts"])
-      .then(()=>{
-        allDone(i, done);
-      }).catch(err=>{
-        allDone(i, done);
-      });
+    configs.forEach(config => {
+      try{
+        del([config.base_path + "/dist/js", config.base_path + "/dist/scripts"]);
+      } catch (error) {
+        console.log(error);
+      }
     });
-    
+    done();
   })();
 });
-gulp.task("clean:styles", function(done) {
+gulp.task("clean:styles", function (done) {
   return (() => {
     configs.forEach((config, i) => {
       del([config.base_path + "/dist/css", config.base_path + "/dist/styles"])
@@ -112,18 +112,23 @@ gulp.task("clean:styles", function(done) {
         allDone(i, done);
       });
     });
+    done();
   })();
 });
 
-gulp.task("clean", ["clean:styles", "clean:scripts"]);
+gulp.task("clean", ["clean:styles", "clean:scripts"], (done)=>{
+  return ()=>{
+    done();
+  } 
+});
 gulp.task("build", ["clean", "styles", "scripts"]);
-gulp.task("watch", function() {
+gulp.task("watch", function () {
   (() => {
     configs.forEach(config => {
       gulp.watch(config.base_path + "/src/styles/**/*.scss", ["styles"]);
       gulp.watch(config.base_path + "/src/scripts/**/*.js", ["scripts"]);
-    //   gulp.watch(config.base_path + "/src/index.html", ["index"]);
+      //   gulp.watch(config.base_path + "/src/index.html", ["index"]);
     });
   })();
 });
-gulp.task("default", ['build',"watch"]);
+gulp.task("default", ['build', "watch"]);

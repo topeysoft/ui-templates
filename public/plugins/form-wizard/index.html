@@ -91,7 +91,7 @@
                                     <br />
                                 </div>
                                 <div class="row justify-content ">
-                                    <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="col-12 col-md-8">
                                         <div class="p-sm-4" id="info-inputs">
 
                                             <div class="md-form">
@@ -114,7 +114,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-md-6 d-none d-md-flex">
+                                    <div class="col-12 col-md-auto d-none d-md-flex align-items-center">
                                         <div class="p-2 d-block">
                                             <button id="wiz-continue" class="btn btn-primary btn-lg"><span class="">Continue</span> &rarr;</button>
                                             <p class="d-none" style="color:rgba(0,0,0, 0.1); font-size:20rem; height:20rem;line-height:20rem;">
@@ -139,7 +139,7 @@
                                         <!--Section description-->
                                         <!-- <p class="section-description lead grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit, error amet numquam iure provident voluptate esse quasi, veritatis totam voluptas nostrum quisquam eum.</p> -->
 
-                                        <!--Grid row-->
+
                                         <div id="plan-group" class="row  features-small">
 
                                             <!-- plans will be populated here -->
@@ -148,7 +148,11 @@
                                         <p class="text-muted text-center">
                                             All plans Includes free 3 months subscription starting from the date the website goes live. <br/>                                            * Setup fees can be discounted or completely waived in some cases. <a href="#">Learn how you can save some money on the setup fee.</a>
                                         </p>
-                                        <!--Grid row-->
+                                        <div class="row justify-content-center">
+                                            <div class="col-6 text-center d-none d-md-block w-100">
+                                                <button class=" d-block w-100 wiz-back btn btn-secondary btn-lg">&larr; <span class="text d-none d-sm-inline">Back</span></button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -171,7 +175,17 @@
                                             <div class="col-12 col-md-6 mt-3 mt-md-auto">
                                                 <h4 class="font-weight-bold">Plan details</h4>
                                                 <div class="selected-plan-summary"></div>
-                                                <button id="wiz-continue" class="btn btn-primary btn-lg d-none d-md-block"><span class="text d-none d-sm-inline">Continue</span> &rarr;</button>
+
+                                            </div>
+                                            <div class="col-12 d-none d-md-block">
+                                                <div class="row">
+                                                    <div class="col-6 text-right">
+                                                        <button class="wiz-back btn btn-secondary btn-lg">&larr; <span class="text d-none d-sm-inline">Back</span></button>
+                                                    </div>
+                                                    <div class="col-6 text-left">
+                                                        <button class="wiz-continue btn btn-primary btn-lg"><span class="text d-none d-sm-inline">Continue</span> &rarr;</button>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -189,8 +203,8 @@
                                         <div class=" p-3 selected-plan-summary"></div>
                                         <div class="total-payment-summary"></div>
                                         <div class="col-auto text-left d-none d-md-block">
-                                                <button id="wiz-back" class="btn btn-secondary btn-lg">&larr; <span class="text d-none  d-sm-inline"> Back</span></button>
-                                            </div>
+                                            <button id="wiz-back" class="btn btn-secondary btn-lg">&larr; <span class="text d-none  d-sm-inline"> Back</span></button>
+                                        </div>
                                     </div>
 
                                     <div class="col-md-6">
@@ -253,15 +267,16 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="fix-break-point" ></div>
+                        <div id="fix-break-point"></div>
 
                         <div class="wizard-footer mt-4 d-md-none border border-left-0 border-right-0 border-bottom-0">
                             <div class="row bg-white ">
+                            <hr class="d-block d-md-none p-0 col-12 m-0" />
                                 <div class="col-auto text-left">
-                                    <button id="wiz-back" class="btn btn-secondary btn-lg">&larr; <span class="text d-none  d-sm-inline"> Back</span></button>
+                                    <button class="wiz-back btn btn-secondary btn-lg">&larr; <span class="text d-none  d-sm-inline"> Back</span></button>
                                 </div>
                                 <div class="col text-right">
-                                    <button id="wiz-continue" class="btn btn-primary btn-lg"><span class="text d-none d-sm-inline">Continue</span> &rarr;</button>
+                                    <button class="wiz-continue btn btn-primary btn-lg"><span class="text d-none d-sm-inline">Continue</span> &rarr;</button>
                                 </div>
                             </div>
                         </div>
