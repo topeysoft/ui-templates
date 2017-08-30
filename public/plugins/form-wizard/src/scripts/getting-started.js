@@ -357,6 +357,7 @@ function GettingStartedWizard (){
 
                 }
             });
+<<<<<<< HEAD
             plansContent += '<div class="col-12 col-xl-4 plan-item text-left">\n\
                                      <div class="row">\
                                         <div class="col-12 col-md-8 col-xl-12">\
@@ -368,6 +369,14 @@ function GettingStartedWizard (){
                                                 </div>\n\
                                                 <span class="text-default">* Plus <span class="font-weight-bold">$'+ plan.setup_fee + '</span> on-time setup fee</span>\n\
                                                 <hr class=" d-none d-md-block"/>\n\
+=======
+            plansContent += '<div class="col-md-4 mb-r plan-item">\n\
+                                        <h1 class="feature-title font-weight-normal"><i class="fa fa-check select-indicator"></i> ' + plan.name + '</h1>\n\
+                                        <p class="">'+ plan.description + '</p>\n\
+                                        <div class="p-2">\n\
+                                            <div class="lead text-center">\n\
+                                                <span class="display-4 text-'+ plan.text_color_class + '">$' + plan.price_per_month + '</span>/mo\n\
+>>>>>>> 905ade2360fd51602b23838062bc1439979233d9
                                             </div>\n\
                                             <div class="p-2 d-none d-md-block">\
                                                 '+ features + '\
