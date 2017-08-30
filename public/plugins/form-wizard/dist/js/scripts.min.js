@@ -341,10 +341,16 @@ function GettingStartedWizard (){
             text_color_class: 'green',
             btn_color_class: 'default',
             description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores nam, aperiam minima assumenda.",
-            features: [{
+            features: [
+                {
                 description: "Includes support and help and all that fun stuff",
                 included: false
-            }]
+            },
+            {
+                description: "Includes more support and help and all that fun stuff",
+                included: false
+            }
+        ]
         },
         {
             name: "Advanced",
@@ -356,7 +362,12 @@ function GettingStartedWizard (){
             features: [{
                 description: "Includes support and help and all that fun stuff",
                 included: true
-            }]
+            },
+            {
+                description: "Includes more support and help and all that fun stuff",
+                included: false
+            }
+        ]
         },
         {
             name: "Premium",
@@ -367,6 +378,10 @@ function GettingStartedWizard (){
             description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores nam, aperiam minima assumenda.",
             features: [{
                 description: "Includes support and help and all that fun stuff",
+                included: true
+            },
+            {
+                description: "Includes more support and help and all that fun stuff",
                 included: true
             }]
         }
@@ -570,48 +585,39 @@ function GettingStartedWizard (){
         $.each(plans, function (i, plan) {
             var features = '';
             $.each(plan.features, function (i, feat) {
-                features += '<div class="row">\
+                features += '<hr class="d-block"/>\
+                <div class="row">\
                                                 <div class="col-auto"> <i class="fa  '+ (feat.included ? 'fa-check-circle' : 'fa-times') + ' p-0 m-0"></i></div>\
                                                 <div class="col text-left">\
                                                     '+ feat.description + '\
                                                 </div>\
                                             </div>\
-                                            <hr class="d-block d-md-none d-xl-block"/>'; 
+                                            '; 
                 if (feat.included) {
 
                 }
             });
-<<<<<<< HEAD
-            plansContent += '<div class="col-12 col-xl-4 plan-item text-left">\n\
-                                     <div class="row">\
-                                        <div class="col-12 col-md-8 col-xl-12">\
-                                            <h1 class="feature-title font-weight-normal text-'+ plan.text_color_class + '"><i class="fa fa-check select-indicator"></i> ' + plan.name + '</h1>\n\
+            plansContent += '<div class="text-left col-12 col-xl-4 plan-item">\n\
+                                    <div class="row">\
+                                        <div class="col-12 col-xl-12 col-md-8">\
+                                            <h1 class="feature-title font-weight-normal"><i class="fa fa-check select-indicator"></i> ' + plan.name + '</h1>\n\
                                             <p class="">'+ plan.description + '</p>\n\
-                                            <div class="">\n\
-                                                <div class="lead ">\n\
+                                            <div class="p-2">\n\
+                                                <div class="lead">\n\
                                                     <span class="display-4 text-'+ plan.text_color_class + '">$' + plan.price_per_month + '</span>/mo\n\
                                                 </div>\n\
-                                                <span class="text-default">* Plus <span class="font-weight-bold">$'+ plan.setup_fee + '</span> on-time setup fee</span>\n\
-                                                <hr class=" d-none d-md-block"/>\n\
-=======
-            plansContent += '<div class="col-md-4 mb-r plan-item">\n\
-                                        <h1 class="feature-title font-weight-normal"><i class="fa fa-check select-indicator"></i> ' + plan.name + '</h1>\n\
-                                        <p class="">'+ plan.description + '</p>\n\
-                                        <div class="p-2">\n\
-                                            <div class="lead text-center">\n\
-                                                <span class="display-4 text-'+ plan.text_color_class + '">$' + plan.price_per_month + '</span>/mo\n\
->>>>>>> 905ade2360fd51602b23838062bc1439979233d9
-                                            </div>\n\
-                                            <div class="p-2 d-none d-md-block">\
-                                                '+ features + '\
+                                                <div class="p-2 d-none d-md-block">\
+                                                    '+ features + '\
+                                                </div>\
+                                            </div>\
+                                            </div>\
+                                            <div class="col-12 col-md-4 col-xl-12">\
+                                                <a class="mt-1 mb-1 mt-md-5 mb-md-1 d-none d-md-block" href="#" target="_blank">Learn more</a> <br/>\
+                                                <button data-index="'+ i + '"  class="btn btn-lg btn-' + plan.btn_color_class + ' mt-1 mt-md-0 mt-xl-5 plan-item-button">Select this plan</button>\
                                             </div>\
                                         </div>\
-                                        <div class="col-12 col-md-4 col-xl-12">\
-                                            <a class="mt-1 mb-1 mt-md-5 mb-md-1 d-none d-md-block" href="#" target="_blank">Learn more</a> <br/>\
-                                            <button data-index="'+ i + '"  class="btn btn-lg btn-' + plan.btn_color_class + 'mt-1 mt-md-0 mt-xl-5 plan-item-button">Select this plan</button>\
-                                        </div>\
+                                        <hr class="d-block border"/>\n\
                                      </div>\
-                                     <hr class=" d-block border"/>\n\
                                     </div>';
         });
 

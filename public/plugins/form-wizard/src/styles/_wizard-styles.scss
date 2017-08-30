@@ -1,4 +1,6 @@
-.wizard-step-content-wrapper {
+#form-wizard{
+  // background: rgba(209, 129, 129, 0.03);
+  .wizard-step-content-wrapper {
   overflow: hidden;
   display: flex;
   align-content: flex-start;
@@ -18,7 +20,7 @@
 }
 
 .wizard-step-indicator-wrapper {
-  background: rgba(0, 0, 0, 0.03);
+  background: rgba(209, 129, 129, 0.03);
   padding: .5rem;
   .wizard-steps {
     list-style: none;
@@ -92,4 +94,5 @@
 
 .plan-item.active .select-indicator {
   display: inline;
+}
 }
