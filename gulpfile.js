@@ -21,6 +21,11 @@ const configs = [
 var jsFiles = "assets/scripts/**/*.js",
   jsDest = "dist/scripts";
 
+  const allDone= (index, doneCallback)=>{
+    if(index===(configs.length-1)){
+      doneCallback(null);
+    }
+  }
 gulp.task("scripts", ["clean:scripts"], function() {
   return (() => {
     configs.forEach(config => {
@@ -84,17 +89,28 @@ gulp.task("styles", ["clean:styles"], function() {
 //   })();
 // });
 
-gulp.task("clean:scripts", function() {
+gulp.task("clean:scripts", function(done) {
   return (() => {
-    configs.forEach(config => {
-      del([config.base_path + "/dist/js", config.base_path + "/dist/scripts"]);
+    configs.forEach((config, i) => {
+      del([config.base_path + "/dist/js", config.base_path + "/dist/scripts"])
+      .then(()=>{
+        allDone(i, done);
+      }).catch(err=>{
+        allDone(i, done);
+      });
     });
+    
   })();
 });
-gulp.task("clean:styles", function() {
+gulp.task("clean:styles", function(done) {
   return (() => {
-    configs.forEach(config => {
-      del([config.base_path + "/dist/css", config.base_path + "/dist/styles"]);
+    configs.forEach((config, i) => {
+      del([config.base_path + "/dist/css", config.base_path + "/dist/styles"])
+      .then(()=>{
+        allDone(i, done);
+      }).catch(err=>{
+        allDone(i, done);
+      });
     });
   })();
 });
