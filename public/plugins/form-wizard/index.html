@@ -22,7 +22,6 @@
     <link rel="stylesheet" href="/dist/css/main.min.css">
     <link rel="stylesheet" href="./dist/css/styles.min.css">
 
-
 </head>
 
 <body>
@@ -51,7 +50,7 @@
            </a>
                             </li>
                             <li>
-                                <a href="#get-started">
+                                <a href="/plugins/user-account/">
               Get Started
            </a>
                             </li>
@@ -73,11 +72,11 @@
                     <div id="form-wizard" class="form-wizard">
                         <div class="wizard-step-indicator-wrapper d-none d-md-block  justify-content">
                             <ul class="wizard-steps  row m-0 p-0">
-                                <li class="wizard-step-item wizard-step col d-flex "><span class="checked">&#10004;</span> <span class="align-middle"> Basic information</span></li>
+                                <!-- <li class="wizard-step-item wizard-step col d-flex "><span class="checked">&#10004;</span> <span class="align-middle"> Basic information</span></li>
                                 <li class="wizard-step-item wizard-step col "><span class="checked">&#10004;</span><span class="align-middle">  Choose a plan</span></li>
                                 <li class="wizard-step-item wizard-step col "><span class="checked">&#10004;</span> <span class="align-middle"> Review</span></li>
                                 <li class="wizard-step-item wizard-step col "><span class="checked">&#10004;</span> <span class="align-middle"> Select payment method</span></li>
-                                <li class="wizard-step-item wizard-step col "><span class="checked">&#10004;</span> <span class="align-middle"> Finish</span></li>
+                                <li class="wizard-step-item wizard-step col "><span class="checked">&#10004;</span> <span class="align-middle"> Finish</span></li> -->
 
 
                             </ul>
@@ -86,15 +85,15 @@
                         <div class="wizard-step-content-wrapper mt-5">
                             <div id="basic-info" class="wizard-step-content active">
                                 <div class="step-header text-center">
-                                    <h1>Basic information</h1>
-                                    <p>We just need some information so we can get you started</p>
+                                    <h1>Business information</h1>
+                                    <p>Tell us about your business</p>
                                     <br />
                                 </div>
-                                <div class="row justify-content ">
-                                    <div class="col-12 col-md-8">
+                                <div class="row justify-content-center ">
+                                    <div class="col-12 col-md-8 col-xl-6">
                                         <div class="p-sm-4" id="info-inputs">
-
-                                            <div class="md-form">
+                                            <p class="p-5 m-5"></p>
+                                            <!-- <div class="md-form">
                                                 <input type="text" id="company-name" class="form-control">
                                                 <label for="company-name">Your company<span class="d-none d-md-inline">/business</span> name</label>
                                             </div>
@@ -111,7 +110,7 @@
                                             <div class="form-group text-left">
                                                 <input type="checkbox" id="checkbox1">
                                                 <label for="checkbox1">We have a business logo</label>
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-auto d-none d-md-flex align-items-center">
@@ -169,7 +168,7 @@
                                         <h3 class="pb-5 text-center">Let's make sure we got everything right before we proceed. </h3>
                                         <div class="row">
                                             <div class="col-12 col-md-6">
-                                                <h4 class="font-weight-bold">Your basic information</h4>
+                                                <h4 class="font-weight-bold">Your business information</h4>
                                                 <div class="basic-info-summary"></div>
                                             </div>
                                             <div class="col-12 col-md-6 mt-3 mt-md-auto">
@@ -219,8 +218,8 @@
 
                                                 </div>
 
-                                                <header class="">
-                                                    <h1>Card payment method</h1>
+                                                <header class="p-0">
+                                                    <h1 >Card payment method</h1>
                                                 </header>
                                                 <form id="bt-payment-form" class="scale-down">
                                                     <div class="cardinfo-card-number">
@@ -273,10 +272,10 @@
                             <div class="row bg-white ">
                             <hr class="d-block d-md-none p-0 col-12 m-0" />
                                 <div class="col-auto text-left">
-                                    <button class="wiz-back btn btn-secondary btn-lg">&larr; <span class="text d-none  d-sm-inline"> Back</span></button>
+                                    <button class="wiz-back btn btn-secondary btn-simple btn-lg">&larr; <span class="text d-none  d-sm-inline"> Back</span></button>
                                 </div>
                                 <div class="col text-right">
-                                    <button class="wiz-continue btn btn-primary btn-lg"><span class="text d-none d-sm-inline">Continue</span> &rarr;</button>
+                                    <button class="wiz-continue  btn-simple btn btn-primary btn-lg"><span class="text d-none d-sm-inline">Continue</span> &rarr;</button>
                                 </div>
                             </div>
                         </div>
@@ -431,7 +430,7 @@
     <script src="https://js.braintreegateway.com/web/3.22.2/js/client.min.js"></script>
     <script src="https://js.braintreegateway.com/web/3.22.2/js/hosted-fields.min.js"></script>
     <script src="https://js.braintreegateway.com/web/3.22.2/js/paypal-checkout.min.js"></script>
-    <script src="./braintree-payment.js"></script>
+    <!-- <script src="./braintree-payment.js"></script> -->
     <!-- <script src="https://js.braintreegateway.com/web/dropin/1.6.1/js/dropin.min.js"></script> -->
 
 

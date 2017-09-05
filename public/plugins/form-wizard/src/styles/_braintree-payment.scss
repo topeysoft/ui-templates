@@ -19,7 +19,7 @@ General
   header {
     z-index: 2;
     display: block;
-    transform: translate(0, 5.5em);
+    transform: translate(0, 1.5em);
     transition: all .5s ease;
     background: transparent;
     &.header-slide {
@@ -85,7 +85,8 @@ General
   #bt-payment-form {
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
-    padding: 8em 3em 2em;
+    padding: 2em;
+    transform: translateY(4rem);
     width: 20em;
     margin-bottom: 2em;
     transition: all 600ms $bouncy;

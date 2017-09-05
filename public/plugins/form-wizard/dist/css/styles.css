@@ -14,7 +14,7 @@ Animations
   .braintree-hosted-form header {
     z-index: 2;
     display: block;
-    transform: translate(0, 5.5em);
+    transform: translate(0, 1.5em);
     transition: all .5s ease;
     background: transparent; }
     .braintree-hosted-form header.header-slide {
@@ -58,7 +58,8 @@ Animations
   .braintree-hosted-form #bt-payment-form {
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
-    padding: 8em 3em 2em;
+    padding: 2em;
+    transform: translateY(4rem);
     width: 20em;
     margin-bottom: 2em;
     transition: all 600ms cubic-bezier(0.2, 1.3, 0.7, 1);
@@ -214,8 +215,11 @@ Animations
   flex: 0 0 100%; }
 
 #form-wizard .wizard-step-indicator-wrapper {
-  background: rgba(209, 129, 129, 0.03);
-  padding: .5rem; }
+  background: rgba(0, 0, 0, 0.2);
+  padding: .0rem;
+  width: 90%;
+  max-width: 30rem;
+  margin: auto; }
   #form-wizard .wizard-step-indicator-wrapper .wizard-steps {
     list-style: none; }
     #form-wizard .wizard-step-indicator-wrapper .wizard-steps .wizard-step {
@@ -224,14 +228,14 @@ Animations
       justify-content: center; }
       #form-wizard .wizard-step-indicator-wrapper .wizard-steps .wizard-step.active {
         font-weight: bold;
-        background: #0099cc;
+        background: rgba(0, 153, 204, 0.2);
         color: white; }
       #form-wizard .wizard-step-indicator-wrapper .wizard-steps .wizard-step .checked {
         display: none; }
       #form-wizard .wizard-step-indicator-wrapper .wizard-steps .wizard-step.passed {
         font-weight: bold; }
         #form-wizard .wizard-step-indicator-wrapper .wizard-steps .wizard-step.passed:not(.active) {
-          background: #4b515d;
+          background: #0099cc;
           color: white; }
           #form-wizard .wizard-step-indicator-wrapper .wizard-steps .wizard-step.passed:not(.active) .checked {
             display: inline; }

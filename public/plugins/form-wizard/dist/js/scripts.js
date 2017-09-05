@@ -1,26 +1,30 @@
-function getStarted() {
-  var xhr = new XMLHttpRequest();
-  xhr.onreadystatechange = function() {
-    if (xhr.readyState == XMLHttpRequest.DONE) {
-      var token = xhr.responseText;
-      setupPaymentInfoValidation(token);
-      setupPaypalButton(token);
-    }
-  };
-  xhr.open(
-    "GET",
-    "https://cms.api.elyir.local:8443/braintree/59062e028631a043f468fc73/client_token?use_sandbox=true",
-    true
-  );
-  xhr.send(null);
-}
+window.tscLib = window.tscLib || {}; window.tscLib['form-wizard']=window.tscLib['form-wizard'] || {}; window.tscLib['form-wizard'].templates = {};
+function TscBraintreeClient() {
+  _this = this;
+
+  function initialize() {
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState == XMLHttpRequest.DONE) {
+        var token = xhr.responseText;
+        setupPaymentInfoValidation(token);
+        setupPaypalButton(token);
+      }
+    };
+    xhr.open(
+      "GET",
+      "https://cms.api.elyir.local:8443/projects/59062e028631a043f468fc73/plugins/braintree/client_token?use_sandbox=true",
+      true
+    );
+    xhr.send(null);
+  }
 
 
 
-function setupPaymentInfoValidation(token) {
+  function setupPaymentInfoValidation(token) {
     var form = document.querySelector('#bt-payment-form');
     var submit = document.querySelector('#button-pay');
-    
+
     braintree.client.create({
       authorization: token //'sandbox_g42y39zw_348pk9cgf3bgyw2b'
     }, function (err, clientInstance) {
@@ -28,7 +32,7 @@ function setupPaymentInfoValidation(token) {
         console.error(err);
         return;
       }
-    
+
       // Create input fields and add text styles  
       braintree.hostedFields.create({
         client: clientInstance,
@@ -56,7 +60,7 @@ function setupPaymentInfoValidation(token) {
           ':-ms-input-placeholder': {
             'color': 'rgba(0,0,0,0.6)'
           }
-    
+
         },
         // Add information for individual fields
         fields: {
@@ -78,53 +82,53 @@ function setupPaymentInfoValidation(token) {
           console.error(err);
           return;
         }
-    
+
         hostedFieldsInstance.on('validityChange', function (event) {
           // Check if all fields are valid, then show submit button
           var formValid = Object.keys(event.fields).every(function (key) {
             return event.fields[key].isValid;
           });
-    
+
           if (formValid) {
             $('#form-container').addClass('show-button');
           } else {
             $('#form-container').removeClass('show-button');
           }
         });
-    
+
         hostedFieldsInstance.on('empty', function (event) {
-          $('header').removeClass('header-slide');
+          $('#bt-payment-form header').removeClass('header-slide');
           $('#card-image').removeClass();
           $(form).removeClass();
         });
-    
+
         hostedFieldsInstance.on('cardTypeChange', function (event) {
           // Change card bg depending on card type
           if (event.cards.length === 1) {
             $(form).removeClass().addClass(event.cards[0].type);
             $('#card-image').removeClass().addClass(event.cards[0].type);
-            $('header').addClass('header-slide');
-            
+            $('#bt-payment-form header').addClass('header-slide');
+
             // Change the CVV length for AmericanExpress cards
             if (event.cards[0].code.size === 4) {
               hostedFieldsInstance.setAttribute({
                 field: 'cvv',
                 attribute: 'placeholder',
-                value: '1234'
+                value: '****'
               });
-            } 
+            }
           } else {
             hostedFieldsInstance.setAttribute({
               field: 'cvv',
               attribute: 'placeholder',
-              value: '123'
+              value: '***'
             });
           }
         });
-    
+
         submit.addEventListener('click', function (event) {
           event.preventDefault();
-    
+
           hostedFieldsInstance.tokenize(function (err, payload) {
             if (err) {
               console.error(err);
@@ -136,99 +140,88 @@ function setupPaymentInfoValidation(token) {
         }, false);
       });
     });
-}
+  }
 
 
-function setupPaypalButton(CLIENT_AUTHORIZATION) {
-     // Be sure to have PayPal's checkout.js library loaded on your page.
-// <script src="https://www.paypalobjects.com/api/checkout.js" data-version-4></script>
+  function setupPaypalButton(CLIENT_AUTHORIZATION) {
+    // Be sure to have PayPal's checkout.js library loaded on your page.
+    // <script src="https://www.paypalobjects.com/api/checkout.js" data-version-4></script>
 
-// Create a client.
-braintree.client.create({
-    authorization: CLIENT_AUTHORIZATION
-  }, function (clientErr, clientInstance) {
-  
-    // Stop if there was a problem creating the client.
-    // This could happen if there is a network error or if the authorization
-    // is invalid.
-    if (clientErr) {
-      console.error('Error creating client:', clientErr);
-      return;
-    }
-  
-    // Create a PayPal Checkout component.
-    braintree.paypalCheckout.create({
-      client: clientInstance
-    }, function (paypalCheckoutErr, paypalCheckoutInstance) {
-  
-      // Stop if there was a problem creating PayPal Checkout.
-      // This could happen if there was a network error or if it's incorrectly
-      // configured.
-      if (paypalCheckoutErr) {
-        console.error('Error creating PayPal Checkout:', paypalCheckoutErr);
+    // Create a client.
+    braintree.client.create({
+      authorization: CLIENT_AUTHORIZATION
+    }, function (clientErr, clientInstance) {
+
+      // Stop if there was a problem creating the client.
+      // This could happen if there is a network error or if the authorization
+      // is invalid.
+      if (clientErr) {
+        console.error('Error creating client:', clientErr);
         return;
       }
-  
-      // Set up PayPal with the checkout.js library
-      paypal.Button.render({
-        env: 'sandbox',
-  
-        payment: function () {
-          return paypalCheckoutInstance.createPayment({
-            flow: 'vault',
-            billingAgreementDescription: 'Your agreement description (TopeySoft Computers)',
-            enableShippingAddress: false,
-            shippingAddressEditable: false,
-            // shippingAddressOverride: {
-            //   recipientName: 'Scruff McGruff',
-            //   line1: '1234 Main St.',
-            //   line2: 'Unit 1',
-            //   city: 'Chicago',
-            //   countryCode: 'US',
-            //   postalCode: '60652',
-            //   state: 'IL',
-            //   phone: '123.456.7890'
-            // }
-          });
-        },
-  
-        onAuthorize: function (data, actions) {
-          return paypalCheckoutInstance.tokenizePayment(data)
-            .then(function (payload) {
-              // Submit `payload.nonce` to your server.
-              submitPaymentWithNonce(payload);
-            });
-        },
-  
-        onCancel: function (data) {
-          console.log('checkout.js payment cancelled', JSON.stringify(data, 0, 2));
-        },
-  
-        onError: function (err) {
-          console.error('checkout.js error', err);
-        }
-      }, '#paypal-button').then(function () {
-        // The PayPal button will be rendered in an html element with the id
-        // `paypal-button`. This function will be called when the PayPal button
-        // is set up and ready to be used.
-      });
-  
-    });
-  
-  });
-}
 
-function submitPaymentWithNonce(payload){
+      // Create a PayPal Checkout component.
+      braintree.paypalCheckout.create({
+        client: clientInstance
+      }, function (paypalCheckoutErr, paypalCheckoutInstance) {
+
+        // Stop if there was a problem creating PayPal Checkout.
+        // This could happen if there was a network error or if it's incorrectly
+        // configured.
+        if (paypalCheckoutErr) {
+          console.error('Error creating PayPal Checkout:', paypalCheckoutErr);
+          return;
+        }
+
+        // Set up PayPal with the checkout.js library
+        paypal.Button.render({
+          env: 'sandbox',
+          payment: function () {
+            return paypalCheckoutInstance.createPayment({
+              flow: 'vault',
+              billingAgreementDescription: 'Your agreement description (TopeySoft Computers)',
+              enableShippingAddress: false,
+              shippingAddressEditable: false
+            });
+          },
+
+          onAuthorize: function (data, actions) {
+            return paypalCheckoutInstance.tokenizePayment(data)
+              .then(function (payload) {
+                // Submit `payload.nonce` to your server.
+                submitPaymentWithNonce(payload);
+              });
+          },
+
+          onCancel: function (data) {
+            console.log('checkout.js payment cancelled', JSON.stringify(data, 0, 2));
+          },
+
+          onError: function (err) {
+            console.error('checkout.js error', err);
+          }
+        }, '#paypal-button').then(function () {
+          // The PayPal button will be rendered in an html element with the id
+          // `paypal-button`. This function will be called when the PayPal button
+          // is set up and ready to be used.
+        });
+
+      });
+
+    });
+  }
+
+  function submitPaymentWithNonce(payload) {
     alert('Submit your nonce to your server here!');
     console.log(payload);
+  }
+
+  function setup() {
+    initialize();
+  }
+
+  setup();
 }
-(function ($) {
-    getStarted();
-    new GettingStartedWizard();
-    
-}( jQuery ));
-
-
 function GettingStartedWizard (){
     _GSW = this;
     
@@ -248,33 +241,33 @@ function GettingStartedWizard (){
             valid_message: 'Thanks, got it',
             required: true
         },
-        {
-            label: 'Your  <span class="d-none d-md-inline">registered</span> domain name  <span class="d-none d-md-inline">(optional)</span>',
-            value: '',
-            type: 'text',
-            invalid_message: 'Please provide us with domain name',
-            valid_message: 'Thanks, got it'
-        },
-        {
-            label: 'Business category  <span class="d-none d-md-inline">(Ex. Non-profit)</span>',
-            value: '',
-            type: 'text',
-            invalid_message: '',
-            valid_message: 'Thanks, got it'
-        },
-        {
-            label: 'Yes we have a business logo',
-            question: 'Do you have a business logo?',
-            true_value: 'Yes we have a business logo',
-            false_value: 'No we do not have a business logo',
-            value: true,
-            checked: false,
-            type: 'checkbox'
-        }
+        // {
+        //     label: 'Your  <span class="d-none d-md-inline">registered</span> domain name  <span class="d-none d-md-inline">(optional)</span>',
+        //     value: '',
+        //     type: 'text',
+        //     invalid_message: 'Please provide us with domain name',
+        //     valid_message: 'Thanks, got it'
+        // },
+        // {
+        //     label: 'Business category  <span class="d-none d-md-inline">(Ex. Non-profit)</span>',
+        //     value: '',
+        //     type: 'text',
+        //     invalid_message: '',
+        //     valid_message: 'Thanks, got it'
+        // },
+        // {
+        //     label: 'Yes we have a business logo',
+        //     question: 'Do you have a business logo?',
+        //     true_value: 'Yes we have a business logo',
+        //     false_value: 'No we do not have a business logo',
+        //     value: true,
+        //     checked: false,
+        //     type: 'checkbox'
+        // }
     ];
     const steps_validity = [
         {
-            name: 'Basic information',
+            name: 'Business information',
             invalid_message: 'Please provide a valid business name',
             valid: false,
             isValid: function (index) {
@@ -312,15 +305,17 @@ function GettingStartedWizard (){
             invalid_message: 'Please setup a payment method',
             valid: false,
             isValid: function (index) {
-                var inputs = wizardContents.eq(index).find('input[required]');
-                var valid = true;
-                inputs.each(function (i, el) {
-                    if ($.trim($(el).val()).length < 1) {
-                        $(el).addClass('invalid').next().addClass('active');
-                        valid = false;
-                    }
-                });
-                return valid;
+                // var inputs = wizardContents.eq(index).find('input[required]');
+                // var valid = true;
+                // inputs.each(function (i, el) {
+                //     if ($.trim($(el).val()).length < 1) {
+                //         $(el).addClass('invalid').next().addClass('active');
+                //         valid = false;
+                //     }
+                // });
+                scrollToSelector(wizardContents.eq(index).find('#card-number'));
+                wizardContents.eq(index).find('#card-number').focus();
+                return false;
             }
         },
        
@@ -473,6 +468,13 @@ function GettingStartedWizard (){
                 console.log($(this).index())
             });
         });
+
+        let stepParent = $('#form-wizard .wizard-steps').html('');
+        for(var i=0; i<(steps_validity.length-1); i++){
+           var item = $('<li class="wizard-step-item wizard-step col pt-1"><li>');
+           stepParent.append(item);
+        }
+        wizardSteps = $('#form-wizard .wizard-steps .wizard-step');
     }
     function activateStepIndicatorByIndex(index) {
         wizardSteps.removeClass('active').removeClass('passed');
@@ -606,7 +608,7 @@ function GettingStartedWizard (){
                                                 <div class="lead">\n\
                                                     <span class="display-4 text-'+ plan.text_color_class + '">$' + plan.price_per_month + '</span>/mo\n\
                                                 </div>\n\
-                                                <div class="p-2 d-none d-md-block">\
+                                                <div class="p-2 d-none d-xl-block">\
                                                     '+ features + '\
                                                 </div>\
                                             </div>\
@@ -632,10 +634,15 @@ function GettingStartedWizard (){
     setup();
     gotoToStepByIndex(0, false);
 
-    _GSW.selectPlan = selectPlan;
+   // _GSW.selectPlan = selectPlan;
     _GSW.selectedPlan = selectedPlan;
-    _GSW.isFinished = isFinished;
-    _GSW.markFinished = markFinished;
-    _GSW.setup = setup;
+   // _GSW.isFinished = isFinished;
+   // _GSW.markFinished = markFinished;
+    _GSW.businessInfo = basicInfo;
     
 }
+(function ($) {
+    window.tscLib = window.tscLib || {};
+    window.tscLib.gettingStartedWizard = new GettingStartedWizard();
+    window.tscLib.tscBraintreeClient = new TscBraintreeClient();
+}( jQuery ));

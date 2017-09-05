@@ -1,10 +1,3 @@
-(function ($) {
-    getStarted();
-    new GettingStartedWizard();
-    
-}( jQuery ));
-
-
 function GettingStartedWizard (){
     _GSW = this;
     
@@ -24,33 +17,33 @@ function GettingStartedWizard (){
             valid_message: 'Thanks, got it',
             required: true
         },
-        {
-            label: 'Your  <span class="d-none d-md-inline">registered</span> domain name  <span class="d-none d-md-inline">(optional)</span>',
-            value: '',
-            type: 'text',
-            invalid_message: 'Please provide us with domain name',
-            valid_message: 'Thanks, got it'
-        },
-        {
-            label: 'Business category  <span class="d-none d-md-inline">(Ex. Non-profit)</span>',
-            value: '',
-            type: 'text',
-            invalid_message: '',
-            valid_message: 'Thanks, got it'
-        },
-        {
-            label: 'Yes we have a business logo',
-            question: 'Do you have a business logo?',
-            true_value: 'Yes we have a business logo',
-            false_value: 'No we do not have a business logo',
-            value: true,
-            checked: false,
-            type: 'checkbox'
-        }
+        // {
+        //     label: 'Your  <span class="d-none d-md-inline">registered</span> domain name  <span class="d-none d-md-inline">(optional)</span>',
+        //     value: '',
+        //     type: 'text',
+        //     invalid_message: 'Please provide us with domain name',
+        //     valid_message: 'Thanks, got it'
+        // },
+        // {
+        //     label: 'Business category  <span class="d-none d-md-inline">(Ex. Non-profit)</span>',
+        //     value: '',
+        //     type: 'text',
+        //     invalid_message: '',
+        //     valid_message: 'Thanks, got it'
+        // },
+        // {
+        //     label: 'Yes we have a business logo',
+        //     question: 'Do you have a business logo?',
+        //     true_value: 'Yes we have a business logo',
+        //     false_value: 'No we do not have a business logo',
+        //     value: true,
+        //     checked: false,
+        //     type: 'checkbox'
+        // }
     ];
     const steps_validity = [
         {
-            name: 'Basic information',
+            name: 'Business information',
             invalid_message: 'Please provide a valid business name',
             valid: false,
             isValid: function (index) {
@@ -88,15 +81,17 @@ function GettingStartedWizard (){
             invalid_message: 'Please setup a payment method',
             valid: false,
             isValid: function (index) {
-                var inputs = wizardContents.eq(index).find('input[required]');
-                var valid = true;
-                inputs.each(function (i, el) {
-                    if ($.trim($(el).val()).length < 1) {
-                        $(el).addClass('invalid').next().addClass('active');
-                        valid = false;
-                    }
-                });
-                return valid;
+                // var inputs = wizardContents.eq(index).find('input[required]');
+                // var valid = true;
+                // inputs.each(function (i, el) {
+                //     if ($.trim($(el).val()).length < 1) {
+                //         $(el).addClass('invalid').next().addClass('active');
+                //         valid = false;
+                //     }
+                // });
+                scrollToSelector(wizardContents.eq(index).find('#card-number'));
+                wizardContents.eq(index).find('#card-number').focus();
+                return false;
             }
         },
        
@@ -249,6 +244,13 @@ function GettingStartedWizard (){
                 console.log($(this).index())
             });
         });
+
+        let stepParent = $('#form-wizard .wizard-steps').html('');
+        for(var i=0; i<(steps_validity.length-1); i++){
+           var item = $('<li class="wizard-step-item wizard-step col pt-1"><li>');
+           stepParent.append(item);
+        }
+        wizardSteps = $('#form-wizard .wizard-steps .wizard-step');
     }
     function activateStepIndicatorByIndex(index) {
         wizardSteps.removeClass('active').removeClass('passed');
@@ -382,7 +384,7 @@ function GettingStartedWizard (){
                                                 <div class="lead">\n\
                                                     <span class="display-4 text-'+ plan.text_color_class + '">$' + plan.price_per_month + '</span>/mo\n\
                                                 </div>\n\
-                                                <div class="p-2 d-none d-md-block">\
+                                                <div class="p-2 d-none d-xl-block">\
                                                     '+ features + '\
                                                 </div>\
                                             </div>\
@@ -408,10 +410,10 @@ function GettingStartedWizard (){
     setup();
     gotoToStepByIndex(0, false);
 
-    _GSW.selectPlan = selectPlan;
+   // _GSW.selectPlan = selectPlan;
     _GSW.selectedPlan = selectedPlan;
-    _GSW.isFinished = isFinished;
-    _GSW.markFinished = markFinished;
-    _GSW.setup = setup;
+   // _GSW.isFinished = isFinished;
+   // _GSW.markFinished = markFinished;
+    _GSW.businessInfo = basicInfo;
     
 }

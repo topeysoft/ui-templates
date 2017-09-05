@@ -20,8 +20,11 @@
 }
 
 .wizard-step-indicator-wrapper {
-  background: rgba(209, 129, 129, 0.03);
-  padding: .5rem;
+  background: rgba(0,0,0, 0.2);
+  padding: .0rem;
+  width: 90%;
+  max-width: 30rem;
+  margin: auto;
   .wizard-steps {
     list-style: none;
     .wizard-step {
@@ -30,7 +33,7 @@
         justify-content: center;
       &.active {
         font-weight: bold;
-        background: #0099cc;
+        background: rgba(#0099cc, 0.2);
         color: white;
       }
       .checked {
@@ -40,7 +43,8 @@
       &.passed {
         font-weight: bold;
         &:not(.active) {
-          background: rgba(#4b515d, 1);
+          // background: rgba(#4b515d, 1);
+        background: #0099cc;
           color: white;
           .checked {
             display: inline;

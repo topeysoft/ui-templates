@@ -7,11 +7,18 @@ const cleanCSS = require("gulp-clean-css");
 const sourcemaps = require("gulp-sourcemaps");
 const inject = require("gulp-inject");
 const del = require("del");
+const  fileinclude = require('gulp-file-include');
+const TscTemplateBuilder = require('./gulp-plugins/template-builder').TemplateBuilder;
 
+const templateBuilder = new TscTemplateBuilder; 
 const configs = [
   {
     name: "form-wizard",
     base_path: "./public/plugins/form-wizard"
+  },
+  {
+    name: "user-account",
+    base_path: "./public/plugins/user-account"
   },
   {
     name: "main",
@@ -26,6 +33,16 @@ var jsFiles = "assets/scripts/**/*.js",
       doneCallback(null);
     }
   }
+
+  gulp.task('fileinclude', function() {
+    gulp.src(['./**/*.html'])
+      .pipe(fileinclude({
+        prefix: '@@',
+        basepath: '@file'
+      }))
+      .pipe(gulp.dest('./'));
+  });
+
 gulp.task("scripts", ["clean:scripts"], function() {
   return (() => {
     configs.forEach(config => {
@@ -116,14 +133,30 @@ gulp.task("clean:styles", function(done) {
 });
 
 gulp.task("clean", ["clean:styles", "clean:scripts"]);
-gulp.task("build", ["clean", "styles", "scripts"]);
+gulp.task("build", ["clean", "styles", "templates", "scripts"]);
 gulp.task("watch", function() {
   (() => {
     configs.forEach(config => {
       gulp.watch(config.base_path + "/src/styles/**/*.scss", ["styles"]);
       gulp.watch(config.base_path + "/src/scripts/**/*.js", ["scripts"]);
+      gulp.watch(config.base_path + "/src/templates/**/*.html", ["templates"]);
+      //gulp.watch(config.base_path + "../**/*.html", ["fileinclude"]);
     //   gulp.watch(config.base_path + "/src/index.html", ["index"]);
     });
   })();
 });
 gulp.task("default", ['build',"watch"]);
+
+
+gulp.task('templates', function(done){
+  return (() => {
+    configs.forEach((config, i)=> {
+     const files = templateBuilder.readFiles(config.base_path + "/src/templates/**/*.html");
+     gulp
+     .src(config.base_path + "/src/templates/**/*.html")
+     .pipe(templateBuilder.readFiles({namespace:config.name, dest:config.base_path + "/src/scripts/_templates.js"}, ()=>{
+      allDone(i, done);
+     }));
+    });
+  })();
+});
