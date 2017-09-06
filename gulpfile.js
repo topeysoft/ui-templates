@@ -46,13 +46,17 @@ var jsFiles = "assets/scripts/**/*.js",
 gulp.task("scripts", ["clean:scripts"], function() {
   return (() => {
     configs.forEach(config => {
-      gulp
+      try{
+        gulp
         .src(config.base_path + "/src/scripts/**/*.js")
         .pipe(concat("scripts.js"))
         .pipe(gulp.dest(config.base_path + "/dist/js"))
         .pipe(rename({ suffix: ".min" }))
         //.pipe(uglify())
         .pipe(gulp.dest(config.base_path + "/dist/js"));
+      }catch(err){
+        console.log(err);
+      }
     });
   })();
 });
@@ -109,12 +113,16 @@ gulp.task("styles", ["clean:styles"], function() {
 gulp.task("clean:scripts", function(done) {
   return (() => {
     configs.forEach((config, i) => {
-      del([config.base_path + "/dist/js", config.base_path + "/dist/scripts"])
-      .then(()=>{
-        allDone(i, done);
-      }).catch(err=>{
-        allDone(i, done);
-      });
+      try{
+        del([config.base_path + "/dist/js", config.base_path + "/dist/scripts"], {force:true})
+        .then(()=>{
+          allDone(i, done);
+        }).catch(err=>{
+          allDone(i, done);
+        });
+      }catch(err){
+        console.log(err);
+      }
     });
     
   })();
