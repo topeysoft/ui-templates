@@ -93,7 +93,7 @@ function preparePluginConfig() {
                 event.preventDefault();
                 tscLib.userService.thirdPartySignIn(button.data('provider'));
             })
-            const btnSpan = $('<div class="col-12 col-md-6 col-xl-4 mt-3 p-0" ></div>').append(button);
+            const btnSpan = $('<div class="col-12 col-md-6 mt-3 p-0" ></div>').append(button);
             console.log(btnSpan);
             parent.append(btnSpan);
         });
