@@ -5603,14 +5603,26 @@ body {
     padding: 2rem 0;
     background: #dae8ed; }
     html header .main-brand,
-    body header .main-brand {
-      color: #444444;
+    html header #main-brand,
+    html header .main-brand a,
+    html header .main-brand a,
+    body header .main-brand,
+    body header #main-brand,
+    body header .main-brand a,
+    body header .main-brand a {
+      color: #000000 !important;
       font-size: 2rem;
       font-weight: 300;
       line-height: 5rem;
       height: 5rem; }
       html header .main-brand:hover,
-      body header .main-brand:hover {
+      html header #main-brand:hover,
+      html header .main-brand a:hover,
+      html header .main-brand a:hover,
+      body header .main-brand:hover,
+      body header #main-brand:hover,
+      body header .main-brand a:hover,
+      body header .main-brand a:hover {
         text-decoration: none; }
     html header nav ul,
     body header nav ul {
@@ -5704,3 +5716,54 @@ h1, h2, h3, h4,
 
 .main-section {
   flex: 1 0 0; }
+
+.btn-simple,
+.btn-simple:focus,
+.btn-simple:hover {
+  border: none !important;
+  background: none !important;
+  color: #555555 !important;
+  box-shadow: none; }
+  .btn-simple.btn-primary,
+  .btn-simple:focus.btn-primary,
+  .btn-simple:hover.btn-primary {
+    color: #007bff !important; }
+  .btn-simple.btn-secondary,
+  .btn-simple:focus.btn-secondary,
+  .btn-simple:hover.btn-secondary {
+    color: #868e96 !important; }
+  .btn-simple.btn-success,
+  .btn-simple:focus.btn-success,
+  .btn-simple:hover.btn-success {
+    color: #28a745 !important; }
+  .btn-simple.btn-info,
+  .btn-simple:focus.btn-info,
+  .btn-simple:hover.btn-info {
+    color: #17a2b8 !important; }
+  .btn-simple.btn-warning,
+  .btn-simple:focus.btn-warning,
+  .btn-simple:hover.btn-warning {
+    color: #ffc107 !important; }
+  .btn-simple.btn-danger,
+  .btn-simple:focus.btn-danger,
+  .btn-simple:hover.btn-danger {
+    color: #dc3545 !important; }
+  .btn-simple.btn-light,
+  .btn-simple:focus.btn-light,
+  .btn-simple:hover.btn-light {
+    color: #f8f9fa !important; }
+  .btn-simple.btn-dark,
+  .btn-simple:focus.btn-dark,
+  .btn-simple:hover.btn-dark {
+    color: #343a40 !important; }
+
+.main-menu,
+#main-menu {
+  display: none;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.9); }
+
+body.show-menu .main-menu,
+body.show-menu #main-menu {
+  display: block; }

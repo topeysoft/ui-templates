@@ -13,8 +13,11 @@ body{
         header{
             padding: 2rem 0;
             background: #dae8ed;
-            .main-brand{
-                color:#444444;
+            .main-brand,
+            #main-brand, 
+            .main-brand a,
+            .main-brand a{
+                color:#000000 !important;
                  font-size: 2rem;
                  font-weight: 300;
                 line-height: 5rem;
@@ -149,4 +152,35 @@ h1,h2,h3,h4,
 }
 .main-section{
     flex:1 0 0;
+}
+
+.btn-simple,
+.btn-simple:focus,
+.btn-simple:hover{
+  border:none !important;
+  background: none !important;
+  color:#555555 !important;
+  box-shadow: none;
+  @each $color, $value in $theme-colors {
+    &.btn-#{$color} {
+     color:$value !important;
+    }
+  }
+}
+
+
+.main-menu,
+#main-menu{
+    display: none;
+    width:100vw;
+    height: 100vh;
+    background: rgba(#fff, 0.9);
+}
+body{
+    &.show-menu{
+        .main-menu,
+        #main-menu{
+            display: block;
+        }
+    }
 }

@@ -1,12 +1,16 @@
-function UserService() {
+function UserService(settings) {
+    settings = settings || {};
+    let config = settings.config || {};
+    let options = settings.options || {};
     const _this = this;
-
+    signedOut = false;
     function postSignIn() {
-        const user = _this.getUserInfo();
-        if (user) {
-            tscLib.userFormService.showForm('user-info', user);
-        }
-    }
+       const user = _this.getUserInfo();
+       if (user) {
+           tscLib.userFormService.showForm('user-info', user);
+       }
+   }
+     _this.postSignIn = postSignIn;
     _this.signIn = function (email, password) {
         firebase.auth().signInWithEmailAndPassword(email, password).then(result => {
             postSignIn();
@@ -19,7 +23,12 @@ function UserService() {
             // ...
         });
     }
-    _this.signOut = function () { }
+    _this.signOut = function () { 
+        signedOut = true;
+        firebase.auth().signOut().then(data=>{
+            tscLib.userFormService.showForm('signed-out');
+        });
+    }
     _this.signUp = function (email, password, displayName) {
         firebase.auth().createUserWithEmailAndPassword(email, password)
             .then(user => {
@@ -52,35 +61,55 @@ function UserService() {
         return firebase.auth().currentUser;
     }
     _this.isLoggedIn = function () {
-        var user = firebase.auth().currentUser;
-        if (user) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        let loggedIn=false;
+        try{
+           loggedIn = JSON.parse(localStorage.getItem('logged_in'));
+        }catch(er){}
+        return loggedIn;
     }
 
+    _this.redirectIfNotLoggedIn = function(args = {}){
+        let options = {redirectToUrl:'', forceShowLogin:true};
+        $.extend(options, args);
+       if(!_this.isLoggedIn()){
+           let redirectToUrl = options.redirectToUrl;
+            let user_account_uri = config.user_account_uri;  
+            let loginUri = location.href;   
+            let currentUrl = location.href;
+            if(redirectToUrl){
+                loginUri = redirectToUrl;
+            }else{
+                if(user_account_uri){
+                    loginUri = location.protocol+'//'+location.host+'/'+user_account_uri;
+                  }else{
+                      loginUri = currentUrl;
+                  }
+            }
+        loginUri += '#user-account?redirectUrl='+currentUrl;
+        location.href = loginUri;
+       }
+    }
 
     _this.watchAuth = function () {
         firebase.auth().onAuthStateChanged(function (user) {
             if (user) {
                 // User is signed in.
+                setUserColor(user);
+                setUserInitials(user);
+                let text = user.photoURL?'':user.initials;
+                let avatar = `<div style="background-color:${user.profileColor.value};
+                background-image:url(${user.photoURL}); 
+                background-size:cover; border-radius:50%; 
+                margin:1rem;width:3rem; font-size:1.5rem; font-weight:300; height:3rem;
+                 line-height:3rem; text-align:center; color:white">${text}</div>`
+                user.profileAvatar = avatar;
                 postSignIn();
-
-                //   var displayName = user.displayName;
-                //   var email = user.email;
-                //   var emailVerified = user.emailVerified;
-                //   var photoURL = user.photoURL;
-                //   var isAnonymous = user.isAnonymous;
-                //   var uid = user.uid;
-                //   var providerData = user.providerData;
-                // ...
+                localStorage.setItem('logged_in', 'true');
             } else {
-                tscLib.userFormService.showForm('signed-out');
-
-                // User is signed out.
-                // ...
+                localStorage.setItem('logged_in', 'false');
+                const view = signedOut?'signed-out':'sign-in';
+                 tscLib.userFormService.showForm(view);
+                 
             }
         });
     }
@@ -145,10 +174,57 @@ function UserService() {
             // ...
         });
     }
+    
+    const userColors = [
+        {name:'red', value:'#b71c1c'},
+        {name:'purple', value:'#4a148c'},
+        {name:'blue', value:'#1976d2'},
+        {nae:'green', value:'#2e7d32'},
+        {name:'orange', value:'#e65100'},
+        {name:'gray', value:'#37474f'},
+        {name:'pink', value:'#d81b60'}        
+    ];
+
+    function setUserColor(user) {
+        user.profileColor = getColorFromString(user.email);
+    }
+
+    function getColorFromString(str) {
+       let num = getLettersNumber(str, true);
+       if(num<userColors.length) num = userColors.length;
+       let index = num % userColors.length;
+       return userColors[index];
+    }
+
+    function setUserInitials(user) {
+       user.initials = getInitials(user.displayName);
+    }
+
+    function getInitials(name){
+        var initials = name.replace(/[^a-zA-Z- ]/g, "").match(/\b\w/g);
+        let result = initials;
+        
+            return (initials.join('').toUpperCase()).substr(0, 2);
+    }
+    function getLettersNumber(text, add=true) {
+        var str = "";
+        var added = 0;
+        for (var i = 0; i < text.length; i++) {
+          var code = text.toUpperCase().charCodeAt(i)
+          if (code > 64 && code < 91) {
+              str += (code - 64) + " ";
+              added += (code - 64);
+          }
+        }
+        return add?added:str.slice(0, str.length - 1);
+      }
+
     _this.setup = function () {
         _this.watchAuth();
     }
     this.setup();
+
+
 }
 
 

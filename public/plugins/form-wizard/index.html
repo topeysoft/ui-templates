@@ -19,6 +19,7 @@
     <!-- Material Design Bootstrap -->
     <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
     <link href="/assets/css/mdb.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/plugins/user-account/dist/css/style.min.css">
     <link rel="stylesheet" href="/dist/css/main.min.css">
     <link rel="stylesheet" href="./dist/css/styles.min.css">
 
@@ -65,6 +66,7 @@
 
 
     <section>
+        <!-- Plugin content start -->
         <div class="container text-center">
             <div class="row justify-content-md-center">
                 <div class="col-12">
@@ -85,8 +87,7 @@
                         <div class="wizard-step-content-wrapper mt-5">
                             <div id="basic-info" class="wizard-step-content active">
                                 <div class="step-header text-center">
-                                    <h1>Business information</h1>
-                                    <p>Tell us about your business</p>
+                                    <h3>Tell us about your business</h3>
                                     <br />
                                 </div>
                                 <div class="row justify-content-center ">
@@ -133,7 +134,7 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <!--Section heading-->
-                                        <h1 class="section-heading pt-4">Choose a plan to Continue</h1>
+                                        <h3 class="section-heading pt-4">Choose a plan to continue</h3>
                                         <br />
                                         <!--Section description-->
                                         <!-- <p class="section-description lead grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit, error amet numquam iure provident voluptate esse quasi, veritatis totam voluptas nostrum quisquam eum.</p> -->
@@ -145,7 +146,7 @@
 
                                         </div>
                                         <p class="text-muted text-center">
-                                            All plans Includes free 3 months subscription starting from the date the website goes live. <br/>                                            * Setup fees can be discounted or completely waived in some cases. <a href="#">Learn how you can save some money on the setup fee.</a>
+                                            All plans Includes non-refundable setup fee and monthly subscription starting from the date the website goes live. <br/>                                            * Setup fees can be discounted or completely waived in some cases. <a href="#">Learn how you can save some money on the setup fee.</a>
                                         </p>
                                         <div class="row justify-content-center">
                                             <div class="col-6 text-center d-none d-md-block w-100">
@@ -195,7 +196,7 @@
                             <div id="payment-method" class="wizard-step-content">
                                 <div class="row justify-content-md-center">
                                     <div class="w-100">
-                                        <h1 class="section-heading pt-4 font-weight-normal">Set up a payment method</h1>
+                                        <h3 class="section-heading pt-4">Set up a payment method</h3>
                                         <br />
                                     </div>
                                     <div class="col-md-6 text-left">
@@ -268,14 +269,17 @@
                         </div>
                         <div id="fix-break-point"></div>
 
-                        <div class="wizard-footer mt-4 d-md-none border border-left-0 border-right-0 border-bottom-0">
-                            <div class="row bg-white ">
+                        <div id="wizard-footer" class="wizard-footer mt-4 d-md-none border border-left-0 border-right-0 border-bottom-0">
+                            <div class="row bg-white">
                             <hr class="d-block d-md-none p-0 col-12 m-0" />
-                                <div class="col-auto text-left">
-                                    <button class="wiz-back btn btn-secondary btn-simple btn-lg">&larr; <span class="text d-none  d-sm-inline"> Back</span></button>
+                                <div class="col text-left">
+                                    <button class="wiz-back btn btn-secondary btn-simple btn-lg">   <i class="fa fa-long-arrow-left float-left"></i> 
+                                        <span class="text d-none  d-sm-inline"> Back</span> </button>
                                 </div>
                                 <div class="col text-right">
-                                    <button class="wiz-continue  btn-simple btn btn-primary btn-lg"><span class="text d-none d-sm-inline">Continue</span> &rarr;</button>
+                                    <button class="wiz-continue  btn-simple btn btn-primary btn-lg">
+                                        <span class="text d-none d-md-inline">Continue</span> 
+                                         <i class="fa fa-long-arrow-right"></i></button>
                                 </div>
                             </div>
                         </div>
@@ -284,6 +288,7 @@
             </div>
 
         </div>
+        <!-- Plugin content end -->
     </section>
 
 
@@ -450,7 +455,19 @@
 
     <script type="text/javascript" src="/assets/js/mdb.min.js"></script>
 
-    <script type="text/javascript" src="/dist/js/scripts.min.js"></script>
+
+    <!-- <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.3.0/firebaseui.css" /> -->
+    
+      <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase-app.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase-auth.js"></script>
+      <!-- <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-database.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-messaging.js"></script> -->
+    
+      <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
+    
+
+    <script src="/plugins/user-account/dist/js/scripts.min.js"></script>
+    <script src="/dist/js/scripts.min.js"></script>
     <script type="text/javascript" src="./dist/js/scripts.min.js"></script>
 
 

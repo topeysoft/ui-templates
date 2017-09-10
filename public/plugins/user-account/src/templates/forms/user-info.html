@@ -1,13 +1,27 @@
 <form id="user-info" style="display:none;" action="/plugins/form-wizard">
     <div class="form-header">
       <p>Your are logged in as:</p>
-      <h1 id="user-name" class="font-weight-normal thin"> {{displayName}}</h1>
-      <p id="user-email" class="lead">{{email}}</p>
+     <div class="row justify-content-center text-center">
+        <div class="col-auto ">
+          {{profileAvatar}}
+            </div>
+            <p class="w-100"></p>
+        <div class="col ">
+            <h1 id="user-name" class="font-weight-normal thin"> {{displayName}}</h1>
+          <p id="user-email" class="lead">{{email}}</p>
+          </div>
+          
+       </div>
       <p>
         Not you? <a class="user-account-div__sign-in-link" href="#">sign in as a different user</a>
       </p>
-      <div>
-        <a href="/plugins/form-wizard" class="btn btn-sm btn-primary">Continue</a>
+      <div class="row">
+          <span class="col">
+              <button  class="btn btn-sm btn-secondary user-account-div__sign-out-link">Sign out</button>
+              </span>
+              <span id="user-info-continue-button-col" class="col">
+                  <a href="#" class="btn btn-sm btn-primary">Continue</a>
+                  </span>
       </div>
     </div>
 

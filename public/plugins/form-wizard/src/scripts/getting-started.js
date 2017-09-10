@@ -111,7 +111,7 @@ function GettingStartedWizard (){
             setup_fee: 30,
             text_color_class: 'green',
             btn_color_class: 'default',
-            description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores nam, aperiam minima assumenda.",
+            description: "Ideal for basic online presence to showcase your product or service.",
             features: [
                 {
                 description: "Includes support and help and all that fun stuff",
@@ -129,7 +129,7 @@ function GettingStartedWizard (){
             setup_fee: 50,
             text_color_class: 'purple',
             btn_color_class: 'purple',
-            description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores nam, aperiam minima assumenda.",
+            description: "Contains features of the basic plan but also include user management (membership system). Suitable for online reservaion, appointment booking, etc",
             features: [{
                 description: "Includes support and help and all that fun stuff",
                 included: true
@@ -146,7 +146,7 @@ function GettingStartedWizard (){
             setup_fee: 100,
             text_color_class: 'rose',
             btn_color_class: 'pink',
-            description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores nam, aperiam minima assumenda.",
+            description: "Contains all the features of the advanced plan but also include shopping cart capability. Suitable for e-commerce.",
             features: [{
                 description: "Includes support and help and all that fun stuff",
                 included: true
@@ -180,6 +180,12 @@ function GettingStartedWizard (){
     function setup() {
         // setupPaymentInfoValidation();
         callOnWizardNext.push(function () {
+            window.tscLib = window.tscLib || {};
+            if(window.tscLib.userService){
+                tscLib.userService.redirectIfNotLoggedIn();
+            }
+        });
+        callOnWizardNext.push(function () {
             var summary = $('#form-wizard .basic-info-summary');
             var summaryHtml = '';
             $.each(basicInfo, function (i, info) {
@@ -188,6 +194,7 @@ function GettingStartedWizard (){
             });
             summary.html(summaryHtml);
         });
+        
         callOnWizardNext.push(function () {
             var summary = $('#form-wizard .selected-plan-summary');
             summary.html('\
@@ -237,7 +244,9 @@ function GettingStartedWizard (){
                 if (info.type === 'checkbox') {
                     info.checked = $(this).prop('checked');
                 }
+                $(this).removeClass('invalid');
             }
+            
             $('body').on('change', '#form-wizard #info-inputs .basic-info-input', handleChange);
             $('body').on('input', '#form-wizard #info-inputs .basic-info-input', handleChange);
             $('body').on('click', '#form-wizard .page-item.wizard-step.passed a', function(event){
