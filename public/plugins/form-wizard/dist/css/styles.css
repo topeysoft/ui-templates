@@ -228,7 +228,6 @@ Animations
       justify-content: center; }
       #form-wizard .wizard-step-indicator-wrapper .wizard-steps .wizard-step.active {
         font-weight: bold;
-        background: rgba(0, 153, 204, 0.2);
         color: white; }
       #form-wizard .wizard-step-indicator-wrapper .wizard-steps .wizard-step .checked {
         display: none; }
