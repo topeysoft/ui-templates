@@ -1,32 +1,33 @@
 const path = require('path');
 const fs = require('fs');
-const Stream = require('stream');
+var through = require('through2');
+var Stream = require('stream');
 
 // Get file content
 // Set content as property to templates object
-function TscTemplateBuilder() {
-    _this = this;
-    _this.templates = {};
-    _this.readFiles = (opt, done=()=>{}) => {
-        var stream = new Stream.Transform({ objectMode: true });
-        // const files = fs.readdirSync(filePattern);
-        // console.log('FILES', files);
-        stream._transform = function (file, unused, callback) {
+function TemplateBuilder(namespace, destination, done = () => { }) {
+    this.templates = [];
+    // this.templates[namespace] ={};
+       this.stream = new Stream.Transform({ objectMode: true });
+        // this.stream = through.obj( (file, unused, callback) =>{
+         this.stream._transform =  (file, unused, callback) =>{
             const propertyName = path.basename(file.relative);
-            _this.templates[file.relative] = file._contents.toString();
+            console.log(`Bundling template -- ${propertyName} --- for ${namespace}`);
+                this.templates.push({
+                    filename:(path.basename(file.relative)),
+                    path:file.relative.replace(path.basename(file.relative), ''),
+                    full_path:file.relative,
+                    content:file._contents.toString()
+                });
+                this.templates[file.relative] = file._contents.toString();
             callback(null, file)
-           // console.log(_this.templates);
-            // console.log(Object.keys(file), file._contents.toString());
-
+        // });
         }
-        stream.on('finish', (event) => {
-            var templates = `window.tscLib = window.tscLib || {}; window.tscLib['${opt.namespace}']=window.tscLib['${opt.namespace}'] || {}; window.tscLib['${opt.namespace}'].templates = ${JSON.stringify(_this.templates)};`;
-            fs.writeFileSync(opt.dest, templates);
+        this.stream.on('finish', (event) => {
+            var templates = `window.tscLib = window.tscLib || {}; window.tscLib['${namespace}']=window.tscLib['${namespace}'] || {}; window.tscLib['${namespace}'].templates = ${JSON.stringify(this.templates)};`;
+            fs.writeFileSync(destination, templates);
             done();
         });
-        return stream;
-    }
-
+    return this.stream;
 }
-
-exports.TemplateBuilder = TscTemplateBuilder;
+exports.TemplateBuilder = TemplateBuilder;

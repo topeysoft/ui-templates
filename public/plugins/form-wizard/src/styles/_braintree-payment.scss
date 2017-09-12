@@ -86,7 +86,7 @@ General
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
     padding: 2em;
-    transform: translateY(4rem);
+    transform: translateY(2rem);
     width: 20em;
     margin-bottom: 2em;
     transition: all 600ms $bouncy;
@@ -100,7 +100,7 @@ General
 
     @media (max-width: $small-screen) {
       box-sizing: border-box;
-      padding: 7em 2em 2em;
+      padding: 5em 2em 2em;
       width: 100%;
     }
     // Change background color based on the card type

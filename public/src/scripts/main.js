@@ -48,4 +48,16 @@
   $('body').on('click', 'main-menu-toggle', function(event){
     $('body').toggleClass('show-menu');
   });
+
+
+
+
+    // if(window.tscLib.plugins){
+    //   $.each(window.tscLib.plugins, (function(i, plugin){
+    //      if(!plugin.initialized){
+    //         plugin.initialize();
+    //         plugin.initialized =true;
+    //      };
+    //   }))
+    // }
 })(jQuery);

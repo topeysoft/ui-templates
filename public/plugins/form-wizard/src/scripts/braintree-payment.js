@@ -1,4 +1,4 @@
-function TscBraintreeClient() {
+function TscBraintreeClient(settings, formWizard) {
   _this = this;
 
   function initialize() {
@@ -10,12 +10,17 @@ function TscBraintreeClient() {
         setupPaypalButton(token);
       }
     };
-    xhr.open(
-      "GET",
-      "https://cms.api.elyir.local:8443/projects/59062e028631a043f468fc73/plugins/braintree/client_token?use_sandbox=true",
-      true
-    );
-    xhr.send(null);
+    window.tscLib.userService.getToken().then(function(token){
+      xhr.open(
+        "GET",
+        "https://api.elyir.local:8443/cms-api/projects/59062e028631a043f468fc73/plugins/braintree/client_token?use_sandbox=true",
+        true
+      );
+      xhr.setRequestHeader('Authorization', 'Bearer '+token);
+      xhr.send(null);
+    }).catch(err=>{
+      console.log('Invalid user', err);  
+    });
   }
 
 
@@ -211,7 +216,8 @@ function TscBraintreeClient() {
   }
 
   function submitPaymentWithNonce(payload) {
-    alert('Submit your nonce to your server here!');
+    // alert('Submit your nonce to your server here!');
+    formWizard.nextStep(true);
     console.log(payload);
   }
 

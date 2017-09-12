@@ -38,7 +38,7 @@ function UserFormService(settings){
         return canAccess;
     }
     _this.showForm = function(formId, data){
-        const pluginDiv = _this._pluginDiv || $(settings.options.container_selector);
+        const pluginDiv = _this._pluginDiv || $(options.container_selector);
         // if(formId === 'user-info' && _userAccountModal && _userAccountModal.length>0){
         //    setTimeout(function(){
         //     _userAccountModal.modal('hide');
@@ -90,12 +90,13 @@ function UserFormService(settings){
            html = form.html();
            formTemplates[form[0].id] = html;
         }
-        var arr = html.match(re);
-        $.each(arr, function(i, e){
-            properyName = $.trim(e.replace('{{','').replace('}}',''));
-            var prop = data[properyName] ||'';
-            html = html.replace(e, prop);
-        });
+        html = parseContentData(html, data);
+        //     var arr = html.match(re);
+        // $.each(arr, function(i, e){
+        //     properyName = $.trim(e.replace('{{','').replace('}}',''));
+        //     var prop = data[properyName] ||'';
+        //     html = html.replace(e, prop);
+        // });
         form.html(html);
     }
     _this.renderPluginUI = function(){
@@ -233,10 +234,13 @@ function UserFormService(settings){
             }
         }
     }
-    _this.setup = function(){
-        $.each(tscLib['user-account'].templates, function(key, template){
-            _this.pluginUI.append($(template).hide());
+    function insertTemplates(){
+        $.each(tscLib['user-account'].templates, function(index, template){
+            _this.pluginUI.append($(template.content).hide());
         });
+    }
+    _this.setup = function(){
+        insertTemplates();
         
     }
     this.setup();

@@ -29,6 +29,9 @@ function UserService(settings) {
             tscLib.userFormService.showForm('signed-out');
         });
     }
+    _this.getToken = function () { 
+        return _this.getUserInfo().getIdToken();
+    }
     _this.signUp = function (email, password, displayName) {
         firebase.auth().createUserWithEmailAndPassword(email, password)
             .then(user => {
@@ -92,10 +95,12 @@ function UserService(settings) {
 
     _this.watchAuth = function () {
         firebase.auth().onAuthStateChanged(function (user) {
+            $(document).trigger('tsc:user_service:ready',[user]);
             if (user) {
                 // User is signed in.
                 setUserColor(user);
                 setUserInitials(user);
+                user.displayName = user.displayName || email;
                 let text = user.photoURL?'':user.initials;
                 let avatar = `<div style="background-color:${user.profileColor.value};
                 background-image:url(${user.photoURL}); 
@@ -105,10 +110,12 @@ function UserService(settings) {
                 user.profileAvatar = avatar;
                 postSignIn();
                 localStorage.setItem('logged_in', 'true');
+                $(document).trigger('tsc:user_service:logged-in', [user]);            
             } else {
                 localStorage.setItem('logged_in', 'false');
                 const view = signedOut?'signed-out':'sign-in';
-                 tscLib.userFormService.showForm(view);
+                $(document).trigger('tsc:user_service:logged-in', [user]);            
+                tscLib.userFormService.showForm(view);
                  
             }
         });

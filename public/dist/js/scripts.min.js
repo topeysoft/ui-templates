@@ -1,4 +1,4 @@
-window.tscLib = window.tscLib || {}; window.tscLib['main']=window.tscLib['main'] || {}; window.tscLib['main'].templates = {};
+window.tscLib = window.tscLib || {}; window.tscLib['main']=window.tscLib['main'] || {}; window.tscLib['main'].templates = [];
 (function($) {
   $.extend({
     stickToBottom: function(args) {
@@ -49,4 +49,29 @@ window.tscLib = window.tscLib || {}; window.tscLib['main']=window.tscLib['main']
   $('body').on('click', 'main-menu-toggle', function(event){
     $('body').toggleClass('show-menu');
   });
+
+
+
+
+    // if(window.tscLib.plugins){
+    //   $.each(window.tscLib.plugins, (function(i, plugin){
+    //      if(!plugin.initialized){
+    //         plugin.initialize();
+    //         plugin.initialized =true;
+    //      };
+    //   }))
+    // }
 })(jQuery);
+
+ function parseContentData(htmlTemplateString, data){
+    re = /{{([^}]*)}}/g
+    var html = htmlTemplateString;
+    
+    var arr = html.match(re);
+    $.each(arr, function(i, e){
+        properyName = $.trim(e.replace('{{','').replace('}}',''));
+        var prop = data[properyName] ||'';
+        html = html.replace(e, prop);
+    });
+    return html;
+}

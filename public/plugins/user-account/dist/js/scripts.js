@@ -1,72 +1,76 @@
-window.tscLib = window.tscLib || {}; window.tscLib['user-account']=window.tscLib['user-account'] || {}; window.tscLib['user-account'].templates = {"forms/sign-in.html":"<form id=\"sign-in\" style=\"display:none;\"  action=\"/plugins/form-wizard\">\n    <div class=\"form-header\">\n      <h3><i class=\"fa fa-lock\"></i> Sign In</h3>\n    </div>\n    <p>We just need some information so we can get you started</p>\n    <br />\n    <!-- Form log in -->\n    <div class=\"md-form\">\n      <!-- <i class=\"fa fa-envelope prefix grey-text\"></i> -->\n      <input type=\"email\" id=\"defaultForm-email\" class=\"form-control email-input\">\n      <label data-error=\"invalid email\" for=\"defaultForm-email\"><i class=\"fa fa-user-circle-o\"></i>&nbsp; &nbsp; Your email</label>\n    </div>\n\n    <div class=\"md-form\">\n      <!-- <i class=\"fa fa-lock prefix grey-text\"></i> -->\n      <input type=\"password\" id=\"defaultForm-pass\" class=\"form-control password-input\">\n      <label data-error=\"Invalid password\" for=\"defaultForm-pass\"><i class=\"fa fa-lock\"></i>&nbsp; &nbsp; Your password</label>\n    </div>\n\n    <div class=\"text-center\">\n      <button class=\"btn btn-default btn-lg\">Sign in</button>\n    </div>\n    <br />\n    <p>\n      If you don't have an account yet <a class=\"user-account-div__sign-up-link\" href=\"#\">get started here</a>\n    </p>\n    <p>\n      Other options:\n      <br />\n      <div class=\"providers-div\">\n\n       \n      </div>\n    </p>\n    <!-- <div id=\"firebaseui-auth-container\"></div>\n    <div id=\"sign-in-status\"></div>\n    <div id=\"sign-in\"></div>\n    <div id=\"account-details\"></div> -->\n    <!-- Form log in -->\n  </form>","forms/sign-up.html":"<form id=\"sign-up\"  style=\"display:none;\" action=\"/plugins/form-wizard\">\n    <div class=\"form-header\">\n      <h3><i class=\"fa fa-lock\"></i> Get Started</h3>\n    </div>\n    <p>Let's get to know each other.</p>\n    <br />\n    <!-- Form register -->\n    <div class=\"md-form\">\n      <!-- <i class=\"fa fa-user prefix grey-text\"></i> -->\n      <input type=\"text\" id=\"orangeForm-name\" class=\"form-control  name-input\">\n      <label for=\"orangeForm-name\"><i class=\"fa fa-user-circle-o\"></i>&nbsp; &nbsp; Your name</label>\n    </div>\n    <div class=\"md-form\">\n      <!-- <i class=\"fa fa-envelope prefix grey-text\"></i> -->\n      <input type=\"text\" id=\"orangeForm-email\" class=\"form-control email-input\">\n      <label for=\"orangeForm-email\"><i class=\"fa fa-envelope\"></i>&nbsp; &nbsp; Your email</label>\n    </div>\n\n    <div class=\"md-form\">\n      <!-- <i class=\"fa fa-lock prefix grey-text\"></i> -->\n      <input type=\"password\" id=\"orangeForm-pass\" class=\"form-control password-input\">\n      <label for=\"orangeForm-pass\"><i class=\"fa fa-lock\"></i>&nbsp; &nbsp; Your password</label>\n    </div>\n\n    <div class=\"text-center\">\n      <button class=\"btn btn-primary btn-lg\">Continue</button>\n    </div>\n    <br />\n    <p>\n      If you already have an account with us <a class=\"user-account-div__sign-in-link\" href=\"#\">sign in</a>\n    </p>\n    <!-- Form register -->\n<p>Other options</p>\n    <div class=\"providers-div\">\n      \n                       \n                      </div>\n  </form>","forms/signed-out.html":"<form id=\"signed-out\" style=\"display:none;\" action=\"/plugins/form-wizard\">\n    <div class=\"form-header\">\n      <p class=\"lead\"> You have successfully signed out. <br/> <small>See you again soon</small></p>\n      <p>\n        <a class=\"user-account-div__sign-in-link\" href=\"#\">sign in again</a>\n      </p>\n\n\n    </div>\n\n    <!-- Form log in -->\n  </form>","forms/user-info.html":"<form id=\"user-info\" style=\"display:none;\" action=\"/plugins/form-wizard\">\n    <div class=\"form-header\">\n      <p>Your are logged in as:</p>\n     <div class=\"row justify-content-center text-center\">\n        <div class=\"col-auto \">\n          {{profileAvatar}}\n            </div>\n            <p class=\"w-100\"></p>\n        <div class=\"col \">\n            <h1 id=\"user-name\" class=\"font-weight-normal thin\"> {{displayName}}</h1>\n          <p id=\"user-email\" class=\"lead\">{{email}}</p>\n          </div>\n          \n       </div>\n      <p>\n        Not you? <a class=\"user-account-div__sign-in-link\" href=\"#\">sign in as a different user</a>\n      </p>\n      <div class=\"row\">\n          <span class=\"col\">\n              <button  class=\"btn btn-sm btn-secondary user-account-div__sign-out-link\">Sign out</button>\n              </span>\n              <span id=\"user-info-continue-button-col\" class=\"col\">\n                  <a href=\"#\" class=\"btn btn-sm btn-primary\">Continue</a>\n                  </span>\n      </div>\n    </div>\n\n    <!-- Form log in -->\n  </form>"};
-function preparePluginConfig() {
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function () {
-      if (xhr.readyState == XMLHttpRequest.DONE) {
-        var settings = {};
-        try {
-            settings = JSON.parse(xhr.responseText);
-        } catch (err) { 
-            console.log('User account config error', err)
-        }
-        settings = settings || {};
-        settings.config = settings.config || {};
-        settings.options = settings.options || {};
-        // settings.config.user_account_uri =  settings.config.user_account_uri || '/plugins/user-account/';
-        settings.config.locked_uris =  settings.config.locked_uris || ['', '/plugins/user-account/', '/plugins/form-wizard/'];
-        settings.config.firebase = settings.config.firebase || {};
-        settings.options.container_selector = settings.options.container_selector || '#user-account-div.user-account-div';
-
-        initializePlugin(settings);
+window.tscLib = window.tscLib || {}; window.tscLib['user-account']=window.tscLib['user-account'] || {}; window.tscLib['user-account'].templates = [{"filename":"sign-in.html","path":"forms/","full_path":"forms/sign-in.html","content":"<form id=\"sign-in\" style=\"display:none;\"  action=\"/plugins/form-wizard\">\n    <div class=\"form-header\">\n      <h3><i class=\"fa fa-lock\"></i> Sign In</h3>\n    </div>\n    <p>We just need some information so we can get you started</p>\n    <br />\n    <!-- Form log in -->\n    <div class=\"md-form\">\n      <!-- <i class=\"fa fa-envelope prefix grey-text\"></i> -->\n      <input type=\"email\" id=\"defaultForm-email\" class=\"form-control email-input\">\n      <label data-error=\"invalid email\" for=\"defaultForm-email\"><i class=\"fa fa-user-circle-o\"></i>&nbsp; &nbsp; Your email</label>\n    </div>\n\n    <div class=\"md-form\">\n      <!-- <i class=\"fa fa-lock prefix grey-text\"></i> -->\n      <input type=\"password\" id=\"defaultForm-pass\" class=\"form-control password-input\">\n      <label data-error=\"Invalid password\" for=\"defaultForm-pass\"><i class=\"fa fa-lock\"></i>&nbsp; &nbsp; Your password</label>\n    </div>\n\n    <div class=\"text-center\">\n      <button class=\"btn btn-default btn-lg\">Sign in</button>\n    </div>\n    <br />\n    <p>\n      If you don't have an account yet <a class=\"user-account-div__sign-up-link\" href=\"#\">get started here</a>\n    </p>\n    <p>\n      Other options:\n      <br />\n      <div class=\"providers-div\">\n\n       \n      </div>\n    </p>\n    <!-- <div id=\"firebaseui-auth-container\"></div>\n    <div id=\"sign-in-status\"></div>\n    <div id=\"sign-in\"></div>\n    <div id=\"account-details\"></div> -->\n    <!-- Form log in -->\n  </form>"},{"filename":"sign-up.html","path":"forms/","full_path":"forms/sign-up.html","content":"<form id=\"sign-up\"  style=\"display:none;\" action=\"/plugins/form-wizard\">\n    <div class=\"form-header\">\n      <h3><i class=\"fa fa-lock\"></i> Get Started</h3>\n    </div>\n    <p>Let's get to know each other.</p>\n    <br />\n    <!-- Form register -->\n    <div class=\"md-form\">\n      <!-- <i class=\"fa fa-user prefix grey-text\"></i> -->\n      <input type=\"text\" id=\"orangeForm-name\" class=\"form-control  name-input\">\n      <label for=\"orangeForm-name\"><i class=\"fa fa-user-circle-o\"></i>&nbsp; &nbsp; Your name</label>\n    </div>\n    <div class=\"md-form\">\n      <!-- <i class=\"fa fa-envelope prefix grey-text\"></i> -->\n      <input type=\"text\" id=\"orangeForm-email\" class=\"form-control email-input\">\n      <label for=\"orangeForm-email\"><i class=\"fa fa-envelope\"></i>&nbsp; &nbsp; Your email</label>\n    </div>\n\n    <div class=\"md-form\">\n      <!-- <i class=\"fa fa-lock prefix grey-text\"></i> -->\n      <input type=\"password\" id=\"orangeForm-pass\" class=\"form-control password-input\">\n      <label for=\"orangeForm-pass\"><i class=\"fa fa-lock\"></i>&nbsp; &nbsp; Your password</label>\n    </div>\n\n    <div class=\"text-center\">\n      <button class=\"btn btn-primary btn-lg\">Continue</button>\n    </div>\n    <br />\n    <p>\n      If you already have an account with us <a class=\"user-account-div__sign-in-link\" href=\"#\">sign in</a>\n    </p>\n    <!-- Form register -->\n<p>Other options</p>\n    <div class=\"providers-div\">\n      \n                       \n                      </div>\n  </form>"},{"filename":"signed-out.html","path":"forms/","full_path":"forms/signed-out.html","content":"<form id=\"signed-out\" style=\"display:none;\" action=\"/plugins/form-wizard\">\n    <div class=\"form-header\">\n      <p class=\"lead\"> You have successfully signed out. <br/> <small>See you again soon</small></p>\n      <p>\n        <a class=\"user-account-div__sign-in-link\" href=\"#\">sign in again</a>\n      </p>\n\n\n    </div>\n\n    <!-- Form log in -->\n  </form>"},{"filename":"user-info.html","path":"forms/","full_path":"forms/user-info.html","content":"<form id=\"user-info\" style=\"display:none;\" action=\"/plugins/form-wizard\">\n    <div class=\"form-header\">\n      <p>Your are logged in as:</p>\n     <div class=\"row justify-content-center text-center\">\n        <div class=\"col-auto \">\n          {{profileAvatar}}\n            </div>\n            <p class=\"w-100\"></p>\n        <div class=\"col \">\n            <h1 id=\"user-name\" class=\"font-weight-normal thin\"> {{displayName}}</h1>\n          <p id=\"user-email\" class=\"lead\">{{email}}</p>\n          </div>\n          \n       </div>\n      <p>\n        Not you? <a class=\"user-account-div__sign-in-link\" href=\"#\">sign in as a different user</a>\n      </p>\n      <div class=\"row\">\n          <span class=\"col\">\n              <button  class=\"btn btn-sm btn-secondary user-account-div__sign-out-link\">Sign out</button>\n              </span>\n              <span id=\"user-info-continue-button-col\" class=\"col\">\n                  <a href=\"#\" class=\"btn btn-sm btn-primary\">Continue</a>\n                  </span>\n      </div>\n    </div>\n\n    <!-- Form log in -->\n  </form>"}];
+window.tscLib['user_account'] = {};
+window.tscLib['user_account'].preparePluginConfig = function () {
+  var xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState == XMLHttpRequest.DONE) {
+      var settings = {};
+      try {
+        settings = JSON.parse(xhr.responseText);
+      } catch (err) {
+        console.log('User account config error', err)
       }
-    };
-    xhr.open(
-      "GET",
-      "https://cms.api.elyir.local:8443/projects/59062e028631a043f468fc73/plugins/user_account/config/?use_sandbox=true",
-      true
-    );
-    xhr.send(null);
+      settings = settings || {};
+      settings.config = settings.config || {};
+      settings.config.namespace =  'user_account';
+      settings.options = settings.options || {};
+      // settings.config.user_account_uri =  settings.config.user_account_uri || '/plugins/user-account/';
+      settings.config.locked_uris = settings.config.locked_uris || ['', '/plugins/user-account/', '/plugins/form-wizard/'];
+      settings.config.firebase = settings.config.firebase || {};
+      settings.options.container_selector = settings.options.container_selector || '#user-account-div.user-account-div';
+
+      window.tscLib['user_account'].initializePlugin(settings);
+    }
+  };
+  xhr.open(
+    "GET",
+    "https://cms.api.elyir.local:8443/projects/59062e028631a043f468fc73/plugins/user_account/config/?use_sandbox=true",
+    true
+  );
+  xhr.send(null);
+}
+
+
+window.tscLib['user_account'].initializePlugin = function (settings){
+  window.tscLib = window.tscLib || {};
+  window.tscLib[settings.config.namespace] = window.tscLib[settings.config.namespace] || {};
+  if (tscLib[settings.config.namespace].initialized) {
+    return;
+  }
+  firebase.initializeApp(settings.config.firebase);
+  tscLib[settings.config.namespace].initialized = true;
+  const containerSelector = settings.options.container_selector;
+  function switchToForm(formId) {
+    var pluginDiv = $(containerSelector);
+    pluginDiv.find('form').hide();
+    pluginDiv.find('form#' + formId).show();
+    event.preventDefault();
   }
 
-  function initializePlugin(settings){
-    window.tscLib = window.tscLib||{};
-    window.tscLib.user_account = window.tscLib.user_account||{};
-    if(tscLib.user_account.initialized){
-        return;
+  $(document).on('tsc:user_service:ready', function(event, user){
+      const userFormService = new UserFormService(settings);
+      
+      window.tscLib.userFormService = userFormService;
+      if (window.requireUserLogin) {
+        window.tscLib.userService.redirectIfNotLoggedIn();
       }
-      firebase.initializeApp(settings.config.firebase);
-      tscLib.user_account.initialized = true;
-    const containerSelector = settings.options.container_selector;
-    function switchToForm(formId) {
-      var pluginDiv = $(containerSelector);
-      pluginDiv.find('form').hide();
-      pluginDiv.find('form#'+formId).show();
-      event.preventDefault();
-    }
-    
+      userFormService.renderPluginUI();
+    });
     const userService = new UserService(settings);
-    const userFormService = new UserFormService(settings);
-
     window.tscLib.userService = userService;
-    window.tscLib.userFormService = userFormService;
-    if(window.requireUserLogin){
-        userService.redirectIfNotLoggedIn();
-    }
-    userFormService.renderPluginUI();
-    
-    
-   
-  }
-
-  $(document).ready(function(){
-     // Initialize Firebase
-     preparePluginConfig();
+ 
 
 
-    
+
+}
+
+$(document).ready(function () {
+
+  window.tscLib['user_account'].preparePluginConfig();
+
 });
 
-   
+
 function UserFormService(settings){
     let config = settings.config || {};
     let options = settings.options || {};
@@ -107,7 +111,7 @@ function UserFormService(settings){
         return canAccess;
     }
     _this.showForm = function(formId, data){
-        const pluginDiv = _this._pluginDiv || $(settings.options.container_selector);
+        const pluginDiv = _this._pluginDiv || $(options.container_selector);
         // if(formId === 'user-info' && _userAccountModal && _userAccountModal.length>0){
         //    setTimeout(function(){
         //     _userAccountModal.modal('hide');
@@ -159,12 +163,13 @@ function UserFormService(settings){
            html = form.html();
            formTemplates[form[0].id] = html;
         }
-        var arr = html.match(re);
-        $.each(arr, function(i, e){
-            properyName = $.trim(e.replace('{{','').replace('}}',''));
-            var prop = data[properyName] ||'';
-            html = html.replace(e, prop);
-        });
+        html = parseContentData(html, data);
+        //     var arr = html.match(re);
+        // $.each(arr, function(i, e){
+        //     properyName = $.trim(e.replace('{{','').replace('}}',''));
+        //     var prop = data[properyName] ||'';
+        //     html = html.replace(e, prop);
+        // });
         form.html(html);
     }
     _this.renderPluginUI = function(){
@@ -302,10 +307,13 @@ function UserFormService(settings){
             }
         }
     }
-    _this.setup = function(){
-        $.each(tscLib['user-account'].templates, function(key, template){
-            _this.pluginUI.append($(template).hide());
+    function insertTemplates(){
+        $.each(tscLib['user-account'].templates, function(index, template){
+            _this.pluginUI.append($(template.content).hide());
         });
+    }
+    _this.setup = function(){
+        insertTemplates();
         
     }
     this.setup();
@@ -341,6 +349,9 @@ function UserService(settings) {
         firebase.auth().signOut().then(data=>{
             tscLib.userFormService.showForm('signed-out');
         });
+    }
+    _this.getToken = function () { 
+        return _this.getUserInfo().getIdToken();
     }
     _this.signUp = function (email, password, displayName) {
         firebase.auth().createUserWithEmailAndPassword(email, password)
@@ -405,10 +416,12 @@ function UserService(settings) {
 
     _this.watchAuth = function () {
         firebase.auth().onAuthStateChanged(function (user) {
+            $(document).trigger('tsc:user_service:ready',[user]);
             if (user) {
                 // User is signed in.
                 setUserColor(user);
                 setUserInitials(user);
+                user.displayName = user.displayName || email;
                 let text = user.photoURL?'':user.initials;
                 let avatar = `<div style="background-color:${user.profileColor.value};
                 background-image:url(${user.photoURL}); 
@@ -418,10 +431,12 @@ function UserService(settings) {
                 user.profileAvatar = avatar;
                 postSignIn();
                 localStorage.setItem('logged_in', 'true');
+                $(document).trigger('tsc:user_service:logged-in', [user]);            
             } else {
                 localStorage.setItem('logged_in', 'false');
                 const view = signedOut?'signed-out':'sign-in';
-                 tscLib.userFormService.showForm(view);
+                $(document).trigger('tsc:user_service:logged-in', [user]);            
+                tscLib.userFormService.showForm(view);
                  
             }
         });

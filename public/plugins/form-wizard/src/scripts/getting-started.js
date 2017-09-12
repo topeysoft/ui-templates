@@ -1,6 +1,8 @@
-function GettingStartedWizard (){
+function GettingStartedWizard (settings){
     _GSW = this;
-    
+    settings = settings || {};
+    const config = settings.config || {};
+    const options = settings.options || {};
 
 
 
@@ -43,6 +45,16 @@ function GettingStartedWizard (){
     ];
     const steps_validity = [
         {
+            name: 'intro',
+            invalid_message: '',
+            valid: true,
+            isValid: function(){
+                return true;
+            },
+            hide_step_indicator:true,
+            hide_nav_on_mobile:true
+        },
+        {
             name: 'Business information',
             invalid_message: 'Please provide a valid business name',
             valid: false,
@@ -59,7 +71,10 @@ function GettingStartedWizard (){
                     inputs.eq(0).focus();
                 }
                 return valid;
-            }
+            },
+            disable_back:true,
+            hide_back_button:true,
+
         },
         {
             name: 'Choose a plan',
@@ -96,12 +111,22 @@ function GettingStartedWizard (){
         },
        
         {
+            name: 'Terms and condition',
+            invalid_message: '',
+            valid: true,
+            isValid: function (index) {
+                return true;
+            },
+            hide_nav_on_mobile:true
+        },
+         {
             name: 'Finish',
             invalid_message: '',
             valid: true,
             isValid: function (index) {
                 return true;
-            }
+            },
+            hide_step_indicator:true
         }
     ];
     const plans = [
@@ -185,6 +210,30 @@ function GettingStartedWizard (){
                 tscLib.userService.redirectIfNotLoggedIn();
             }
         });
+        callOnWizardNext.push(function (nextStepIndex) {
+            if(steps_validity[nextStepIndex] && steps_validity[nextStepIndex].disable_back){
+                $('.wiz-back').prop('disabled', true);
+            }else{
+                $('.wiz-back').prop('disabled', false);
+            }
+            if(steps_validity[nextStepIndex] && steps_validity[nextStepIndex].hide_back_button){
+                $('.wiz-back').hide();
+                $('.wiz-continue').closest('.col').removeClass('text-right');
+            }else{
+                $('.wiz-back').show();
+                $('.wiz-continue').closest('.col').addClass('text-right');
+            }
+            if(steps_validity[nextStepIndex] && steps_validity[nextStepIndex].hide_step_indicator){
+                $(options.container_selector+' .wizard-steps').hide();
+            }else{
+                $(options.container_selector+' .wizard-steps').show();
+            }
+            if(steps_validity[nextStepIndex] && steps_validity[nextStepIndex].hide_nav_on_mobile){
+                $('.wizard-footer').addClass('d-none');
+            }else{
+                $('.wizard-footer').removeClass('d-none');
+            }
+        });
         callOnWizardNext.push(function () {
             var summary = $('#form-wizard .basic-info-summary');
             var summaryHtml = '';
@@ -266,7 +315,7 @@ function GettingStartedWizard (){
         wizardSteps.eq(index).addClass('active').prevAll().addClass('passed');
     }
     function reFocusActiveStep() {
-        gotoToStepByIndex($('#form-wizard .wizard-step-content.active').index(), true);
+        gotoStepByIndex($('#form-wizard .wizard-step-content.active').index(), true);
     }
     function resetContinueText(index) {
         var btn = $('#form-wizard  .wiz-continue, #form-wizard  #wiz-continue');
@@ -276,13 +325,13 @@ function GettingStartedWizard (){
         }
         if (index === wizardContents.length - 2) {
             text.text('Finish');
-            btn.removeClass('btn-primary').addClass('btn-default');
+            btn.removeClass('btn-primary').addClass('btn-success');
         } else {
             text.text('Continue')
-            btn.removeClass('btn-default').addClass('btn-primary');
+            btn.removeClass('btn-success').addClass('btn-primary');
         }
     }
-    function gotoToStepByIndex(index) {
+    function gotoStepByIndex(index) {
         var rect = wizardContentWrapper[0].getBoundingClientRect();
         var width = index * -(rect.width);
         wizardContents.removeClass('invisible').css('transform', 'translateX(' + width + 'px)');
@@ -294,7 +343,7 @@ function GettingStartedWizard (){
         activateStepIndicatorByIndex(index);
         resetContinueText(index);
         $.each(callOnWizardNext, function (i, fn) {
-            fn();
+            fn(index);
         });
     }
 
@@ -305,26 +354,26 @@ function GettingStartedWizard (){
         toastr["error"](steps_validity[index].invalid_message);
     }
 
-    function advanceStepByIndex(index) {
+    function advanceStepByIndex(index, suppressValidation) {
         var currIndex = index - 1;
-        if (!steps_validity[currIndex].isValid(currIndex)) {
+        if (!suppressValidation && !steps_validity[currIndex].isValid(currIndex)) {
             return notifyInvalidStep(currIndex);
         }
-        gotoToStepByIndex(index);
+        gotoStepByIndex(index);
         if(index === wizardSteps.length-1){
             markFinished(true);
         }
     }
     function revertStepByIndex(index) {
-        gotoToStepByIndex(index);
+        gotoStepByIndex(index);
     }
-    function wizardContinue() {
+    function wizardContinue(suppressValidation=false) {
         var current = $('#form-wizard .wizard-step-content.active');
         var index = current.index();
         if (index < (wizardContents.length - 1)) {
             index += 1;
         }
-        advanceStepByIndex(index);
+        advanceStepByIndex(index, suppressValidation);
     }
     function wizardBack() {
         var current = $('#form-wizard .wizard-step-content.active');
@@ -366,6 +415,7 @@ function GettingStartedWizard (){
 
 
     }
+   
     function populatePlans() {
         var planGroup = $('#form-wizard #plan-group');
         var plansContent = '';
@@ -417,12 +467,14 @@ function GettingStartedWizard (){
 
     populatePlans();
     setup();
-    gotoToStepByIndex(0, false);
+    gotoStepByIndex(0, false);
 
    // _GSW.selectPlan = selectPlan;
     _GSW.selectedPlan = selectedPlan;
    // _GSW.isFinished = isFinished;
    // _GSW.markFinished = markFinished;
     _GSW.businessInfo = basicInfo;
-    
+    _GSW.gotoStepByIndex = gotoStepByIndex;
+    _GSW.nextStep = wizardContinue;
+    _GSW.previousStep = wizardBack;
 }

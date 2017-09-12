@@ -7,10 +7,9 @@ const cleanCSS = require("gulp-clean-css");
 const sourcemaps = require("gulp-sourcemaps");
 const inject = require("gulp-inject");
 const del = require("del");
-const  fileinclude = require('gulp-file-include');
+const fileinclude = require('gulp-file-include');
 const TscTemplateBuilder = require('./gulp-plugins/template-builder').TemplateBuilder;
 
-const templateBuilder = new TscTemplateBuilder; 
 const configs = [
   {
     name: "form-wizard",
@@ -28,39 +27,39 @@ const configs = [
 var jsFiles = "assets/scripts/**/*.js",
   jsDest = "dist/scripts";
 
-  const allDone= (index, doneCallback)=>{
-    if(index===(configs.length-1)){
-      doneCallback(null);
-    }
+const allDone = (index, doneCallback) => {
+  if (index === (configs.length - 1)) {
+    doneCallback(null);
   }
+}
 
-  gulp.task('fileinclude', function() {
-    gulp.src(['./**/*.html'])
-      .pipe(fileinclude({
-        prefix: '@@',
-        basepath: '@file'
-      }))
-      .pipe(gulp.dest('./'));
-  });
+gulp.task('fileinclude', function () {
+  gulp.src(['./**/*.html'])
+    .pipe(fileinclude({
+      prefix: '@@',
+      basepath: '@file'
+    }))
+    .pipe(gulp.dest('./'));
+});
 
-gulp.task("scripts", ["clean:scripts"], function() {
+gulp.task("scripts", ["clean:scripts"], function () {
   return (() => {
     configs.forEach(config => {
-      try{
+      try {
         gulp
-        .src(config.base_path + "/src/scripts/**/*.js")
-        .pipe(concat("scripts.js"))
-        .pipe(gulp.dest(config.base_path + "/dist/js"))
-        .pipe(rename({ suffix: ".min" }))
-        //.pipe(uglify())
-        .pipe(gulp.dest(config.base_path + "/dist/js"));
-      }catch(err){
+          .src(config.base_path + "/src/scripts/**/*.js")
+          .pipe(concat("scripts.js"))
+          .pipe(gulp.dest(config.base_path + "/dist/js"))
+          .pipe(rename({ suffix: ".min" }))
+          //.pipe(uglify())
+          .pipe(gulp.dest(config.base_path + "/dist/js"));
+      } catch (err) {
         console.log(err);
       }
     });
   })();
 });
-gulp.task("styles", ["clean:styles"], function() {
+gulp.task("styles", ["clean:styles"], function () {
   return (() => {
     configs.forEach(config => {
       gulp
@@ -70,10 +69,10 @@ gulp.task("styles", ["clean:styles"], function() {
         .pipe(rename({ suffix: ".min" }))
         //.pipe(sourcemaps.init())
         .pipe(
-          cleanCSS({ debug: true }, function(details) {
-            console.log(details.name + ": " + details.stats.originalSize);
-            console.log(details.name + ": " + details.stats.minifiedSize);
-          })
+        cleanCSS({ debug: true }, function (details) {
+          console.log(details.name + ": " + details.stats.originalSize);
+          console.log(details.name + ": " + details.stats.minifiedSize);
+        })
         )
         //.pipe(sourcemaps.write())
         .pipe(gulp.dest(config.base_path + "/dist/css/"));
@@ -110,61 +109,62 @@ gulp.task("styles", ["clean:styles"], function() {
 //   })();
 // });
 
-gulp.task("clean:scripts", function(done) {
+gulp.task("clean:scripts", function (done) {
   return (() => {
     configs.forEach((config, i) => {
-      try{
-        del([config.base_path + "/dist/js", config.base_path + "/dist/scripts"], {force:true})
-        .then(()=>{
-          allDone(i, done);
-        }).catch(err=>{
-          allDone(i, done);
-        });
-      }catch(err){
+      try {
+        del([config.base_path + "/dist/js", config.base_path + "/dist/scripts"], { force: true })
+          .then(() => {
+            allDone(i, done);
+          }).catch(err => {
+            allDone(i, done);
+          });
+      } catch (err) {
         console.log(err);
       }
     });
-    
+
   })();
 });
-gulp.task("clean:styles", function(done) {
+gulp.task("clean:styles", function (done) {
   return (() => {
     configs.forEach((config, i) => {
       del([config.base_path + "/dist/css", config.base_path + "/dist/styles"])
-      .then(()=>{
-        allDone(i, done);
-      }).catch(err=>{
-        allDone(i, done);
-      });
+        .then(() => {
+          allDone(i, done);
+        }).catch(err => {
+          allDone(i, done);
+        });
     });
   })();
 });
 
 gulp.task("clean", ["clean:styles", "clean:scripts"]);
 gulp.task("build", ["clean", "styles", "templates", "scripts"]);
-gulp.task("watch", function() {
+gulp.task("watch", function () {
   (() => {
     configs.forEach(config => {
       gulp.watch(config.base_path + "/src/styles/**/*.scss", ["styles"]);
       gulp.watch(config.base_path + "/src/scripts/**/*.js", ["scripts"]);
       gulp.watch(config.base_path + "/src/templates/**/*.html", ["templates"]);
       //gulp.watch(config.base_path + "../**/*.html", ["fileinclude"]);
-    //   gulp.watch(config.base_path + "/src/index.html", ["index"]);
+      //   gulp.watch(config.base_path + "/src/index.html", ["index"]);
     });
   })();
 });
-gulp.task("default", ['build',"watch"]);
+gulp.task("default", ['build', "watch"]);
 
 
-gulp.task('templates', function(done){
+gulp.task('templates', function (done) {
   return (() => {
-    configs.forEach((config, i)=> {
-     const files = templateBuilder.readFiles(config.base_path + "/src/templates/**/*.html");
-     gulp
-     .src(config.base_path + "/src/templates/**/*.html")
-     .pipe(templateBuilder.readFiles({namespace:config.name, dest:config.base_path + "/src/scripts/_templates.js"}, ()=>{
-      allDone(i, done);
-     }));
+    configs.forEach((config, i) => {
+      // let templateBuilder = new TscTemplateBuilder(config.name);
+      const srcPath = config.base_path + "/src/templates/**/*.html";
+      gulp
+        .src(srcPath)
+        .pipe(new TscTemplateBuilder(config.name, config.base_path + "/src/scripts/_templates.js" , () => {
+          allDone(i, done);
+        }));
     });
   })();
 });
