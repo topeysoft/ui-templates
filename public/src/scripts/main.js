@@ -1,4 +1,26 @@
+const viewport = {xs:true, sm:true, md:true, lg:true, xl:true};
+function setViewport(){
+  let div = $('#viewport-div')
+  if(div.length<1){
+    div = $(`<div id="viewport-div">
+    <i id="viewport-xs" class="d-block d-sm-none"></i>
+    <i id="viewport-sm" class="d-none d-sm-block d-md-none"></i>
+    <i id="viewport-md"  class="d-none d-md-block d-lg-none"></i>
+    <i id="viewport-lg"  class="d-none d-lg-block d-xl-none"></i>
+    <i id="viewport-xl" class="d-none d-xl-block"></i>
+    </div>`)
+    $('body').append(div);
+  }
+  $.each(viewport, function (size, value){
+    viewport[size] = $('#viewport-'+size).is(":visible");
+    if(viewport[size]){
+      $('body').attr('data-viewport', size)
+    }
+  });
+   console.log('viewport', viewport);
+}
 (function($) {
+  setViewport();
   $.extend({
     stickToBottom: function(args) {
       let options = {css_class:'fixed', scrollSelector:'body'};
@@ -45,12 +67,13 @@
 
 
 
-  $('body').on('click', 'main-menu-toggle', function(event){
+  $('body').on('click', '.main-menu-toggle', function(event){
     $('body').toggleClass('show-menu');
   });
 
-
-
+$(window).on('resize', function(event){
+  setViewport();
+})
 
     // if(window.tscLib.plugins){
     //   $.each(window.tscLib.plugins, (function(i, plugin){

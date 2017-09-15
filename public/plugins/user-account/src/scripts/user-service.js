@@ -5,12 +5,12 @@ function UserService(settings) {
     const _this = this;
     signedOut = false;
     function postSignIn() {
-       const user = _this.getUserInfo();
-       if (user) {
-           tscLib.userFormService.showForm('user-info', user);
-       }
-   }
-     _this.postSignIn = postSignIn;
+        const user = _this.getUserInfo();
+        if (user) {
+            tscLib.userFormService.showForm('user-info', user);
+        }
+    }
+    _this.postSignIn = postSignIn;
     _this.signIn = function (email, password) {
         firebase.auth().signInWithEmailAndPassword(email, password).then(result => {
             postSignIn();
@@ -23,14 +23,18 @@ function UserService(settings) {
             // ...
         });
     }
-    _this.signOut = function () { 
+    _this.signOut = function () {
         signedOut = true;
-        firebase.auth().signOut().then(data=>{
+        firebase.auth().signOut().then(data => {
             tscLib.userFormService.showForm('signed-out');
         });
     }
-    _this.getToken = function () { 
-        return _this.getUserInfo().getIdToken();
+    _this.getToken = function () {
+        const user = _this.getUserInfo();
+        if (!user) {
+            _this.redirectToLogin();
+        }
+        return user.getIdToken();
     }
     _this.signUp = function (email, password, displayName) {
         firebase.auth().createUserWithEmailAndPassword(email, password)
@@ -64,59 +68,61 @@ function UserService(settings) {
         return firebase.auth().currentUser;
     }
     _this.isLoggedIn = function () {
-        let loggedIn=false;
-        try{
-           loggedIn = JSON.parse(localStorage.getItem('logged_in'));
-        }catch(er){}
+        let loggedIn = false;
+        try {
+            loggedIn = JSON.parse(localStorage.getItem('logged_in'));
+        } catch (er) { }
         return loggedIn;
     }
 
-    _this.redirectIfNotLoggedIn = function(args = {}){
-        let options = {redirectToUrl:'', forceShowLogin:true};
+    _this.redirectIfNotLoggedIn = function (args = {}) {
+        let options = { redirectToUrl: '', forceShowLogin: true };
         $.extend(options, args);
-       if(!_this.isLoggedIn()){
-           let redirectToUrl = options.redirectToUrl;
-            let user_account_uri = config.user_account_uri;  
-            let loginUri = location.href;   
-            let currentUrl = location.href;
-            if(redirectToUrl){
-                loginUri = redirectToUrl;
-            }else{
-                if(user_account_uri){
-                    loginUri = location.protocol+'//'+location.host+'/'+user_account_uri;
-                  }else{
-                      loginUri = currentUrl;
-                  }
-            }
-        loginUri += '#user-account?redirectUrl='+currentUrl;
-        location.href = loginUri;
-       }
+        if (!_this.isLoggedIn()) {
+            _this.redirectToLogin();
+        }
     }
-
+    _this.redirectToLogin = function () {
+        let redirectToUrl = options.redirectToUrl;
+        let user_account_uri = config.user_account_uri;
+        let loginUri = location.href;
+        let currentUrl = location.href;
+        if (redirectToUrl) {
+            loginUri = redirectToUrl;
+        } else {
+            if (user_account_uri) {
+                loginUri = location.protocol + '//' + location.host + '/' + user_account_uri;
+            } else {
+                loginUri = currentUrl;
+            }
+        }
+        loginUri += '#user-account?redirectUrl=' + currentUrl;
+        location.href = loginUri;
+    }
     _this.watchAuth = function () {
         firebase.auth().onAuthStateChanged(function (user) {
-            $(document).trigger('tsc:user_service:ready',[user]);
+            $(document).trigger('tsc:user_service:ready', [user]);
             if (user) {
                 // User is signed in.
                 setUserColor(user);
                 setUserInitials(user);
                 user.displayName = user.displayName || email;
-                let text = user.photoURL?'':user.initials;
+                let text = user.photoURL ? '' : user.initials;
                 let avatar = `<div style="background-color:${user.profileColor.value};
                 background-image:url(${user.photoURL}); 
                 background-size:cover; border-radius:50%; 
-                margin:1rem;width:3rem; font-size:1.5rem; font-weight:300; height:3rem;
+                margin:1rem;width:4rem; font-size:1.5rem; font-weight:300; height:4rem;
                  line-height:3rem; text-align:center; color:white">${text}</div>`
                 user.profileAvatar = avatar;
                 postSignIn();
                 localStorage.setItem('logged_in', 'true');
-                $(document).trigger('tsc:user_service:logged-in', [user]);            
+                $(document).trigger('tsc:user_service:logged-in', [user]);
             } else {
                 localStorage.setItem('logged_in', 'false');
-                const view = signedOut?'signed-out':'sign-in';
-                $(document).trigger('tsc:user_service:logged-in', [user]);            
+                const view = signedOut ? 'signed-out' : 'sign-in';
+                $(document).trigger('tsc:user_service:' + (signedOut ? 'logged-out' : 'not-logged-in'), [user]);
                 tscLib.userFormService.showForm(view);
-                 
+
             }
         });
     }
@@ -140,22 +146,25 @@ function UserService(settings) {
         providers: [
             {
                 name: "Google",
-                uiButton: $('<button class="btn\
-                                firebaseui-idp-google firebaseui-id-idp-button" data-provider-id="google.com" data-upgraded=",MaterialButton">\
-                                <span class="firebaseui-idp-icon-wrapper"><img class="firebaseui-idp-icon" src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg">\
-                                </span><span class="firebaseui-idp-text firebaseui-idp-text-long">Continue with Google</span>\
-                                <span class="firebaseui-idp-text firebaseui-idp-text-short">Google</span></button>').data('provider', new firebase.auth.GoogleAuthProvider())
+                uiButton: $(`<button class="btn btn-google btn-social-login waves-effect text-left">
+                <span class="row m-0">
+                <span class="col-auto p-0 pr-2"><img  
+                  src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"></span><span class=" p-0 col
+                  d-none d-md-inline">Continue with Google</span><span class="p-0 col d-md-none">Continue with Google
+                  </span> </span></button>`).data('provider', new firebase.auth.GoogleAuthProvider())
                 ,
                 uiIcon: '<span class="firebaseui-idp-icon-wrapper"><img class="firebaseui-idp-icon" src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"></span>',
             },
             {
-                name: "Google",
-                uiButton: $('<button class="btn firebaseui-idp-facebook firebaseui-id-idp-button">\
-                <span class="firebaseui-idp-icon-wrapper"><img class="firebaseui-idp-icon" \
-                 src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/facebook.svg"></span><span class="firebaseui-idp-text \
-                 firebaseui-idp-text-long">Continue with Facebook</span><span class="firebaseui-idp-text firebaseui-idp-text-short">Facebook</span></button>')
-                    .data('provider', new firebase.auth.FacebookAuthProvider())
-                ,
+                name: "Facebook",
+                uiButton: $(`<button class="btn btn-facebook btn-social-login waves-effect text-left">
+               <span class="row m-0">
+               <span class="col-auto p-0 pr-2"><img  
+                 src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/facebook.svg"></span><span class=" p-0 col
+                 d-none d-md-inline">Continue with Facebook</span><span class="p-0 col d-md-none">Continue with Facebook
+                 </span> </span></button>`)
+                    .data('provider', new firebase.auth.FacebookAuthProvider()),
+                
                 uiIcon: '<span class="firebaseui-idp-icon-wrapper"><img class="firebaseui-idp-icon" \
                 src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/facebook.svg"></span>',
             }
@@ -181,15 +190,15 @@ function UserService(settings) {
             // ...
         });
     }
-    
+
     const userColors = [
-        {name:'red', value:'#b71c1c'},
-        {name:'purple', value:'#4a148c'},
-        {name:'blue', value:'#1976d2'},
-        {nae:'green', value:'#2e7d32'},
-        {name:'orange', value:'#e65100'},
-        {name:'gray', value:'#37474f'},
-        {name:'pink', value:'#d81b60'}        
+        { name: 'red', value: '#b71c1c' },
+        { name: 'purple', value: '#4a148c' },
+        { name: 'blue', value: '#1976d2' },
+        { nae: 'green', value: '#2e7d32' },
+        { name: 'orange', value: '#e65100' },
+        { name: 'gray', value: '#37474f' },
+        { name: 'pink', value: '#d81b60' }
     ];
 
     function setUserColor(user) {
@@ -197,34 +206,34 @@ function UserService(settings) {
     }
 
     function getColorFromString(str) {
-       let num = getLettersNumber(str, true);
-       if(num<userColors.length) num = userColors.length;
-       let index = num % userColors.length;
-       return userColors[index];
+        let num = getLettersNumber(str, true);
+        if (num < userColors.length) num = userColors.length;
+        let index = num % userColors.length;
+        return userColors[index];
     }
 
     function setUserInitials(user) {
-       user.initials = getInitials(user.displayName);
+        user.initials = getInitials(user.displayName);
     }
 
-    function getInitials(name){
+    function getInitials(name) {
         var initials = name.replace(/[^a-zA-Z- ]/g, "").match(/\b\w/g);
         let result = initials;
-        
-            return (initials.join('').toUpperCase()).substr(0, 2);
+
+        return (initials.join('').toUpperCase()).substr(0, 2);
     }
-    function getLettersNumber(text, add=true) {
+    function getLettersNumber(text, add = true) {
         var str = "";
         var added = 0;
         for (var i = 0; i < text.length; i++) {
-          var code = text.toUpperCase().charCodeAt(i)
-          if (code > 64 && code < 91) {
-              str += (code - 64) + " ";
-              added += (code - 64);
-          }
+            var code = text.toUpperCase().charCodeAt(i)
+            if (code > 64 && code < 91) {
+                str += (code - 64) + " ";
+                added += (code - 64);
+            }
         }
-        return add?added:str.slice(0, str.length - 1);
-      }
+        return add ? added : str.slice(0, str.length - 1);
+    }
 
     _this.setup = function () {
         _this.watchAuth();

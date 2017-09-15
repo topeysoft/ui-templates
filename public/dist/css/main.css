@@ -5613,8 +5613,8 @@ body {
       color: #000000 !important;
       font-size: 2rem;
       font-weight: 300;
-      line-height: 5rem;
-      height: 5rem; }
+      line-height: 3rem;
+      height: 3rem; }
       html #main-header .main-brand:hover,
       html #main-header #main-brand:hover,
       html #main-header .main-brand a:hover,
@@ -5757,13 +5757,107 @@ h1, h2, h3, h4,
   .btn-simple:hover.btn-dark {
     color: #343a40 !important; }
 
-.main-menu,
-#main-menu {
-  display: none;
+.main-menu-toggle {
+  position: absolute;
+  width: 2rem;
+  height: 2rem;
+  left: 2rem;
+  font-size: 1.5rem;
+  transition: all .2s ease-in-out;
+  border-top: 0.09em solid #000; }
+  .main-menu-toggle:after, .main-menu-toggle:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 0.1em;
+    border-bottom: 0.09em solid #000;
+    transition: all .2s ease-in-out; }
+  .main-menu-toggle:before {
+    top: 0.25em; }
+  .main-menu-toggle:after {
+    top: 0.55em; }
+
+#main-nav ul li {
+  transition: tranform  .2s ease-in-out; }
+
+body[data-viewport=xs] .main-menu,
+body[data-viewport=xs] #main-menu, body[data-viewport=sm] .main-menu,
+body[data-viewport=sm] #main-menu {
+  flex-direction: column;
+  display: none !important;
   width: 100vw;
   height: 100vh;
-  background: rgba(255, 255, 255, 0.9); }
+  background: rgba(255, 255, 255, 0.95);
+  position: relative;
+  transform: translateY(-200vh); }
+  body[data-viewport=xs] .main-menu #main-nav,
+  body[data-viewport=xs] #main-menu #main-nav, body[data-viewport=sm] .main-menu #main-nav,
+  body[data-viewport=sm] #main-menu #main-nav {
+    padding: 0 2rem;
+    display: block;
+    height: 100vh;
+    padding-bottom: 5rem;
+    overflow-x: none;
+    overflow-y: auto; }
+    body[data-viewport=xs] .main-menu #main-nav ul li,
+    body[data-viewport=xs] #main-menu #main-nav ul li, body[data-viewport=sm] .main-menu #main-nav ul li,
+    body[data-viewport=sm] #main-menu #main-nav ul li {
+      display: block !important;
+      width: 100%;
+      padding: 0;
+      margin: 0; }
+      body[data-viewport=xs] .main-menu #main-nav ul li a,
+      body[data-viewport=xs] #main-menu #main-nav ul li a, body[data-viewport=sm] .main-menu #main-nav ul li a,
+      body[data-viewport=sm] #main-menu #main-nav ul li a {
+        font-size: 1.2rem !important; }
 
-body.show-menu .main-menu,
-body.show-menu #main-menu {
-  display: block; }
+body[data-viewport=xs].show-menu .main-header,
+body[data-viewport=xs].show-menu #main-header, body[data-viewport=sm].show-menu .main-header,
+body[data-viewport=sm].show-menu #main-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 20000; }
+
+body[data-viewport=xs].show-menu .main-menu,
+body[data-viewport=xs].show-menu #main-menu, body[data-viewport=sm].show-menu .main-menu,
+body[data-viewport=sm].show-menu #main-menu {
+  display: flex !important;
+  transform: translateY(0); }
+
+body[data-viewport=xs].show-menu .main-menu-toggle, body[data-viewport=sm].show-menu .main-menu-toggle {
+  transition: all .2s ease-in-out;
+  border-top: 0.0em solid #000; }
+  body[data-viewport=xs].show-menu .main-menu-toggle:after, body[data-viewport=xs].show-menu .main-menu-toggle:before, body[data-viewport=sm].show-menu .main-menu-toggle:after, body[data-viewport=sm].show-menu .main-menu-toggle:before {
+    top: 0.25em; }
+  body[data-viewport=xs].show-menu .main-menu-toggle:before, body[data-viewport=sm].show-menu .main-menu-toggle:before {
+    transform: rotate(45deg); }
+  body[data-viewport=xs].show-menu .main-menu-toggle:after, body[data-viewport=sm].show-menu .main-menu-toggle:after {
+    transform: rotate(-45deg); }
+
+.btn.btn-social-login {
+  text-transform: none; }
+  .btn.btn-social-login img {
+    width: 1.5rem;
+    margin-right: 2; }
+  .btn.btn-social-login.btn-facebook {
+    color: #ffffff;
+    background: #3b5998 !important; }
+  .btn.btn-social-login.btn-google {
+    color: #757575 !important;
+    background: #ffffff !important; }
+
+#loader-div {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 2000000;
+  background: rgba(255, 255, 255, 0.95); }
+  #loader-div .wrapper {
+    top: 40%;
+    max-width: 10rem;
+    margin: auto;
+    position: relative; }

@@ -1,0 +1,95 @@
+{
+    "_id": ObjectId("59062e028631a043f468fc73"),
+    "description": "Clean name test",
+    "name": "tsc_cms",
+    "created": "2017-04-30T18:33:38.680Z",
+    "modified": ISODate("2017-05-02T05:12:48.086+0000"),
+    "raw_name": "TSC CMS",
+    "entities": [
+        {
+            "name": "pages"
+        },
+        {
+            "name": "templates"
+        },
+        {
+            "name": "widgets"
+        },
+        {
+            "name": "themes"
+        }
+    ],
+    "base_url": "http://topeysoft.local",
+    "default_template_id": "59074db735d5734e005e4903",
+    "theme_id": "590772119a50d839b869b5cf",
+    "title": "Official TopeySoft",
+    "id": "59062e028631a043f468fc73",
+    "display_name": "Official TopeySoft",
+    "last_modified": "2017-08-08T02:35:20.534Z",
+    "plugin_configs": {
+        "braintree": {
+            "merchant_id": "vj7kcs7qcgkw3tvd",
+            "public_key": "pb4yz3nh7bxtm5nm",
+            "private_key": "4fc6a02947bbde2429e6e7a50e8e4fbd"
+        },
+        "user_account": {
+            "user_account_uri": "my-account#user-account",
+            "locked_uris": [
+                "get-started",
+                "plugins/form-wizard"
+            ],
+            "firebase": {
+                "apiKey": "AIzaSyDbMpLUdyhNsfPNPcaXv-csyQb8DVAqR-I",
+                "authDomain": "cms-admin-8e3fb.firebaseapp.com",
+                "databaseURL": "https://cms-admin-8e3fb.firebaseio.com",
+                "projectId": "cms-admin-8e3fb",
+                "storageBucket": "cms-admin-8e3fb.appspot.com",
+                "messagingSenderId": "721305448570"
+            }
+        },
+        "getting_started": {
+            "finish_text": " <p class=\"section-heading display-4 pt-4\">Thank's for choosing our service.</p>\n                <br />\n\n                <h3 class=\"\">Here is what will happen next:</h3>\n                <p>You will be contacted in the next hour, using the preferred contact information you provided earlier to get more detail and specifics of your website so that we can tailor the designs and aesthetically to your business needs.\n                    At the same time, we will work with you to register your domain name or configure your existing one if you have already purchased one.\n                </p>",
+            "basic_info_data": [
+                {
+                    "id": "company_name",
+                    "label": "Your company<span class=\"d-none d-md-inline\">/business</span> name",
+                    "value": "",
+                    "type": "text",
+                    "invalid_message": "Invalid name",
+                    "valid_message": "Thanks, got it",
+                    "required": true
+                },
+                {
+                    "id": "contact_phone",
+                    "label": "Phone number",
+                    "value": "",
+                    "type": "tel",
+                    "invalid_message": "Invalid phone number",
+                    "valid_message": "Thanks, got it",
+                    "required": true
+                },
+                {
+                    "id": "contact_email",
+                    "label": "Email address",
+                    "value": "",
+                    "type": "email",
+                    "invalid_message": "Invalid email",
+                    "valid_message": "Thanks, got it",
+                    "required": true
+                },
+                {
+                    "id": "preferred_contact_method",
+                    "label": "How would you like to be contacted?",
+                    "question": "How would you like to be contacted?",
+                    "options": {
+                        "call": {"label":"Phone call", "response":"I prefer phone call"},
+                        "text": {"label":"Text message","response":"I prefer text message"},
+                        "email":  {"label":"Email","response":"I prefer email message"}
+                    },
+                    "value": "call",
+                    "type": "select"
+                }
+            ]
+        }
+    }
+}

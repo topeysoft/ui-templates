@@ -1,0 +1,123 @@
+{ 
+    "_id" : ObjectId("59b4cba2f468fb28367399ae"), 
+    "unique_name" : "ryg5jsHf9b", 
+    "project_id" : "59062e028631a043f468fc73", 
+    "content" : "<!-- Plugin content start -->\n        <div class=\"container text-center\">\n            <div class=\"row justify-content-md-center\">\n                <div class=\"col-12\">\n\n                    <div id=\"form-wizard\" class=\"form-wizard\">\n                       \n                    </div>\n                </div>\n            </div>\n\n        </div>\n        <!-- Plugin content end -->", 
+    "created" : ISODate("2017-09-10T05:20:34.515+0000"), 
+    "modified" : ISODate("2017-09-10T05:20:34.515+0000"), 
+    "name" : "get started", 
+    "tag_name" : "section", 
+    "last_modified" : "2017-09-10T08:12:19.699Z", 
+    "attributes" : [
+        {
+            "enabled" : true, 
+            "key" : "class", 
+            "value" : ""
+        }, 
+        {
+            "enabled" : true, 
+            "key" : "id", 
+            "value" : ""
+        }
+    ], 
+    "styles" : [
+        {
+            "tag_name" : "link", 
+            "self_closing" : true, 
+            "attributes" : [
+                {
+                    "enabled" : true, 
+                    "key" : "href", 
+                    "value" : "https://s3-us-west-2.amazonaws.com/tscdms/59062e028631a043f468fc73/plugins/getting-started/styles.min.css"
+                }, 
+                {
+                    "enabled" : true, 
+                    "key" : "rel", 
+                    "value" : "stylesheet"
+                }
+            ]
+        }
+    ],
+    "scripts" : [
+        {
+            "tag_name" : "script", 
+            "self_closing" : false, 
+            "attributes" : [
+                {
+                    "enabled" : true, 
+                    "key" : "src", 
+                    "value" : "https://www.paypalobjects.com/api/checkout.js"
+                }, 
+                {
+                    "enabled" : true, 
+                    "key" : "type", 
+                    "value" : "text/javascript"
+                }
+            ]
+        },
+        {
+            "tag_name" : "script", 
+            "self_closing" : false, 
+            "attributes" : [
+                {
+                    "enabled" : true, 
+                    "key" : "src", 
+                    "value" : "https://js.braintreegateway.com/web/3.22.2/js/client.min.js"
+                }, 
+                {
+                    "enabled" : true, 
+                    "key" : "type", 
+                    "value" : "text/javascript"
+                }
+            ]
+        },
+        {
+            "tag_name" : "script", 
+            "self_closing" : false, 
+            "attributes" : [
+                {
+                    "enabled" : true, 
+                    "key" : "src", 
+                    "value" : "https://js.braintreegateway.com/web/3.22.2/js/hosted-fields.min.js"
+                }, 
+                {
+                    "enabled" : true, 
+                    "key" : "type", 
+                    "value" : "text/javascript"
+                }
+            ]
+        },
+        {
+            "tag_name" : "script", 
+            "self_closing" : false, 
+            "attributes" : [
+                {
+                    "enabled" : true, 
+                    "key" : "src", 
+                    "value" : "https://js.braintreegateway.com/web/3.22.2/js/paypal-checkout.min.js"
+                }, 
+                {
+                    "enabled" : true, 
+                    "key" : "type", 
+                    "value" : "text/javascript"
+                }
+            ]
+        },
+        {
+            "tag_name" : "script", 
+            "self_closing" : false, 
+            "attributes" : [
+                {
+                    "enabled" : true, 
+                    "key" : "src", 
+                    "value" : "https://s3-us-west-2.amazonaws.com/tscdms/59062e028631a043f468fc73/plugins/getting-started/script.min.js"
+                }, 
+                {
+                    "enabled" : true, 
+                    "key" : "type", 
+                    "value" : "text/javascript"
+                }
+            ]
+        }
+    ]
+}

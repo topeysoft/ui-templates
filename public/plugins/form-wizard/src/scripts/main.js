@@ -2,15 +2,14 @@ let namespace =  'getting-started-wiz';
 window.tscLib = window.tscLib||{};
 window.tscLib[namespace] = {};
 window.tscLib[namespace].preparePluginConfig = function (user) {
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function () {
-      if (xhr.readyState == XMLHttpRequest.DONE) {
-        var settings = {};
-        try {
-            settings = JSON.parse(xhr.responseText);
-        } catch (err) { 
-            console.log('Getting started config error', err)
-        }
+    let httpClient = new HttpClient();
+    httpClient.get(api_base_url+"plugins/getting_started/config/?use_sandbox=true")
+    .then(function(settings){
+       continueToInit(settings);
+    }).catch(function(err){
+       continueToInit();
+    });
+     function continueToInit(settings) {
         settings = settings || {};
         settings.config = settings.config || {};
         settings.options = settings.options || {};
@@ -18,20 +17,8 @@ window.tscLib[namespace].preparePluginConfig = function (user) {
         settings.options.container_selector = settings.options.container_selector || '#form-wizard.form-wizard';
 
         tscLib[settings.config.namespace].initializePlugin(settings);
-      }
-    };
-    window.tscLib.userService.getToken()
-    .then(function(token){
-       xhr.open(
-         "GET",
-         "https://api.elyir.local:8443/cms-api/projects/59062e028631a043f468fc73/plugins/form_wizard/config/?use_sandbox=true",
-         true
-       );
-        xhr.setRequestHeader('Authorization', 'Bearer '+token);
-    xhr.send(null);
-}).catch(err=>{
-  console.log('Invalid user', err);  
-});
+         
+     }
   }
 
 
@@ -48,15 +35,21 @@ window.tscLib[namespace].preparePluginConfig = function (user) {
       const  uiManager = new UiManager(settings);
       window.tscLib[config.namespace].uiManager = uiManager;
       uiManager.prepareTemplates( function(){
-          const formWizard = new GettingStartedWizard(settings);
-        window.tscLib[namespace].gettingStartedWizard = formWizard;
-          window.tscLib[config.namespace].tscBraintreeClient = new TscBraintreeClient(settings, formWizard);
+          const formWizard = new GettingStartedWizard(settings, uiManager);
+        window.tscLib[config.namespace].gettingStartedWizard = formWizard;
+          window.tscLib[config.namespace].tscBraintreeClient = new TscBraintreeClient(settings, formWizard, uiManager);
+            Loader.hide('tsc:getting-started-loader');
+    
       });
       
 }
 
 $(document).ready(function(){
-    $(document).on('tsc:user_service:ready', function(event, user){
+    Loader.presentFullScreen({identifier:'tsc:getting-started-loader', text:'Preparing the good stuff...'});
+    $(document).on('tsc:user_service:logged-in', function(event, user){
         window.tscLib[namespace].preparePluginConfig(user);
+    });
+    $(document).on('tsc:user_service:not-logged-in', function(event){
+        window.tscLib.userService.redirectToLogin();
     });
 });

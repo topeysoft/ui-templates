@@ -47,6 +47,7 @@ window.tscLib['user_account'].initializePlugin = function (settings){
   }
 
   $(document).on('tsc:user_service:ready', function(event, user){
+      Loader.hide('user-service-loader');
       const userFormService = new UserFormService(settings);
       
       window.tscLib.userFormService = userFormService;
@@ -57,15 +58,10 @@ window.tscLib['user_account'].initializePlugin = function (settings){
     });
     const userService = new UserService(settings);
     window.tscLib.userService = userService;
- 
-
-
-
 }
 
 $(document).ready(function () {
-
+  Loader.presentFullScreen({identifier:'user-service-loader', text:'Hang on, we are starting al the things...'});  
   window.tscLib['user_account'].preparePluginConfig();
-
 });
 

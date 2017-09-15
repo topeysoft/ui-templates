@@ -1,4 +1,5 @@
 const path = require('path');
+const four04 = require('./four04').Four04;
 const express = require('express');
 
 class MyServer{
@@ -8,6 +9,7 @@ class MyServer{
     };
     setup(){
         this.app.use(express.static(path.join(__dirname, "../public")));
+        this.app.use(four04.getApp());
     }
     getApp(){
        return this.app;

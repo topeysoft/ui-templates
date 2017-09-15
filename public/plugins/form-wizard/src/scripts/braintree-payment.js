@@ -1,28 +1,16 @@
-function TscBraintreeClient(settings, formWizard) {
+function TscBraintreeClient(settings, formWizard, uiManager) {
   _this = this;
 
   function initialize() {
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function () {
-      if (xhr.readyState == XMLHttpRequest.DONE) {
-        var token = xhr.responseText;
+    var httpClient = new HttpClient(true);
+    httpClient.get(api_base_url+"plugins/braintree/client_token?use_sandbox=true")
+      .then(function (token) {
         setupPaymentInfoValidation(token);
         setupPaypalButton(token);
-      }
-    };
-    window.tscLib.userService.getToken().then(function(token){
-      xhr.open(
-        "GET",
-        "https://api.elyir.local:8443/cms-api/projects/59062e028631a043f468fc73/plugins/braintree/client_token?use_sandbox=true",
-        true
-      );
-      xhr.setRequestHeader('Authorization', 'Bearer '+token);
-      xhr.send(null);
-    }).catch(err=>{
-      console.log('Invalid user', err);  
-    });
+      }).catch(function (err) {
+        console.log('Error setting up client', err);
+      });
   }
-
 
 
   function setupPaymentInfoValidation(token) {
@@ -132,13 +120,14 @@ function TscBraintreeClient(settings, formWizard) {
 
         submit.addEventListener('click', function (event) {
           event.preventDefault();
-
+          Loader.presentFullScreen({identifier:'user-braintree-pmt-service-loader', text:'Hang on, we just want to make sure this is valid...'});                        
           hostedFieldsInstance.tokenize(function (err, payload) {
+          Loader.hide('user-braintree-pmt-service-loader');                        
             if (err) {
               console.error(err);
               return;
             }
-            submitPaymentWithNonce(payload);
+            showTermsAndCondition(payload);
             // This is where you would submit payload.nonce to your server
           });
         }, false);
@@ -190,10 +179,11 @@ function TscBraintreeClient(settings, formWizard) {
           },
 
           onAuthorize: function (data, actions) {
+            Loader.presentFullScreen({identifier:'tsc-paypal-service-loader', text:'Please wait while we contact paypal...'});              
             return paypalCheckoutInstance.tokenizePayment(data)
               .then(function (payload) {
-                // Submit `payload.nonce` to your server.
-                submitPaymentWithNonce(payload);
+                Loader.hide('tsc-service-loader');                  
+                showTermsAndCondition(payload);
               });
           },
 
@@ -215,15 +205,161 @@ function TscBraintreeClient(settings, formWizard) {
     });
   }
 
-  function submitPaymentWithNonce(payload) {
-    // alert('Submit your nonce to your server here!');
+  function showTermsAndCondition(payload) {
+    let agreeButton = formWizard.pluginUI.find('#agree-and-checkout-btn');
+    if (agreeButton.length < 1) {
+      agreeButton = $('<button id="agree-and-checkout-btn" class="btn col-12 col-md-6 col-xl-4 btn-primary btn-lg">I agree, continue</button>');
+    }
+    formWizard.pluginUI.find('#agree-and-checkout').before(agreeButton)
+    agreeButton.on('click', function () {
+      Loader.presentFullScreen({identifier:'tsc-service-checkout-loader', text:'We are almost done. This won\'t take long.'});              
+      agreeButton.prop('disabled', true);
+      $('.wiz-continue, .wiz-back').prop('disabled', true);
+      if(payload && payload.nonce){
+        submitPaymentWithNonce(payload.nonce)
+      }else if(payload && payload.token){
+        submitPaymentWithToken(payload.token)
+      }
+    });
     formWizard.nextStep(true);
-    console.log(payload);
   }
 
+  function createPaymentMethod(customerId, paymentMethodNonce) {
+    const payload = {};
+    payload.customerId = customerId;
+    payload.paymentMethodNonce = paymentMethodNonce;
+    const paymentMethodRestClient = new RestClient(api_base_url + 'plugins/braintree/payment-methods');
+    return paymentMethodRestClient.create(payload);
+    // .then(function(data){
+    //     console.log('Payment method created', data);
+    // })
+    // .catch(function(err){
+    //     console.log('Payment method create error', err);
+    // })
+  }
+  function createSubscription(planId, paymentMethodToken) {
+    const payload = {};
+    payload.planId = planId;
+    payload.paymentMethodToken = paymentMethodToken;
+    const subscriptionRestClient = new RestClient(api_base_url + 'plugins/braintree/subscriptions');
+    return subscriptionRestClient.create(payload);
+    // .then(function(data){
+    //     console.log('Subscription created', data);
+    // })
+    // .catch(function(err){
+    //     console.log('Subscription create error', err);
+    // });
+  }
+  function upsertCustomer(paymentMethodNonce) {
+    let user = window.tscLib.userService.getUserInfo();
+    if (user) {
+      const payload = {};
+      if (user.displayName) {
+        let names = user.displayName.replace('  ', ' ').split(' ');
+        if (names[0]) {
+          payload.firstName = names[0];
+        }
+        if (names[2]) {
+          payload.lastName = names[2];
+        } else if (names[1]) {
+          payload.lastName = names[1]
+        }
+      }
+      payload.id = user.uid;
+      let contactEmail = (formWizard.getBasicInfo() || []).find(function(info){return info.id==='contact_email'}) || {};
+      let contactPhone = (formWizard.getBasicInfo() || []).find(function(info){return info.id==='contact_phone'}) || {};
+      let company = (formWizard.getBasicInfo() || []).find(function(info){return info.id==='company_name'}) || {};
+      let preferredContactMethod = (formWizard.getBasicInfo() || []).find(function(info){return info.id==='preferred_contact_method'}) || {};
+      payload.email = contactEmail.value || user.email;
+      payload.phone = contactPhone.value || '';
+      payload.company = company.value;
+      payload.customFields = {}
+      payload.customFields.preferred_contact_method = preferredContactMethod.value;
+      if (paymentMethodNonce) {
+        payload.paymentMethodNonce = paymentMethodNonce;
+      }
+      const customerRestClient = new RestClient(api_base_url + 'plugins/braintree/customers');
+      return customerRestClient.upsert(user.uid, payload);
+      // .then(function(data){
+      //     console.log('Customer upserted', data);
+      // })
+      // .catch(function(err){
+      //     console.log('Customer upsert error', err);
+      // })
+    }
+  }
+  function getExistingCustmer() {
+    let user = window.tscLib.userService.getUserInfo();
+    if (user) {
+      const customerRestClient = new RestClient(api_base_url + 'plugins/braintree/customers');
+      return customerRestClient.findById(user.uid);
+      // .then(function(data){
+      //     console.log('Customer upserted', data);
+      // })
+      // .catch(function(err){
+      //     console.log('Customer upsert error', err);
+      // })
+    }
+  }
+
+
+  function submitPaymentWithNonce(nonce) {
+    upsertCustomer(nonce)
+      .then(function (data) {
+          createSubscription(formWizard.getSelectedPlan().id, data.customer.paymentMethods[data.customer.paymentMethods.length-1].token)
+            .then(function (data) {
+              paymentProcessComplete();
+            })
+            .catch(function (err) {
+              console.log('Subscription create error', err);
+            })
+      })
+      .catch(function (err) {
+        console.log('Customer upsert error', err);
+      })
+  }
+  function submitPaymentWithToken(token) {
+    upsertCustomer()
+      .then(function (data) {
+          createSubscription(formWizard.getSelectedPlan().id, token)
+            .then(function (data) {
+              paymentProcessComplete();
+            })
+            .catch(function (err) {
+              console.log('Subscription create error', err);
+            })
+      })
+      .catch(function (err) {
+        console.log('Customer upsert error', err);
+      })
+  }
+
+ function paymentProcessComplete(){
+      Loader.hide('tsc-service-checkout-loader');              
+      formWizard.nextStep(true);
+  }
+
+
   function setup() {
+    Loader.presentFullScreen({identifier:'tsc:braintree-service-loader', text:'Making sure we have everything in order...'});
     initialize();
+    getExistingCustmer()
+    .then(function(customer){
+      // uiManager.setExistingCustomer(customer);
+      formWizard.setExistingCustomer(customer, showTermsAndCondition);
+      Loader.hide('tsc:braintree-service-loader');    
+    }).catch(function(err){
+      formWizard.setExistingCustomer(null);
+      Loader.hide('tsc:braintree-service-loader');    
+      console.log('Error in getExistingCustmer', err);
+    });
+    // formWizard.pluginUI.on('tsc:getting_started:finish_and_subscribe', function(event){
+
+    // });
+
   }
 
   setup();
+
+  //_this.showTermsAndCondition = showTermsAndCondition;
 }

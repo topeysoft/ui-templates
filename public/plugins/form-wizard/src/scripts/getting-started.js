@@ -1,58 +1,54 @@
-function GettingStartedWizard (settings){
+function GettingStartedWizard(settings, uiManager) {
     _GSW = this;
     settings = settings || {};
     const config = settings.config || {};
     const options = settings.options || {};
 
-
+    _GSW.getExistingCustomer = function () {
+        return _GSW.existingCustomer;
+        }
+    _GSW.setExistingCustomer = function (customer, doneCallback) {
+        _GSW.existingCustomer = customer;
+        if(!customer){
+            return;
+        }
+        let contactEmail = (_GSW.getBasicInfo() || []).find(function(info){return info.id==='contact_email'}) || {};
+        let contactPhone = (_GSW.getBasicInfo() || []).find(function(info){return info.id==='contact_phone'}) || {};
+        let company = (_GSW.getBasicInfo() || []).find(function(info){return info.id==='company_name'}) || {};
+        let preferredContactMethod = (_GSW.getBasicInfo() || []).find(function(info){return info.id==='preferred_contact_method'}) || {};
+        
+        customer.customFields = customer.customFields || [];
+        contactEmail.value = customer.email || '';
+        contactPhone.value = customer.phone || '';
+        company.value = customer.company || '';
+        preferredContactMethod.value = customer.customFields['preferredContactMethod'] || 'email';
+        
+        renderSavedPaymentMethods(doneCallback);
+    }
+    _GSW.getSelectedPlan = function () { return selectedPlan; }
+    _GSW.getPaymentMethod = function () { return selectedPaymentMethod; }
+    _GSW.getBasicInfo = function () { return basicInfo; }
+    _GSW.pluginUI = $(options.container_selector);
+    _GSW.gotoStepByIndex = gotoStepByIndex;
+    _GSW.nextStep = wizardContinue;
+    _GSW.previousStep = wizardBack;
 
 
     let selectedPlan = {};
     let isFinished = false;
+    let selectedPaymentMethod = false;
 
-    const basicInfo = [
-        {
-            label: 'Your company/ <span class="d-none d-md-inline">business</span> name',
-            value: '',
-            type: 'text',
-            invalid_message: 'Please provide us with your business name',
-            valid_message: 'Thanks, got it',
-            required: true
-        },
-        // {
-        //     label: 'Your  <span class="d-none d-md-inline">registered</span> domain name  <span class="d-none d-md-inline">(optional)</span>',
-        //     value: '',
-        //     type: 'text',
-        //     invalid_message: 'Please provide us with domain name',
-        //     valid_message: 'Thanks, got it'
-        // },
-        // {
-        //     label: 'Business category  <span class="d-none d-md-inline">(Ex. Non-profit)</span>',
-        //     value: '',
-        //     type: 'text',
-        //     invalid_message: '',
-        //     valid_message: 'Thanks, got it'
-        // },
-        // {
-        //     label: 'Yes we have a business logo',
-        //     question: 'Do you have a business logo?',
-        //     true_value: 'Yes we have a business logo',
-        //     false_value: 'No we do not have a business logo',
-        //     value: true,
-        //     checked: false,
-        //     type: 'checkbox'
-        // }
-    ];
+    const basicInfo = config.basic_info_data;
     const steps_validity = [
         {
             name: 'intro',
             invalid_message: '',
             valid: true,
-            isValid: function(){
+            isValid: function () {
                 return true;
             },
-            hide_step_indicator:true,
-            hide_nav_on_mobile:true
+            hide_step_indicator: true,
+            hide_nav_on_mobile: true
         },
         {
             name: 'Business information',
@@ -72,22 +68,23 @@ function GettingStartedWizard (settings){
                 }
                 return valid;
             },
-            disable_back:true,
-            hide_back_button:true,
+            disable_back: true,
+            hide_back_button: true,
 
         },
         {
             name: 'Choose a plan',
-            invalid_message: 'Please select a plan to continue',
+            invalid_message: 'Please select a plan<span class="d-none d-md-inline"> to continue</span>',
             isValid: function (index) {
                 return (selectedPlan && selectedPlan.name);
             }
         },
-         {
+        {
             name: 'Review',
             invalid_message: 'Please review your entry before you proceed',
             valid: true,
             isValid: function (index) {
+                $(options.container_selector).trigger('tsc:getting_started:review-completed');
                 return true;
             }
         },
@@ -95,21 +92,16 @@ function GettingStartedWizard (settings){
             name: 'Select payment method',
             invalid_message: 'Please setup a payment method',
             valid: false,
+            before_show: function () {
+                // renderSavedPaymentMethods();
+            },
             isValid: function (index) {
-                // var inputs = wizardContents.eq(index).find('input[required]');
-                // var valid = true;
-                // inputs.each(function (i, el) {
-                //     if ($.trim($(el).val()).length < 1) {
-                //         $(el).addClass('invalid').next().addClass('active');
-                //         valid = false;
-                //     }
-                // });
                 scrollToSelector(wizardContents.eq(index).find('#card-number'));
                 wizardContents.eq(index).find('#card-number').focus();
                 return false;
             }
         },
-       
+
         {
             name: 'Terms and condition',
             invalid_message: '',
@@ -117,21 +109,27 @@ function GettingStartedWizard (settings){
             isValid: function (index) {
                 return true;
             },
-            hide_nav_on_mobile:true
+            hide_nav_on_mobile: true
         },
-         {
+        {
             name: 'Finish',
             invalid_message: '',
             valid: true,
+            before_show: function () {
+                if(config.finish_text){
+                    $(options.container_selector).find('#finish-text').html(config.finish_text);
+                }
+            },
             isValid: function (index) {
                 return true;
             },
-            hide_step_indicator:true
+            hide_step_indicator: true
         }
     ];
     const plans = [
         {
             name: "Basic",
+            id: "tsc_web_basic",
             price_per_month: 50,
             setup_fee: 30,
             text_color_class: 'green',
@@ -139,17 +137,18 @@ function GettingStartedWizard (settings){
             description: "Ideal for basic online presence to showcase your product or service.",
             features: [
                 {
-                description: "Includes support and help and all that fun stuff",
-                included: false
-            },
-            {
-                description: "Includes more support and help and all that fun stuff",
-                included: false
-            }
-        ]
+                    description: "Includes support and help and all that fun stuff",
+                    included: false
+                },
+                {
+                    description: "Includes more support and help and all that fun stuff",
+                    included: false
+                }
+            ]
         },
         {
             name: "Advanced",
+            id: "tsc_web_advanced",
             price_per_month: 90,
             setup_fee: 50,
             text_color_class: 'purple',
@@ -163,10 +162,11 @@ function GettingStartedWizard (settings){
                 description: "Includes more support and help and all that fun stuff",
                 included: false
             }
-        ]
+            ]
         },
         {
             name: "Premium",
+            id: "tsc_web_premium",
             price_per_month: 150,
             setup_fee: 100,
             text_color_class: 'rose',
@@ -183,7 +183,7 @@ function GettingStartedWizard (settings){
         }
     ];
 
-    
+
     var wizardContentWrapper = $('#form-wizard .wizard-step-content-wrapper');
     var wizardContents = $('#form-wizard .wizard-step-content');
     var wizardSteps = $('#form-wizard .wizard-steps .wizard-step');
@@ -200,37 +200,37 @@ function GettingStartedWizard (settings){
     //     wizardContents.hide();
     //     wizardContents.eq(index).show();
     // }
-    
+
 
     function setup() {
-        // setupPaymentInfoValidation();
+        // renderSavedPaymentMethods();
         callOnWizardNext.push(function () {
             window.tscLib = window.tscLib || {};
-            if(window.tscLib.userService){
+            if (window.tscLib.userService) {
                 tscLib.userService.redirectIfNotLoggedIn();
             }
         });
         callOnWizardNext.push(function (nextStepIndex) {
-            if(steps_validity[nextStepIndex] && steps_validity[nextStepIndex].disable_back){
+            if (steps_validity[nextStepIndex] && steps_validity[nextStepIndex].disable_back) {
                 $('.wiz-back').prop('disabled', true);
-            }else{
+            } else {
                 $('.wiz-back').prop('disabled', false);
             }
-            if(steps_validity[nextStepIndex] && steps_validity[nextStepIndex].hide_back_button){
+            if (steps_validity[nextStepIndex] && steps_validity[nextStepIndex].hide_back_button) {
                 $('.wiz-back').hide();
                 $('.wiz-continue').closest('.col').removeClass('text-right');
-            }else{
+            } else {
                 $('.wiz-back').show();
                 $('.wiz-continue').closest('.col').addClass('text-right');
             }
-            if(steps_validity[nextStepIndex] && steps_validity[nextStepIndex].hide_step_indicator){
-                $(options.container_selector+' .wizard-steps').hide();
-            }else{
-                $(options.container_selector+' .wizard-steps').show();
+            if (steps_validity[nextStepIndex] && steps_validity[nextStepIndex].hide_step_indicator) {
+                $(options.container_selector + ' .wizard-steps').hide();
+            } else {
+                $(options.container_selector + ' .wizard-steps').show();
             }
-            if(steps_validity[nextStepIndex] && steps_validity[nextStepIndex].hide_nav_on_mobile){
+            if (steps_validity[nextStepIndex] && steps_validity[nextStepIndex].hide_nav_on_mobile) {
                 $('.wizard-footer').addClass('d-none');
-            }else{
+            } else {
                 $('.wizard-footer').removeClass('d-none');
             }
         });
@@ -238,84 +238,39 @@ function GettingStartedWizard (settings){
             var summary = $('#form-wizard .basic-info-summary');
             var summaryHtml = '';
             $.each(basicInfo, function (i, info) {
-                summaryHtml += '<p class="font-weight-normal">' + (info.type === 'checkbox' ? info.question : info.label) + ' <br/>\
-             <span class="font-italic font-weight-normal">' + (info.type === 'checkbox' ? (info.checked ? info.true_value : info.false_value) : info.value) + '</span></p>';
+                summaryHtml += uiManager.getInfoSummaryHtml(info);
             });
             summary.html(summaryHtml);
         });
-        
-        callOnWizardNext.push(function () {
-            var summary = $('#form-wizard .selected-plan-summary');
-            summary.html('\
-            <p class="font-weight-normal">You selected <span class="font-weight-bold text-'+ selectedPlan.text_color_class + '">' + selectedPlan.name + ' plan</span>. <br/> You will be charged a one-time *refundable fee of \
-             <span class="font-weight-bold text-'+ selectedPlan.text_color_class + '">$' + selectedPlan.setup_fee + '</span></p>\
-             <br />\n\
-             <p class=" font-weight-normal" >Your monthly payment will be <span class="font-weight-bold text-'+ selectedPlan.text_color_class + '">$' + selectedPlan.price_per_month + '</span>/month starting from the date your website goes live.</h4>\
-             <p>* Setup fee refund is subject to terms and condition. <a href="#">Please see details here</a>  </p>\
-        ');
-            var totalSummary = $('#form-wizard .total-payment-summary');
-            var dueToday = (+selectedPlan.setup_fee) + (+selectedPlan.price_per_month);
-            totalSummary.html('\
-            <hr class="border" />\
-            <div class="row  ">\
-                <p class="h4  font-weight-normal col-6 text-md-right">Due monthly: <br />\
-                <p class="h4  font-weight-normal col-6 ">$'+ selectedPlan.price_per_month + '</p> \
-            </div>\
-            <hr class="border" />\
-            <div class="row ">\
-                <p class="h4  font-weight-bold col-6 text-md-right">Due today: </p> \
-                <p class="h4  font-weight-bold col-6">$'+ (dueToday) + '</p> \
-            </div>\
-            <hr class="border" />\
-            ');
-        });
-        callOnWizardNext.push(function populateInfoInputs() {
-            const infoInputDiv = $('#form-wizard #info-inputs');
-            var inputs = '';
-            $.each(basicInfo, function (i, info) {
-                inputs += '<div class="mt-4">\
-                                <p class="'+ (info.type === 'checkbox' ? 'form-group text-left' : 'md-form') + '">\
-                                        <input data-index="'+ i + '" ' + (info.checked ? 'checked=checked' : '') + ' \
-                                        '+ (info.required ? 'required=required' : '') + ' type="' + info.type + '" id="info-input_' + i + '" value="' + info.value + '" \
-                                            class="'+ (info.type === 'checkbox' ? '' : 'form-control  validate') + ' basic-info-input">\
-                                        <label for="info-input_'+ i + '"data-error="' + info.invalid_message + '" data-success="' + info.valid_message + '" class="' + (info.value && $.trim(info.value).length > 0 ? 'active' : '') + '">' + info.label + '</label>\
-                                    </p>\
-                                    </div>';
 
-            });
-            infoInputDiv.html(inputs);
-            function handleChange(event) {
-                var info = basicInfo[$(this).data('index')];
-                if (!info) {
-                    return;
-                }
-                info.value = $(this).val();
-                if (info.type === 'checkbox') {
-                    info.checked = $(this).prop('checked');
-                }
-                $(this).removeClass('invalid');
-            }
-            
-            $('body').on('change', '#form-wizard #info-inputs .basic-info-input', handleChange);
-            $('body').on('input', '#form-wizard #info-inputs .basic-info-input', handleChange);
-            $('body').on('click', '#form-wizard .page-item.wizard-step.passed a', function(event){
-                console.log($(this).index())
-            });
+        callOnWizardNext.push(function () {
+            uiManager.getPlanSummaryHtml(selectedPlan);
+        });
+        callOnWizardNext.push(function(){
+            uiManager.populateInfoInputs(_GSW);
         });
 
         let stepParent = $('#form-wizard .wizard-steps').html('');
-        for(var i=0; i<(steps_validity.length-1); i++){
-           var item = $('<li class="wizard-step-item wizard-step col pt-1"><li>');
-           stepParent.append(item);
+        for (var i = 0; i < (steps_validity.length - 1); i++) {
+            var item = $('<li class="wizard-step-item wizard-step col pt-1"><li>');
+            stepParent.append(item);
         }
         wizardSteps = $('#form-wizard .wizard-steps .wizard-step');
+
     }
+
+        
     function activateStepIndicatorByIndex(index) {
         wizardSteps.removeClass('active').removeClass('passed');
         wizardSteps.eq(index).addClass('active').prevAll().addClass('passed');
     }
     function reFocusActiveStep() {
         gotoStepByIndex($('#form-wizard .wizard-step-content.active').index(), true);
+    }
+    function resetWizardHeight() {
+        let index = $('#form-wizard .wizard-step-content.active').index();
+        var childRect = wizardContents.get(index).getBoundingClientRect();
+        wizardContentWrapper.css('height', childRect.height);
     }
     function resetContinueText(index) {
         var btn = $('#form-wizard  .wiz-continue, #form-wizard  #wiz-continue');
@@ -332,13 +287,15 @@ function GettingStartedWizard (settings){
         }
     }
     function gotoStepByIndex(index) {
+        if (steps_validity[index] && steps_validity[index].before_show) {
+            steps_validity[index].before_show();
+        }
         var rect = wizardContentWrapper[0].getBoundingClientRect();
         var width = index * -(rect.width);
         wizardContents.removeClass('invisible').css('transform', 'translateX(' + width + 'px)');
         $(wizardContents).not(wizardContents.eq(index)).removeClass('active').addClass('invisible');
         wizardContents.eq(index).addClass('active');
-        var childRect = wizardContents.get(index).getBoundingClientRect();
-        wizardContentWrapper.css('height', childRect.height);
+        resetWizardHeight();
         scrollToSelector('#form-wizard');
         activateStepIndicatorByIndex(index);
         resetContinueText(index);
@@ -360,14 +317,14 @@ function GettingStartedWizard (settings){
             return notifyInvalidStep(currIndex);
         }
         gotoStepByIndex(index);
-        if(index === wizardSteps.length-1){
+        if (index === wizardSteps.length - 1) {
             markFinished(true);
         }
     }
     function revertStepByIndex(index) {
         gotoStepByIndex(index);
     }
-    function wizardContinue(suppressValidation=false) {
+    function wizardContinue(suppressValidation = false) {
         var current = $('#form-wizard .wizard-step-content.active');
         var index = current.index();
         if (index < (wizardContents.length - 1)) {
@@ -410,12 +367,12 @@ function GettingStartedWizard (settings){
         });
         plainItemButton.eq(index).prop('disabled', true)
             .text('Selected');
-            wizardContinue();
+        wizardContinue();
         // .removeClass('btn-' + selectedPlan.btn_color_class).addClass('btn-secondary');
 
 
     }
-   
+
     function populatePlans() {
         var planGroup = $('#form-wizard #plan-group');
         var plansContent = '';
@@ -429,7 +386,7 @@ function GettingStartedWizard (settings){
                                                     '+ feat.description + '\
                                                 </div>\
                                             </div>\
-                                            '; 
+                                            ';
                 if (feat.included) {
 
                 }
@@ -465,16 +422,110 @@ function GettingStartedWizard (settings){
 
     }
 
+
+    function renderSavedPaymentMethods(doneCallback) {
+
+        let existingMethods = $(options.container_selector + ' #existing-payment-methods');
+        let newMethod = $(options.container_selector + ' #braintree-hosted-form');
+        let wrapper = existingMethods.find('.methods-wrapper');
+        existingMethods.hide();
+        newMethod.show();
+        wrapper.html('');
+        if (!_GSW.existingCustomer) {
+            return;
+        }
+        let newButton = $('<button class="btn btn-secondary mt-4">Setup new payment method</button>')
+            .on('click', function (event) {
+                newMethod.show();
+                existingMethods.hide();
+                resetWizardHeight();
+            });
+        let existingButton = $('<button class="btn btn-secondary mt-4" id="use-saved">Use saved payment method</button>')
+            .on('click', function (event) {
+                newMethod.hide();
+                existingMethods.show();
+                resetWizardHeight();
+            });
+        if (newMethod.find('#use-saved').length < 1) {
+            newMethod.append(existingButton);
+        }
+        renderCreditCards(newMethod, existingMethods, wrapper, newButton);
+        renderPayPal(newMethod, existingMethods, wrapper, newButton);
+        wrapper.find('.btn-use-this-pmt').on('click', function (event) {
+            event.preventDefault();
+            let token = $(this).data('data');
+            doneCallback({ token: token });
+        });
+    }
+    function renderPayPal(newMethod, existingMethods, wrapper, newButton) {
+        if (_GSW.existingCustomer.paypalAccounts
+            && _GSW.existingCustomer.paypalAccounts.length > 0) {
+            newMethod.hide();
+            existingMethods.show();
+            let cards = $(`<div class="mt-4 card">
+        <h4 class="card-header">PayPal Accounts</h4>
+           
+          </div>`);
+            let cardGroup = $('<div id="card-group"> <div> ');
+            $.each(_GSW.existingCustomer.paypalAccounts, function (i, acc) {
+                let html = `<div class="card-body pt-1 pb-1">
+                <div class="row">
+                  <div class="col-auto">
+                    <span class="d-inline-block" style="width:4.5rem; height:3rem;background-image:url('${acc.imageUrl}'); background-size:100% 100%;"></span>
+                  </div> 
+                  <div class="col">
+                      <p class ="card-text"> ${acc.email}  <a href="#" data-data="${acc.token}" class ="btn btn-primary btn-use-this-pmt btn-sm">Use this</a>  </p>
+                  </div> 
+              </div>
+          </div>`;
+                if (i !== _GSW.existingCustomer.paypalAccounts.length - 1) {
+                    html += '<hr />';
+                }
+                cardGroup.append(html);
+            });
+            wrapper.append(cards.append(cardGroup));
+            wrapper.append(newButton);
+
+        }
+    }
+
+    function renderCreditCards(newMethod, existingMethods, wrapper, newButton) {
+        if (_GSW.existingCustomer.creditCards
+            && _GSW.existingCustomer.creditCards.length > 0) {
+            newMethod.hide();
+            existingMethods.show();
+            let cards = $(`<div class="card">
+            <h4 class="card-header">Credit Cards</h4>
+           
+          </div>`);
+            let cardGroup = $('<div id="card-group"> <div> ');
+            $.each(_GSW.existingCustomer.creditCards, function (i, card) {
+                let html = `<div class="card-body pt-1 pb-1">
+              <div class="row">
+                <div class="col-auto">
+                    <span class="d-inline-block" style="width:4.5rem; height:3rem;background-image:url('${card.imageUrl}'); background-size:100% 100%;"></span>
+                </div> 
+                <div class="col">
+                    <p class ="card-text">**** **** **** ${card.last4}   <a href="#" data-data="${card.token}" class ="btn btn-primary btn-use-this-pmt btn-sm">Use this</a>  </p>
+                </div> 
+            </div>
+        </div>`;
+                if (i !== _GSW.existingCustomer.creditCards.length - 1) {
+                    html += '<hr class="m-0" />';
+                }
+                cardGroup.append(html);
+            });
+            wrapper.append(cards.append(cardGroup));
+            if (_GSW.existingCustomer.paypalAccounts
+                && _GSW.existingCustomer.paypalAccounts.length > 0) {
+                wrapper.append(newButton);
+            }
+        }
+    }
+
     populatePlans();
     setup();
     gotoStepByIndex(0, false);
 
-   // _GSW.selectPlan = selectPlan;
-    _GSW.selectedPlan = selectedPlan;
-   // _GSW.isFinished = isFinished;
-   // _GSW.markFinished = markFinished;
-    _GSW.businessInfo = basicInfo;
-    _GSW.gotoStepByIndex = gotoStepByIndex;
-    _GSW.nextStep = wizardContinue;
-    _GSW.previousStep = wizardBack;
+    
 }
