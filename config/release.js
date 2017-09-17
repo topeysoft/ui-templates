@@ -1,4 +1,4 @@
 module.exports = {
-    login_base_url:'https://login.elyir.com/projects/',
-    api_base_url:'https://api.elyir.com/cms-api/projects/'
+    login_base_url:'https://login.topeysoft.com/',
+    api_base_url:'https://api.topeysoft.com/cms-api/projects/'
 };

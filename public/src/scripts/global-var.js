@@ -1,1 +1,1 @@
-var api_base_url = '__api_base_url__' + project_id;
+var api_base_url = '#{{__api_base_url__}}#' + project_id;

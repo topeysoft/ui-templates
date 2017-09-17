@@ -6,7 +6,7 @@ function UserService(settings) {
     signedOut = false;
     function postSignIn() {
         const user = _this.getUserInfo();
-        if (user) {
+        if (user) {            
             tscLib.userFormService.showForm('user-info', user);
         }
     }
@@ -118,6 +118,7 @@ function UserService(settings) {
                 localStorage.setItem('logged_in', 'true');
                 $(document).trigger('tsc:user_service:logged-in', [user]);
             } else {
+                
                 localStorage.setItem('logged_in', 'false');
                 const view = signedOut ? 'signed-out' : 'sign-in';
                 $(document).trigger('tsc:user_service:' + (signedOut ? 'logged-out' : 'not-logged-in'), [user]);

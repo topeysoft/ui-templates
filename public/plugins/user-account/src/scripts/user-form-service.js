@@ -47,6 +47,7 @@ function UserFormService(settings){
         pluginDiv.find('form').hide();
         var form = pluginDiv.find('form#'+formId);
         if(form && form.length>0){
+            
             form.show();
             if(data){
                 _this.renderContentData(form, data);

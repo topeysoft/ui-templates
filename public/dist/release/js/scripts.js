@@ -1,5 +1,5 @@
 window.tscLib = window.tscLib || {}; window.tscLib['main']=window.tscLib['main'] || {}; window.tscLib['main'].templates = [];
-var api_base_url = 'https://api.elyir.com/cms-api/projects/' + project_id;
+var api_base_url = 'https://api.topeysoft.com/cms-api/projects/' + project_id;
 function HttpClient(useAuthorization = true) {
     var _this = this;
     function callBackend(payload, callWithAuth = useAuthorization) {

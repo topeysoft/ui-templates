@@ -53,7 +53,7 @@ return (() => {
         gulp
           .src(config.base_path + "/src/scripts/**/*.js")
           .pipe(concat("scripts.js"))
-          .pipe(replace({tokens:tokens, prefix:'__', suffix:'__'}))
+          .pipe(replace({tokens:tokens, prefix:'#{{__', suffix:'__}}#'}))
           .pipe(gulp.dest(config.base_path + "/dist/js"))
           .pipe(rename({ suffix: ".min" }))
           //.pipe(uglify())
@@ -73,7 +73,7 @@ return (() => {
         gulp
           .src(config.base_path + "/src/scripts/**/*.js")
           .pipe(concat("scripts.js"))
-          .pipe(replace({tokens:tokens, prefix:'__', suffix:'__'}))
+          .pipe(replace({tokens:tokens, prefix:'#{{__', suffix:'__}}#'}))
           .pipe(minify({ext:{
             min:'.min.js'
         },}))

@@ -5854,6 +5854,7 @@ body[data-viewport=xs].show-menu .main-menu-toggle, body[data-viewport=sm].show-
   position: fixed;
   width: 100%;
   height: 100%;
+  top: 0;
   z-index: 2000000;
   background: rgba(255, 255, 255, 0.95); }
   #loader-div .wrapper {
