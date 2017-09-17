@@ -9,6 +9,8 @@ const inject = require("gulp-inject");
 const del = require("del");
 const fileinclude = require('gulp-file-include');
 const TscTemplateBuilder = require('./gulp-plugins/template-builder').TemplateBuilder;
+const gulpUtil = require('gulp-util');
+var minify = require('gulp-minify');
 
 const configs = [
   {
@@ -43,16 +45,40 @@ gulp.task('fileinclude', function () {
 });
 
 gulp.task("scripts", ["clean:scripts"], function () {
-  return (() => {
+var replace = require('gulp-token-replace');
+return (() => {
+    var tokens = require('./config/debug');
     configs.forEach(config => {
       try {
         gulp
           .src(config.base_path + "/src/scripts/**/*.js")
           .pipe(concat("scripts.js"))
+          .pipe(replace({tokens:tokens, prefix:'__', suffix:'__'}))
           .pipe(gulp.dest(config.base_path + "/dist/js"))
           .pipe(rename({ suffix: ".min" }))
           //.pipe(uglify())
           .pipe(gulp.dest(config.base_path + "/dist/js"));
+      } catch (err) {
+        console.log(err);
+      }
+    });
+  })();
+});
+gulp.task("scripts:release", ["clean:scripts:release"], function () {
+var replace = require('gulp-token-replace');
+return (() => {
+    var tokens = require('./config/release');
+    configs.forEach(config => {
+      try {
+        gulp
+          .src(config.base_path + "/src/scripts/**/*.js")
+          .pipe(concat("scripts.js"))
+          .pipe(replace({tokens:tokens, prefix:'__', suffix:'__'}))
+          .pipe(minify({ext:{
+            min:'.min.js'
+        },}))
+          // .pipe(rename({ suffix: ".min" }))
+          .pipe(gulp.dest(config.base_path + "/dist/release/js"));
       } catch (err) {
         console.log(err);
       }
@@ -114,6 +140,23 @@ gulp.task("clean:scripts", function (done) {
     configs.forEach((config, i) => {
       try {
         del([config.base_path + "/dist/js", config.base_path + "/dist/scripts"], { force: true })
+          .then(() => {
+            allDone(i, done);
+          }).catch(err => {
+            allDone(i, done);
+          });
+      } catch (err) {
+        console.log(err);
+      }
+    });
+
+  })();
+});
+gulp.task("clean:scripts:release", function (done) {
+  return (() => {
+    configs.forEach((config, i) => {
+      try {
+        del([config.base_path + "/dist/release/js", config.base_path + "/dist/scripts/release"], { force: true })
           .then(() => {
             allDone(i, done);
           }).catch(err => {

@@ -1,4 +1,4 @@
-const viewport = {xs:true, sm:true, md:true, lg:true, xl:true};
+var viewport = {xs:true, sm:true, md:true, lg:true, xl:true};
 function setViewport(){
   let div = $('#viewport-div')
   if(div.length<1){

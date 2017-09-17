@@ -3,7 +3,7 @@ window.tscLib = window.tscLib||{};
 window.tscLib['user_account'] = {};
 window.tscLib['user_account'].preparePluginConfig = function (user) {
     let httpClient = new HttpClient();
-    httpClient.get("https://cms.api.elyir.local:8443/projects/"+project_id+"/plugins/user_account/config/?use_sandbox=true", false)
+    httpClient.get("https://login.elyir.com/projects//plugins/user_account/config/?use_sandbox=true", false)
     .then(function(settings){
        continueToInit(settings);
     }).catch(function(err){

@@ -1,7 +1,7 @@
 function RestClient(entityBaseUrl, useAuthorization=true, use_sanbox=true) {
-    const _this = this;
-    const httpClient = new HttpClient(useAuthorization);
-    const sandbox = use_sanbox?'?use_sandbox=true':'';
+    var _this = this;
+    var httpClient = new HttpClient(useAuthorization);
+    var sandbox = use_sanbox?'?use_sandbox=true':'';
     _this.findById = function (id) {
         return httpClient.get(`${entityBaseUrl}/${id}${sandbox}`);
     }

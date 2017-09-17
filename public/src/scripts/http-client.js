@@ -1,5 +1,5 @@
 function HttpClient(useAuthorization = true) {
-    _this = this;
+    var _this = this;
     function callBackend(payload, callWithAuth = useAuthorization) {
         if (!payload) {
             return;
@@ -10,8 +10,8 @@ function HttpClient(useAuthorization = true) {
                 window.tscLib.userService.getToken().then(function (token) {
                     makeCall(token);
                 }).catch(err => {
-                    reject(err)
                     console.log('Invalid user', err);
+                    reject(err)
                 });
             } else {
                 makeCall();
@@ -29,51 +29,51 @@ function HttpClient(useAuthorization = true) {
             }
         });
     }
-    _this.get = function (url) {
+    _this.get = function (url, useAuth=useAuthorization) {
         let payload = {
             url: url,
             method: 'GET'
         }
-        return callBackend(payload);
+        return callBackend(payload, useAuth);
     }
-    _this.post = function (url, data) {
+    _this.post = function (url, data, useAuth=useAuthorization) {
         let payload = {
             url: url,
             method: 'POST',
             data: data
         }
-        return callBackend(payload);
+        return callBackend(payload, useAuth);
 
     }
-    _this.put = function (url, data) {
+    _this.put = function (url, data, useAuth=useAuthorization) {
         let payload = {
             url: url,
             method: 'PUT',
             data: data
         }
-        return callBackend(payload);
+        return callBackend(payload, useAuth);
     }
-    _this.patch = function (url) {
+    _this.patch = function (url, useAuth=useAuthorization) {
         let payload = {
             url: url,
             method: 'PATCH',
             data: data
         }
-        return callBackend(payload);
+        return callBackend(payload, useAuth);
     }
-    _this.delete = function (url) {
+    _this.delete = function (url, useAuth=useAuthorization) {
         let payload = {
             url: url,
             method: 'DELETE'
         }
-        return callBackend(payload);
+        return callBackend(payload, useAuth);
     }
-    _this.options = function (url) {
+    _this.options = function (url, useAuth=false) {
         let payload = {
             url: url,
             method: 'OPTIONS'
         }
-        return callBackend(payload);
+        return callBackend(payload, useAuth);
     }
 
 }
